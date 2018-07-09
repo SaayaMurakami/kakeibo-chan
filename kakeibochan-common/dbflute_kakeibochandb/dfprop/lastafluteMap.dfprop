@@ -37,8 +37,8 @@ map:{
 
     # settings for web applications
     ; appMap = map:{
-        ; front = map:{
-            ; path = ../../kakeibochan-front
+        ; batch = map:{
+            ; path = ../../kakeibochan-batch
             ; freeGenList = list:{ env ; config ; label ; message ; mail ; template ; html ; doc ; appcls ; namedcls }
             ; propertiesHtmlList = list:{ env ; config ; label ; message }
         }
@@ -46,7 +46,7 @@ map:{
 
     # you can override (several) default settings like this:
     #; overrideMap = map:{
-    #    ; front.freeGen.mail.targetDir = ./playsql/data/mail
+    #    ; dockside.freeGen.mail.targetDir = ./playsql/data/mail
     #}
 }
 # ----------------/

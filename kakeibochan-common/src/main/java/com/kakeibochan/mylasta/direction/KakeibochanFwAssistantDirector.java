@@ -96,7 +96,7 @@ public abstract class KakeibochanFwAssistantDirector extends CachedFwAssistantDi
     }
 
     protected SecurityResourceProvider createSecurityResourceProvider() { // #change_it_first
-        final InvertibleCryptographer inver = InvertibleCryptographer.createAesCipher("kakeibochan:front");
+        final InvertibleCryptographer inver = InvertibleCryptographer.createAesCipher("kakeibochan:dockside");
         final OneWayCryptographer oneWay = OneWayCryptographer.createSha256Cryptographer();
         return new KakeibochanSecurityResourceProvider(inver, oneWay);
     }
@@ -144,7 +144,7 @@ public abstract class KakeibochanFwAssistantDirector extends CachedFwAssistantDi
     }
 
     protected CookieResourceProvider createCookieResourceProvider() { // #change_it_first
-        final InvertibleCryptographer cr = InvertibleCryptographer.createAesCipher("front:kakeibochan");
+        final InvertibleCryptographer cr = InvertibleCryptographer.createAesCipher("dockside:kakeibochan");
         return new KakeibochanCookieResourceProvider(config, cr);
     }
 

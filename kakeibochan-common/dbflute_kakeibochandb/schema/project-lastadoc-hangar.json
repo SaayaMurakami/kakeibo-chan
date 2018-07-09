@@ -2333,7 +2333,7 @@
       "typeComment": "@author jflute\n@author iwamatsu0430",
       "fieldTypeDocMetaList": [
         {
-          "name": "frontLoginAssist",
+          "name": "docksideLoginAssist",
           "typeName": "com.kakeibochan.app.web.base.login.HangarLoginAssist",
           "simpleTypeName": "HangarLoginAssist",
           "value": null,
@@ -2374,7 +2374,7 @@
       "typeComment": "@author jflute\n@author iwamatsu0430",
       "fieldTypeDocMetaList": [
         {
-          "name": "frontLoginAssist",
+          "name": "docksideLoginAssist",
           "typeName": "com.kakeibochan.app.web.base.login.HangarLoginAssist",
           "simpleTypeName": "HangarLoginAssist",
           "value": null,
