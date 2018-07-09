@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//DBFLUTE//DTD LastaDi 1.0//EN"
+	"http://dbflute.org/meta/lastadi10.dtd">
+<components namespace="dbflute">
+	<include condition="#exists('#path')" path="my_included_dbflute.xml"/>
+	<include path="rdb.xml"/>
+
+	<!-- The components of DBFlute Runtime. -->
+	<component name="introduction" class="com.kakeibochan.dbflute.allcommon.DBFluteInitializer"/>
+	<component name="invokerAssistant" class="com.kakeibochan.dbflute.allcommon.ImplementedInvokerAssistant"/>
+	<component name="behaviorCommandInvoker" class="org.dbflute.bhv.core.BehaviorCommandInvoker"/>
+	<component name="behaviorSelector" class="com.kakeibochan.dbflute.allcommon.ImplementedBehaviorSelector"/>
+	<component name="commonColumnAutoSetupper" class="com.kakeibochan.dbflute.allcommon.ImplementedCommonColumnAutoSetupper"/>
+
+	<!-- The components of Behavior. -->
+	<component name="memberBhv" class="com.kakeibochan.dbflute.exbhv.MemberBhv"/>
+	<component name="memberAddressBhv" class="com.kakeibochan.dbflute.exbhv.MemberAddressBhv"/>
+	<component name="memberFollowingBhv" class="com.kakeibochan.dbflute.exbhv.MemberFollowingBhv"/>
+	<component name="memberLoginBhv" class="com.kakeibochan.dbflute.exbhv.MemberLoginBhv"/>
+	<component name="memberSecurityBhv" class="com.kakeibochan.dbflute.exbhv.MemberSecurityBhv"/>
+	<component name="memberServiceBhv" class="com.kakeibochan.dbflute.exbhv.MemberServiceBhv"/>
+	<component name="memberStatusBhv" class="com.kakeibochan.dbflute.exbhv.MemberStatusBhv"/>
+	<component name="memberWithdrawalBhv" class="com.kakeibochan.dbflute.exbhv.MemberWithdrawalBhv"/>
+	<component name="productBhv" class="com.kakeibochan.dbflute.exbhv.ProductBhv"/>
+	<component name="productCategoryBhv" class="com.kakeibochan.dbflute.exbhv.ProductCategoryBhv"/>
+	<component name="productStatusBhv" class="com.kakeibochan.dbflute.exbhv.ProductStatusBhv"/>
+	<component name="purchaseBhv" class="com.kakeibochan.dbflute.exbhv.PurchaseBhv"/>
+	<component name="purchasePaymentBhv" class="com.kakeibochan.dbflute.exbhv.PurchasePaymentBhv"/>
+	<component name="regionBhv" class="com.kakeibochan.dbflute.exbhv.RegionBhv"/>
+	<component name="serviceRankBhv" class="com.kakeibochan.dbflute.exbhv.ServiceRankBhv"/>
+	<component name="withdrawalReasonBhv" class="com.kakeibochan.dbflute.exbhv.WithdrawalReasonBhv"/>
+</components>
