@@ -18,7 +18,7 @@ package com.kakeibochan.dbflute.cbean.nss;
 import com.kakeibochan.dbflute.cbean.cq.MemberServiceCQ;
 
 /**
- * The nest select set-upper of member_service.
+ * The nest select set-upper of MEMBER_SERVICE.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberServiceNss {

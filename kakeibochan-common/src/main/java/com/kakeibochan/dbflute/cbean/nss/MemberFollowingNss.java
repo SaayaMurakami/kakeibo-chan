@@ -18,7 +18,7 @@ package com.kakeibochan.dbflute.cbean.nss;
 import com.kakeibochan.dbflute.cbean.cq.MemberFollowingCQ;
 
 /**
- * The nest select set-upper of member_following.
+ * The nest select set-upper of MEMBER_FOLLOWING.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberFollowingNss {

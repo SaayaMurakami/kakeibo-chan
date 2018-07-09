@@ -27,7 +27,6 @@ import org.dbflute.cbean.scoping.*;
 import org.dbflute.dbmeta.DBMetaProvider;
 import org.dbflute.twowaysql.factory.SqlAnalyzerFactory;
 import org.dbflute.twowaysql.style.BoundDateDisplayTimeZoneProvider;
-import com.kakeibochan.dbflute.allcommon.CDef;
 import com.kakeibochan.dbflute.allcommon.DBFluteConfig;
 import com.kakeibochan.dbflute.allcommon.DBMetaInstanceHandler;
 import com.kakeibochan.dbflute.allcommon.ImplementedInvokerAssistant;
@@ -36,7 +35,7 @@ import com.kakeibochan.dbflute.cbean.*;
 import com.kakeibochan.dbflute.cbean.cq.*;
 
 /**
- * The base condition-bean of withdrawal_reason.
+ * The base condition-bean of WITHDRAWAL_REASON.
  * @author DBFlute(AutoGenerator)
  */
 public class BsWithdrawalReasonCB extends AbstractConditionBean {
@@ -89,7 +88,7 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "withdrawal_reason";
+        return "WITHDRAWAL_REASON";
     }
 
     // ===================================================================================
@@ -97,13 +96,13 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param withdrawalReasonCode (退会理由コード): PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
+     * @param withdrawalReasonCode (退会理由コード): PK, NotNull, CHAR(3). (NotNull)
      * @return this. (NotNull)
      */
-    public WithdrawalReasonCB acceptPK(CDef.WithdrawalReason withdrawalReasonCode) {
+    public WithdrawalReasonCB acceptPK(String withdrawalReasonCode) {
         assertObjectNotNull("withdrawalReasonCode", withdrawalReasonCode);
         BsWithdrawalReasonCB cb = this;
-        cb.query().setWithdrawalReasonCode_Equal_AsWithdrawalReason(withdrawalReasonCode);
+        cb.query().setWithdrawalReasonCode_Equal(withdrawalReasonCode);
         return (WithdrawalReasonCB)this;
     }
 
@@ -312,7 +311,7 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * (退会理由コード)WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3), classification=WithdrawalReason}
+         * (退会理由コード)WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnWithdrawalReasonCode() { return doColumn("WITHDRAWAL_REASON_CODE"); }
@@ -333,10 +332,10 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
             columnWithdrawalReasonCode(); // PK
         }
         @Override
-        protected String getTableDbName() { return "withdrawal_reason"; }
+        protected String getTableDbName() { return "WITHDRAWAL_REASON"; }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from member_withdrawal where ...) as FOO_MAX} <br>
+         * {select max(FOO) from MEMBER_WITHDRAWAL where ...) as FOO_MAX} <br>
          * (会員退会情報)MEMBER_WITHDRAWAL by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
          * <pre>
          * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(withdrawalCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

@@ -18,7 +18,7 @@ package com.kakeibochan.dbflute.cbean.nss;
 import com.kakeibochan.dbflute.cbean.cq.ProductCQ;
 
 /**
- * The nest select set-upper of product.
+ * The nest select set-upper of PRODUCT.
  * @author DBFlute(AutoGenerator)
  */
 public class ProductNss {

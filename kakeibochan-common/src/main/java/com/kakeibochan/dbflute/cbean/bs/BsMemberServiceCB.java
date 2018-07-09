@@ -36,7 +36,7 @@ import com.kakeibochan.dbflute.cbean.cq.*;
 import com.kakeibochan.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of member_service.
+ * The base condition-bean of MEMBER_SERVICE.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberServiceCB extends AbstractConditionBean {
@@ -89,7 +89,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "member_service";
+        return "MEMBER_SERVICE";
     }
 
     // ===================================================================================
@@ -109,7 +109,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param memberId (会員ID): UQ, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberId (会員ID): UQ, NotNull, INT(10), FK to MEMBER. (NotNull)
      * @return this. (NotNull)
      */
     public MemberServiceCB acceptUniqueOf(Integer memberId) {
@@ -368,7 +368,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnMemberServiceId() { return doColumn("MEMBER_SERVICE_ID"); }
         /**
-         * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
+         * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to MEMBER}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
@@ -378,7 +378,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnServicePointCount() { return doColumn("SERVICE_POINT_COUNT"); }
         /**
-         * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
+         * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to SERVICE_RANK}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnServiceRankCode() { return doColumn("SERVICE_RANK_CODE"); }
@@ -422,7 +422,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
             }
         }
         @Override
-        protected String getTableDbName() { return "member_service"; }
+        protected String getTableDbName() { return "MEMBER_SERVICE"; }
         /**
          * Prepare to specify functions about relation table. <br>
          * (会員)MEMBER by my MEMBER_ID, named 'member'.

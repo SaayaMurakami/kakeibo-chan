@@ -36,7 +36,7 @@ import com.kakeibochan.dbflute.cbean.cq.*;
 import com.kakeibochan.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of member_following.
+ * The base condition-bean of MEMBER_FOLLOWING.
  * @author DBFlute(AutoGenerator)
  */
 public class BsMemberFollowingCB extends AbstractConditionBean {
@@ -89,7 +89,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "member_following";
+        return "MEMBER_FOLLOWING";
     }
 
     // ===================================================================================
@@ -109,8 +109,8 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param myMemberId (わたし): UQ+, NotNull, INT(10), FK to member. (NotNull)
-     * @param yourMemberId (あなた): +UQ, IX, NotNull, INT(10), FK to member. (NotNull)
+     * @param myMemberId (わたし): UQ+, NotNull, INT(10), FK to MEMBER. (NotNull)
+     * @param yourMemberId (あなた): +UQ, IX, NotNull, INT(10), FK to MEMBER. (NotNull)
      * @return this. (NotNull)
      */
     public MemberFollowingCB acceptUniqueOf(Integer myMemberId, Integer yourMemberId) {
@@ -378,12 +378,12 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnMemberFollowingId() { return doColumn("MEMBER_FOLLOWING_ID"); }
         /**
-         * (わたし)MY_MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
+         * (わたし)MY_MEMBER_ID: {UQ+, NotNull, INT(10), FK to MEMBER}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnMyMemberId() { return doColumn("MY_MEMBER_ID"); }
         /**
-         * (あなた)YOUR_MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to member}
+         * (あなた)YOUR_MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to MEMBER}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnYourMemberId() { return doColumn("YOUR_MEMBER_ID"); }
@@ -407,7 +407,7 @@ public class BsMemberFollowingCB extends AbstractConditionBean {
             }
         }
         @Override
-        protected String getTableDbName() { return "member_following"; }
+        protected String getTableDbName() { return "MEMBER_FOLLOWING"; }
         /**
          * Prepare to specify functions about relation table. <br>
          * (会員)MEMBER by my MY_MEMBER_ID, named 'memberByMyMemberId'.

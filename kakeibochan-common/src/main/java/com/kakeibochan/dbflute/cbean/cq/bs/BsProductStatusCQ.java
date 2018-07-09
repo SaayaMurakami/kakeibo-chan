@@ -28,7 +28,7 @@ import com.kakeibochan.dbflute.cbean.*;
 import com.kakeibochan.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of product_status.
+ * The base condition-query of PRODUCT_STATUS.
  * @author DBFlute(AutoGenerator)
  */
 public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
@@ -50,7 +50,7 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from product_status) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from PRODUCT_STATUS) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -73,7 +73,7 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join product_status on ... and FOO = [value] ...}
+     * {select ... from ... left outer join PRODUCT_STATUS on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -110,14 +110,14 @@ public class BsProductStatusCQ extends AbstractBsProductStatusCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
      */
     public BsProductStatusCQ addOrderBy_ProductStatusCode_Asc() { regOBA("PRODUCT_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
      */
     public BsProductStatusCQ addOrderBy_ProductStatusCode_Desc() { regOBD("PRODUCT_STATUS_CODE"); return this; }

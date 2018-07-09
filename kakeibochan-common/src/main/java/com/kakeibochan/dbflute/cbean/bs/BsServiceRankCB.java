@@ -27,7 +27,6 @@ import org.dbflute.cbean.scoping.*;
 import org.dbflute.dbmeta.DBMetaProvider;
 import org.dbflute.twowaysql.factory.SqlAnalyzerFactory;
 import org.dbflute.twowaysql.style.BoundDateDisplayTimeZoneProvider;
-import com.kakeibochan.dbflute.allcommon.CDef;
 import com.kakeibochan.dbflute.allcommon.DBFluteConfig;
 import com.kakeibochan.dbflute.allcommon.DBMetaInstanceHandler;
 import com.kakeibochan.dbflute.allcommon.ImplementedInvokerAssistant;
@@ -36,7 +35,7 @@ import com.kakeibochan.dbflute.cbean.*;
 import com.kakeibochan.dbflute.cbean.cq.*;
 
 /**
- * The base condition-bean of service_rank.
+ * The base condition-bean of SERVICE_RANK.
  * @author DBFlute(AutoGenerator)
  */
 public class BsServiceRankCB extends AbstractConditionBean {
@@ -89,7 +88,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "service_rank";
+        return "SERVICE_RANK";
     }
 
     // ===================================================================================
@@ -97,13 +96,13 @@ public class BsServiceRankCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param serviceRankCode (サービスランクコード): PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
+     * @param serviceRankCode (サービスランクコード): PK, NotNull, CHAR(3). (NotNull)
      * @return this. (NotNull)
      */
-    public ServiceRankCB acceptPK(CDef.ServiceRank serviceRankCode) {
+    public ServiceRankCB acceptPK(String serviceRankCode) {
         assertObjectNotNull("serviceRankCode", serviceRankCode);
         BsServiceRankCB cb = this;
-        cb.query().setServiceRankCode_Equal_AsServiceRank(serviceRankCode);
+        cb.query().setServiceRankCode_Equal(serviceRankCode);
         return (ServiceRankCB)this;
     }
 
@@ -312,7 +311,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
+         * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnServiceRankCode() { return doColumn("SERVICE_RANK_CODE"); }
@@ -348,10 +347,10 @@ public class BsServiceRankCB extends AbstractConditionBean {
             columnServiceRankCode(); // PK
         }
         @Override
-        protected String getTableDbName() { return "service_rank"; }
+        protected String getTableDbName() { return "SERVICE_RANK"; }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from member_service where ...) as FOO_MAX} <br>
+         * {select max(FOO) from MEMBER_SERVICE where ...) as FOO_MAX} <br>
          * (会員サービス)MEMBER_SERVICE by SERVICE_RANK_CODE, named 'memberServiceList'.
          * <pre>
          * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(serviceCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

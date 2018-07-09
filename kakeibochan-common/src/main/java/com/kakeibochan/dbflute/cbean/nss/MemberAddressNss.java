@@ -18,7 +18,7 @@ package com.kakeibochan.dbflute.cbean.nss;
 import com.kakeibochan.dbflute.cbean.cq.MemberAddressCQ;
 
 /**
- * The nest select set-upper of member_address.
+ * The nest select set-upper of MEMBER_ADDRESS.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberAddressNss {

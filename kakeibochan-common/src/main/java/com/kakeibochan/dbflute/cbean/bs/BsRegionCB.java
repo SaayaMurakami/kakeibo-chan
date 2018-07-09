@@ -27,7 +27,6 @@ import org.dbflute.cbean.scoping.*;
 import org.dbflute.dbmeta.DBMetaProvider;
 import org.dbflute.twowaysql.factory.SqlAnalyzerFactory;
 import org.dbflute.twowaysql.style.BoundDateDisplayTimeZoneProvider;
-import com.kakeibochan.dbflute.allcommon.CDef;
 import com.kakeibochan.dbflute.allcommon.DBFluteConfig;
 import com.kakeibochan.dbflute.allcommon.DBMetaInstanceHandler;
 import com.kakeibochan.dbflute.allcommon.ImplementedInvokerAssistant;
@@ -36,7 +35,7 @@ import com.kakeibochan.dbflute.cbean.*;
 import com.kakeibochan.dbflute.cbean.cq.*;
 
 /**
- * The base condition-bean of region.
+ * The base condition-bean of REGION.
  * @author DBFlute(AutoGenerator)
  */
 public class BsRegionCB extends AbstractConditionBean {
@@ -89,7 +88,7 @@ public class BsRegionCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "region";
+        return "REGION";
     }
 
     // ===================================================================================
@@ -97,13 +96,13 @@ public class BsRegionCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param regionId (地域ID): PK, NotNull, INT(10), classification=Region. (NotNull)
+     * @param regionId (地域ID): PK, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public RegionCB acceptPK(CDef.Region regionId) {
+    public RegionCB acceptPK(Integer regionId) {
         assertObjectNotNull("regionId", regionId);
         BsRegionCB cb = this;
-        cb.query().setRegionId_Equal_AsRegion(regionId);
+        cb.query().setRegionId_Equal(regionId);
         return (RegionCB)this;
     }
 
@@ -300,7 +299,7 @@ public class BsRegionCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region}
+         * (地域ID)REGION_ID: {PK, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnRegionId() { return doColumn("REGION_ID"); }
@@ -316,10 +315,10 @@ public class BsRegionCB extends AbstractConditionBean {
             columnRegionId(); // PK
         }
         @Override
-        protected String getTableDbName() { return "region"; }
+        protected String getTableDbName() { return "REGION"; }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from member_address where ...) as FOO_MAX} <br>
+         * {select max(FOO) from MEMBER_ADDRESS where ...) as FOO_MAX} <br>
          * (会員住所情報)MEMBER_ADDRESS by REGION_ID, named 'memberAddressList'.
          * <pre>
          * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(addressCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

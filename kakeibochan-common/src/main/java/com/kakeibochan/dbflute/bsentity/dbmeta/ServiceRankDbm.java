@@ -28,7 +28,7 @@ import com.kakeibochan.dbflute.allcommon.*;
 import com.kakeibochan.dbflute.exentity.*;
 
 /**
- * The DB meta of service_rank. (Singleton)
+ * The DB meta of SERVICE_RANK. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class ServiceRankDbm extends AbstractDBMeta {
@@ -57,14 +57,7 @@ public class ServiceRankDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((ServiceRank)et).getServiceRankCode(), (et, vl) -> {
-            CDef.ServiceRank cls = (CDef.ServiceRank)gcls(et, columnServiceRankCode(), vl);
-            if (cls != null) {
-                ((ServiceRank)et).setServiceRankCodeAsServiceRank(cls);
-            } else {
-                ((ServiceRank)et).mynativeMappingServiceRankCode((String)vl);
-            }
-        }, "serviceRankCode");
+        setupEpg(_epgMap, et -> ((ServiceRank)et).getServiceRankCode(), (et, vl) -> ((ServiceRank)et).setServiceRankCode((String)vl), "serviceRankCode");
         setupEpg(_epgMap, et -> ((ServiceRank)et).getServiceRankName(), (et, vl) -> ((ServiceRank)et).setServiceRankName((String)vl), "serviceRankName");
         setupEpg(_epgMap, et -> ((ServiceRank)et).getServicePointIncidence(), (et, vl) -> ((ServiceRank)et).setServicePointIncidence(ctb(vl)), "servicePointIncidence");
         setupEpg(_epgMap, et -> ((ServiceRank)et).getNewAcceptableFlg(), (et, vl) -> {
@@ -84,7 +77,7 @@ public class ServiceRankDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "service_rank";
+    protected final String _tableDbName = "SERVICE_RANK";
     protected final String _tableDispName = "SERVICE_RANK";
     protected final String _tablePropertyName = "serviceRank";
     protected final TableSqlName _tableSqlName = new TableSqlName("SERVICE_RANK", _tableDbName);
@@ -99,7 +92,7 @@ public class ServiceRankDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnServiceRankCode = cci("SERVICE_RANK_CODE", "SERVICE_RANK_CODE", null, "サービスランクコード", String.class, "serviceRankCode", null, true, false, true, "CHAR", 3, 0, null, null, false, null, null, null, "memberServiceList", CDef.DefMeta.ServiceRank, false);
+    protected final ColumnInfo _columnServiceRankCode = cci("SERVICE_RANK_CODE", "SERVICE_RANK_CODE", null, "サービスランクコード", String.class, "serviceRankCode", null, true, false, true, "CHAR", 3, 0, null, null, false, null, null, null, "memberServiceList", null, false);
     protected final ColumnInfo _columnServiceRankName = cci("SERVICE_RANK_NAME", "SERVICE_RANK_NAME", null, "サービスランク名称", String.class, "serviceRankName", null, false, false, true, "VARCHAR", 50, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnServicePointIncidence = cci("SERVICE_POINT_INCIDENCE", "SERVICE_POINT_INCIDENCE", null, "サービスポイント発生率", java.math.BigDecimal.class, "servicePointIncidence", null, false, false, true, "DECIMAL", 5, 3, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnNewAcceptableFlg = cci("NEW_ACCEPTABLE_FLG", "NEW_ACCEPTABLE_FLG", null, "新規受け入れ可能フラグ", Integer.class, "newAcceptableFlg", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, CDef.DefMeta.Flg, false);
@@ -107,7 +100,7 @@ public class ServiceRankDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, "表示順", Integer.class, "displayOrder", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
+     * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnServiceRankCode() { return _columnServiceRankCode; }

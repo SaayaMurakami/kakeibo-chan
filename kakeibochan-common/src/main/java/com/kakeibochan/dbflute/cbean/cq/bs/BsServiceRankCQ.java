@@ -28,7 +28,7 @@ import com.kakeibochan.dbflute.cbean.*;
 import com.kakeibochan.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of service_rank.
+ * The base condition-query of SERVICE_RANK.
  * @author DBFlute(AutoGenerator)
  */
 public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
@@ -50,7 +50,7 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from service_rank) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from SERVICE_RANK) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -73,7 +73,7 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join service_rank on ... and FOO = [value] ...}
+     * {select ... from ... left outer join SERVICE_RANK on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -110,14 +110,14 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
+     * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServiceRankCode_Asc() { regOBA("SERVICE_RANK_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
+     * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_ServiceRankCode_Desc() { regOBD("SERVICE_RANK_CODE"); return this; }

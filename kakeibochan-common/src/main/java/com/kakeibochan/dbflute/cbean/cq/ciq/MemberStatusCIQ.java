@@ -27,7 +27,7 @@ import com.kakeibochan.dbflute.cbean.cq.bs.*;
 import com.kakeibochan.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of member_status.
+ * The condition-query for in-line of MEMBER_STATUS.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberStatusCIQ extends AbstractBsMemberStatusCQ {

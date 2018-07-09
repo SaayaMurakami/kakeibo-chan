@@ -29,7 +29,7 @@ import com.kakeibochan.dbflute.allcommon.*;
 import com.kakeibochan.dbflute.exentity.*;
 
 /**
- * The DB meta of member. (Singleton)
+ * The DB meta of MEMBER. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class MemberDbm extends AbstractDBMeta {
@@ -88,8 +88,6 @@ public class MemberDbm extends AbstractDBMeta {
     @SuppressWarnings("unchecked")
     protected void xsetupEfpg() {
         setupEfpg(_efpgMap, et -> ((Member)et).getMemberStatus(), (et, vl) -> ((Member)et).setMemberStatus((OptionalEntity<MemberStatus>)vl), "memberStatus");
-        setupEfpg(_efpgMap, et -> ((Member)et).getMemberAddressAsValid(), (et, vl) -> ((Member)et).setMemberAddressAsValid((OptionalEntity<MemberAddress>)vl), "memberAddressAsValid");
-        setupEfpg(_efpgMap, et -> ((Member)et).getMemberLoginAsLatest(), (et, vl) -> ((Member)et).setMemberLoginAsLatest((OptionalEntity<MemberLogin>)vl), "memberLoginAsLatest");
         setupEfpg(_efpgMap, et -> ((Member)et).getMemberSecurityAsOne(), (et, vl) -> ((Member)et).setMemberSecurityAsOne((OptionalEntity<MemberSecurity>)vl), "memberSecurityAsOne");
         setupEfpg(_efpgMap, et -> ((Member)et).getMemberServiceAsOne(), (et, vl) -> ((Member)et).setMemberServiceAsOne((OptionalEntity<MemberService>)vl), "memberServiceAsOne");
         setupEfpg(_efpgMap, et -> ((Member)et).getMemberWithdrawalAsOne(), (et, vl) -> ((Member)et).setMemberWithdrawalAsOne((OptionalEntity<MemberWithdrawal>)vl), "memberWithdrawalAsOne");
@@ -100,7 +98,7 @@ public class MemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "member";
+    protected final String _tableDbName = "MEMBER";
     protected final String _tableDispName = "MEMBER";
     protected final String _tablePropertyName = "member";
     protected final TableSqlName _tableSqlName = new TableSqlName("MEMBER", _tableDbName);
@@ -115,7 +113,7 @@ public class MemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, "memberAddressAsValid,memberLoginAsLatest,memberSecurityAsOne,memberServiceAsOne,memberWithdrawalAsOne", "memberAddressList,memberFollowingByMyMemberIdList,memberFollowingByYourMemberIdList,memberLoginList,purchaseList", null, false);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "memberAddressList,memberFollowingByMyMemberIdList,memberFollowingByYourMemberIdList,memberLoginList,purchaseList", null, false);
     protected final ColumnInfo _columnMemberName = cci("MEMBER_NAME", "MEMBER_NAME", null, "会員名称", String.class, "memberName", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnMemberAccount = cci("MEMBER_ACCOUNT", "MEMBER_ACCOUNT", null, "会員アカウント", String.class, "memberAccount", null, false, false, true, "VARCHAR", 50, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, "会員ステータスコード", String.class, "memberStatusCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "memberStatus", null, CDef.DefMeta.MemberStatus, false);
@@ -128,7 +126,7 @@ public class MemberDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT", 19, 0, null, null, false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
-     * (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
+     * (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
@@ -143,7 +141,7 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnMemberAccount() { return _columnMemberAccount; }
     /**
-     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS, classification=MemberStatus}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberStatusCode() { return _columnMemberStatusCode; }
@@ -233,45 +231,28 @@ public class MemberDbm extends AbstractDBMeta {
         return cfi("FK_MEMBER_MEMBER_STATUS", "memberStatus", this, MemberStatusDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "memberList", false);
     }
     /**
-     * (会員住所情報)MEMBER_ADDRESS by my MEMBER_ID, named 'memberAddressAsValid'. <br>
-     * Member's address at the target date.
-     * @return The information object of foreign property. (NotNull)
-     */
-    public ForeignInfo foreignMemberAddressAsValid() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberAddressDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_MEMBER_ADDRESS_VALID", "memberAddressAsValid", this, MemberAddressDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, true, true, false, true, "$$foreignAlias$$.VALID_BEGIN_DATE <= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE >= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null", newArrayList("targetDate"), false, null, false);
-    }
-    /**
-     * (会員ログイン)MEMBER_LOGIN by my MEMBER_ID, named 'memberLoginAsLatest'.
-     * @return The information object of foreign property. (NotNull)
-     */
-    public ForeignInfo foreignMemberLoginAsLatest() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberLoginDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_MEMBER_LOGIN_LATEST", "memberLoginAsLatest", this, MemberLoginDbm.getInstance(), mp, 2, org.dbflute.optional.OptionalEntity.class, true, true, false, true, "$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$", null, false, null, false);
-    }
-    /**
-     * (会員セキュリティ)member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * (会員セキュリティ)MEMBER_SECURITY by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return The information object of foreign property(referrer-as-one). (NotNull)
      */
     public ForeignInfo foreignMemberSecurityAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberSecurityDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_SECURITY_MEMBER", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 3, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
+        return cfi("FK_MEMBER_SECURITY_MEMBER", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
     }
     /**
-     * (会員サービス)member_service by MEMBER_ID, named 'memberServiceAsOne'.
+     * (会員サービス)MEMBER_SERVICE by MEMBER_ID, named 'memberServiceAsOne'.
      * @return The information object of foreign property(referrer-as-one). (NotNull)
      */
     public ForeignInfo foreignMemberServiceAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberServiceDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_SERVICE_MEMBER", "memberServiceAsOne", this, MemberServiceDbm.getInstance(), mp, 4, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
+        return cfi("FK_MEMBER_SERVICE_MEMBER", "memberServiceAsOne", this, MemberServiceDbm.getInstance(), mp, 2, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
     }
     /**
-     * (会員退会情報)member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
+     * (会員退会情報)MEMBER_WITHDRAWAL by MEMBER_ID, named 'memberWithdrawalAsOne'.
      * @return The information object of foreign property(referrer-as-one). (NotNull)
      */
     public ForeignInfo foreignMemberWithdrawalAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberWithdrawalDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_WITHDRAWAL_MEMBER", "memberWithdrawalAsOne", this, MemberWithdrawalDbm.getInstance(), mp, 5, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
+        return cfi("FK_MEMBER_WITHDRAWAL_MEMBER", "memberWithdrawalAsOne", this, MemberWithdrawalDbm.getInstance(), mp, 3, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
     }
 
     // -----------------------------------------------------

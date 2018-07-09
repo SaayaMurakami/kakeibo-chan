@@ -18,7 +18,7 @@ package com.kakeibochan.dbflute.cbean.nss;
 import com.kakeibochan.dbflute.cbean.cq.MemberWithdrawalCQ;
 
 /**
- * The nest select set-upper of member_withdrawal.
+ * The nest select set-upper of MEMBER_WITHDRAWAL.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberWithdrawalNss {

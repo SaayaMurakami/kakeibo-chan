@@ -28,7 +28,7 @@ import com.kakeibochan.dbflute.allcommon.*;
 import com.kakeibochan.dbflute.exentity.*;
 
 /**
- * The DB meta of product_status. (Singleton)
+ * The DB meta of PRODUCT_STATUS. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class ProductStatusDbm extends AbstractDBMeta {
@@ -57,14 +57,7 @@ public class ProductStatusDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((ProductStatus)et).getProductStatusCode(), (et, vl) -> {
-            CDef.ProductStatus cls = (CDef.ProductStatus)gcls(et, columnProductStatusCode(), vl);
-            if (cls != null) {
-                ((ProductStatus)et).setProductStatusCodeAsProductStatus(cls);
-            } else {
-                ((ProductStatus)et).mynativeMappingProductStatusCode((String)vl);
-            }
-        }, "productStatusCode");
+        setupEpg(_epgMap, et -> ((ProductStatus)et).getProductStatusCode(), (et, vl) -> ((ProductStatus)et).setProductStatusCode((String)vl), "productStatusCode");
         setupEpg(_epgMap, et -> ((ProductStatus)et).getProductStatusName(), (et, vl) -> ((ProductStatus)et).setProductStatusName((String)vl), "productStatusName");
         setupEpg(_epgMap, et -> ((ProductStatus)et).getDisplayOrder(), (et, vl) -> ((ProductStatus)et).setDisplayOrder(cti(vl)), "displayOrder");
     }
@@ -74,7 +67,7 @@ public class ProductStatusDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "product_status";
+    protected final String _tableDbName = "PRODUCT_STATUS";
     protected final String _tableDispName = "PRODUCT_STATUS";
     protected final String _tablePropertyName = "productStatus";
     protected final TableSqlName _tableSqlName = new TableSqlName("PRODUCT_STATUS", _tableDbName);
@@ -89,12 +82,12 @@ public class ProductStatusDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, "商品ステータスコード", String.class, "productStatusCode", null, true, false, true, "CHAR", 3, 0, null, null, false, null, null, null, "productList", CDef.DefMeta.ProductStatus, false);
+    protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, "商品ステータスコード", String.class, "productStatusCode", null, true, false, true, "CHAR", 3, 0, null, null, false, null, null, null, "productList", null, false);
     protected final ColumnInfo _columnProductStatusName = cci("PRODUCT_STATUS_NAME", "PRODUCT_STATUS_NAME", null, "商品ステータス名称", String.class, "productStatusName", null, false, false, true, "VARCHAR", 50, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, "表示順", Integer.class, "displayOrder", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnProductStatusCode() { return _columnProductStatusCode; }

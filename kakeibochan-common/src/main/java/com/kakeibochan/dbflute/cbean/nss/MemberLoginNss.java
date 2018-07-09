@@ -18,7 +18,7 @@ package com.kakeibochan.dbflute.cbean.nss;
 import com.kakeibochan.dbflute.cbean.cq.MemberLoginCQ;
 
 /**
- * The nest select set-upper of member_login.
+ * The nest select set-upper of MEMBER_LOGIN.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberLoginNss {

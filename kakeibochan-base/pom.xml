@@ -40,10 +40,8 @@
 
 	<modules>
 		<module>../kakeibochan-common</module>
-		<module>../kakeibochan-dockside</module>
-		<module>../kakeibochan-hangar</module>
+		<module>../kakeibochan-front</module>
 		<module>../kakeibochan-batch</module>
-		<module>../kakeibochan-showbase</module>
 	</modules>
 
 	<licenses>

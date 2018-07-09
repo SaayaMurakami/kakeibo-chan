@@ -18,7 +18,7 @@ package com.kakeibochan.dbflute.cbean.nss;
 import com.kakeibochan.dbflute.cbean.cq.PurchasePaymentCQ;
 
 /**
- * The nest select set-upper of purchase_payment.
+ * The nest select set-upper of PURCHASE_PAYMENT.
  * @author DBFlute(AutoGenerator)
  */
 public class PurchasePaymentNss {

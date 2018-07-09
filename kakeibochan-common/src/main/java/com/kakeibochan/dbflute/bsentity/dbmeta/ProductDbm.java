@@ -29,7 +29,7 @@ import com.kakeibochan.dbflute.allcommon.*;
 import com.kakeibochan.dbflute.exentity.*;
 
 /**
- * The DB meta of product. (Singleton)
+ * The DB meta of PRODUCT. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class ProductDbm extends AbstractDBMeta {
@@ -62,14 +62,7 @@ public class ProductDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Product)et).getProductName(), (et, vl) -> ((Product)et).setProductName((String)vl), "productName");
         setupEpg(_epgMap, et -> ((Product)et).getProductHandleCode(), (et, vl) -> ((Product)et).setProductHandleCode((String)vl), "productHandleCode");
         setupEpg(_epgMap, et -> ((Product)et).getProductCategoryCode(), (et, vl) -> ((Product)et).setProductCategoryCode((String)vl), "productCategoryCode");
-        setupEpg(_epgMap, et -> ((Product)et).getProductStatusCode(), (et, vl) -> {
-            CDef.ProductStatus cls = (CDef.ProductStatus)gcls(et, columnProductStatusCode(), vl);
-            if (cls != null) {
-                ((Product)et).setProductStatusCodeAsProductStatus(cls);
-            } else {
-                ((Product)et).mynativeMappingProductStatusCode((String)vl);
-            }
-        }, "productStatusCode");
+        setupEpg(_epgMap, et -> ((Product)et).getProductStatusCode(), (et, vl) -> ((Product)et).setProductStatusCode((String)vl), "productStatusCode");
         setupEpg(_epgMap, et -> ((Product)et).getRegularPrice(), (et, vl) -> ((Product)et).setRegularPrice(cti(vl)), "regularPrice");
         setupEpg(_epgMap, et -> ((Product)et).getRegisterDatetime(), (et, vl) -> ((Product)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((Product)et).getRegisterUser(), (et, vl) -> ((Product)et).setRegisterUser((String)vl), "registerUser");
@@ -96,7 +89,7 @@ public class ProductDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "product";
+    protected final String _tableDbName = "PRODUCT";
     protected final String _tableDispName = "PRODUCT";
     protected final String _tablePropertyName = "product";
     protected final TableSqlName _tableSqlName = new TableSqlName("PRODUCT", _tableDbName);
@@ -115,7 +108,7 @@ public class ProductDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnProductName = cci("PRODUCT_NAME", "PRODUCT_NAME", null, "商品名称", String.class, "productName", null, false, false, true, "VARCHAR", 50, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnProductHandleCode = cci("PRODUCT_HANDLE_CODE", "PRODUCT_HANDLE_CODE", null, "商品ハンドルコード", String.class, "productHandleCode", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnProductCategoryCode = cci("PRODUCT_CATEGORY_CODE", "PRODUCT_CATEGORY_CODE", null, "商品カテゴリコード", String.class, "productCategoryCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "productCategory", null, null, false);
-    protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, "商品ステータスコード", String.class, "productStatusCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "productStatus", null, CDef.DefMeta.ProductStatus, false);
+    protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, "商品ステータスコード", String.class, "productStatusCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "productStatus", null, null, false);
     protected final ColumnInfo _columnRegularPrice = cci("REGULAR_PRICE", "REGULAR_PRICE", null, "定価", Integer.class, "regularPrice", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
@@ -139,12 +132,12 @@ public class ProductDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnProductHandleCode() { return _columnProductHandleCode; }
     /**
-     * (商品カテゴリコード)PRODUCT_CATEGORY_CODE: {IX, NotNull, CHAR(3), FK to product_category}
+     * (商品カテゴリコード)PRODUCT_CATEGORY_CODE: {IX, NotNull, CHAR(3), FK to PRODUCT_CATEGORY}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnProductCategoryCode() { return _columnProductCategoryCode; }
     /**
-     * (商品ステータスコード)PRODUCT_STATUS_CODE: {IX, NotNull, CHAR(3), FK to product_status, classification=ProductStatus}
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {IX, NotNull, CHAR(3), FK to PRODUCT_STATUS}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnProductStatusCode() { return _columnProductStatusCode; }

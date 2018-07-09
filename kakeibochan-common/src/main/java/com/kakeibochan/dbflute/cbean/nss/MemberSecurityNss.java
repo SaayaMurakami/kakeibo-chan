@@ -18,7 +18,7 @@ package com.kakeibochan.dbflute.cbean.nss;
 import com.kakeibochan.dbflute.cbean.cq.MemberSecurityCQ;
 
 /**
- * The nest select set-upper of member_security.
+ * The nest select set-upper of MEMBER_SECURITY.
  * @author DBFlute(AutoGenerator)
  */
 public class MemberSecurityNss {

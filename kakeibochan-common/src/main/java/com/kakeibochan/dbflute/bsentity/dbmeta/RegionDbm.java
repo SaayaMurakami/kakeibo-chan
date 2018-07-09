@@ -28,7 +28,7 @@ import com.kakeibochan.dbflute.allcommon.*;
 import com.kakeibochan.dbflute.exentity.*;
 
 /**
- * The DB meta of region. (Singleton)
+ * The DB meta of REGION. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class RegionDbm extends AbstractDBMeta {
@@ -57,14 +57,7 @@ public class RegionDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Region)et).getRegionId(), (et, vl) -> {
-            CDef.Region cls = (CDef.Region)gcls(et, columnRegionId(), vl);
-            if (cls != null) {
-                ((Region)et).setRegionIdAsRegion(cls);
-            } else {
-                ((Region)et).mynativeMappingRegionId(ctn(vl, Integer.class));
-            }
-        }, "regionId");
+        setupEpg(_epgMap, et -> ((Region)et).getRegionId(), (et, vl) -> ((Region)et).setRegionId(cti(vl)), "regionId");
         setupEpg(_epgMap, et -> ((Region)et).getRegionName(), (et, vl) -> ((Region)et).setRegionName((String)vl), "regionName");
     }
     public PropertyGateway findPropertyGateway(String prop)
@@ -73,7 +66,7 @@ public class RegionDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "region";
+    protected final String _tableDbName = "REGION";
     protected final String _tableDispName = "REGION";
     protected final String _tablePropertyName = "region";
     protected final TableSqlName _tableSqlName = new TableSqlName("REGION", _tableDbName);
@@ -88,11 +81,11 @@ public class RegionDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, "地域ID", Integer.class, "regionId", null, true, false, true, "INT", 10, 0, null, null, false, null, null, null, "memberAddressList", CDef.DefMeta.Region, false);
+    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, "地域ID", Integer.class, "regionId", null, true, false, true, "INT", 10, 0, null, null, false, null, null, null, "memberAddressList", null, false);
     protected final ColumnInfo _columnRegionName = cci("REGION_NAME", "REGION_NAME", null, "地域名称", String.class, "regionName", null, false, false, true, "VARCHAR", 50, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region}
+     * (地域ID)REGION_ID: {PK, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRegionId() { return _columnRegionId; }

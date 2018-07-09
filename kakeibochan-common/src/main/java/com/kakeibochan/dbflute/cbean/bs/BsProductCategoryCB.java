@@ -36,7 +36,7 @@ import com.kakeibochan.dbflute.cbean.cq.*;
 import com.kakeibochan.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of product_category.
+ * The base condition-bean of PRODUCT_CATEGORY.
  * @author DBFlute(AutoGenerator)
  */
 public class BsProductCategoryCB extends AbstractConditionBean {
@@ -89,7 +89,7 @@ public class BsProductCategoryCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "product_category";
+        return "PRODUCT_CATEGORY";
     }
 
     // ===================================================================================
@@ -340,7 +340,7 @@ public class BsProductCategoryCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnProductCategoryName() { return doColumn("PRODUCT_CATEGORY_NAME"); }
         /**
-         * (親カテゴリコード)PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to product_category}
+         * (親カテゴリコード)PARENT_CATEGORY_CODE: {IX, CHAR(3), FK to PRODUCT_CATEGORY}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnParentCategoryCode() { return doColumn("PARENT_CATEGORY_CODE"); }
@@ -355,7 +355,7 @@ public class BsProductCategoryCB extends AbstractConditionBean {
             }
         }
         @Override
-        protected String getTableDbName() { return "product_category"; }
+        protected String getTableDbName() { return "PRODUCT_CATEGORY"; }
         /**
          * Prepare to specify functions about relation table. <br>
          * (商品カテゴリ)PRODUCT_CATEGORY by my PARENT_CATEGORY_CODE, named 'productCategorySelf'.
@@ -378,7 +378,7 @@ public class BsProductCategoryCB extends AbstractConditionBean {
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from product where ...) as FOO_MAX} <br>
+         * {select max(FOO) from PRODUCT where ...) as FOO_MAX} <br>
          * (商品)PRODUCT by PRODUCT_CATEGORY_CODE, named 'productList'.
          * <pre>
          * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(productCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -395,7 +395,7 @@ public class BsProductCategoryCB extends AbstractConditionBean {
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from product_category where ...) as FOO_MAX} <br>
+         * {select max(FOO) from PRODUCT_CATEGORY where ...) as FOO_MAX} <br>
          * (商品カテゴリ)PRODUCT_CATEGORY by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
          * <pre>
          * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(categoryCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

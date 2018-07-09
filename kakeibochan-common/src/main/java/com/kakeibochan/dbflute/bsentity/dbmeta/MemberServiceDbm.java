@@ -29,7 +29,7 @@ import com.kakeibochan.dbflute.allcommon.*;
 import com.kakeibochan.dbflute.exentity.*;
 
 /**
- * The DB meta of member_service. (Singleton)
+ * The DB meta of MEMBER_SERVICE. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class MemberServiceDbm extends AbstractDBMeta {
@@ -61,14 +61,7 @@ public class MemberServiceDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((MemberService)et).getMemberServiceId(), (et, vl) -> ((MemberService)et).setMemberServiceId(cti(vl)), "memberServiceId");
         setupEpg(_epgMap, et -> ((MemberService)et).getMemberId(), (et, vl) -> ((MemberService)et).setMemberId(cti(vl)), "memberId");
         setupEpg(_epgMap, et -> ((MemberService)et).getServicePointCount(), (et, vl) -> ((MemberService)et).setServicePointCount(cti(vl)), "servicePointCount");
-        setupEpg(_epgMap, et -> ((MemberService)et).getServiceRankCode(), (et, vl) -> {
-            CDef.ServiceRank cls = (CDef.ServiceRank)gcls(et, columnServiceRankCode(), vl);
-            if (cls != null) {
-                ((MemberService)et).setServiceRankCodeAsServiceRank(cls);
-            } else {
-                ((MemberService)et).mynativeMappingServiceRankCode((String)vl);
-            }
-        }, "serviceRankCode");
+        setupEpg(_epgMap, et -> ((MemberService)et).getServiceRankCode(), (et, vl) -> ((MemberService)et).setServiceRankCode((String)vl), "serviceRankCode");
         setupEpg(_epgMap, et -> ((MemberService)et).getRegisterDatetime(), (et, vl) -> ((MemberService)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((MemberService)et).getRegisterUser(), (et, vl) -> ((MemberService)et).setRegisterUser((String)vl), "registerUser");
         setupEpg(_epgMap, et -> ((MemberService)et).getUpdateDatetime(), (et, vl) -> ((MemberService)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
@@ -94,7 +87,7 @@ public class MemberServiceDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "member_service";
+    protected final String _tableDbName = "MEMBER_SERVICE";
     protected final String _tableDispName = "MEMBER_SERVICE";
     protected final String _tablePropertyName = "memberService";
     protected final TableSqlName _tableSqlName = new TableSqlName("MEMBER_SERVICE", _tableDbName);
@@ -112,7 +105,7 @@ public class MemberServiceDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnMemberServiceId = cci("MEMBER_SERVICE_ID", "MEMBER_SERVICE_ID", null, "会員サービスID", Integer.class, "memberServiceId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "member", null, null, false);
     protected final ColumnInfo _columnServicePointCount = cci("SERVICE_POINT_COUNT", "SERVICE_POINT_COUNT", null, "サービスポイント数", Integer.class, "servicePointCount", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnServiceRankCode = cci("SERVICE_RANK_CODE", "SERVICE_RANK_CODE", null, "サービスランクコード", String.class, "serviceRankCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "serviceRank", null, CDef.DefMeta.ServiceRank, false);
+    protected final ColumnInfo _columnServiceRankCode = cci("SERVICE_RANK_CODE", "SERVICE_RANK_CODE", null, "サービスランクコード", String.class, "serviceRankCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "serviceRank", null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
@@ -125,7 +118,7 @@ public class MemberServiceDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnMemberServiceId() { return _columnMemberServiceId; }
     /**
-     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to MEMBER}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
@@ -135,7 +128,7 @@ public class MemberServiceDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnServicePointCount() { return _columnServicePointCount; }
     /**
-     * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
+     * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to SERVICE_RANK}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnServiceRankCode() { return _columnServiceRankCode; }

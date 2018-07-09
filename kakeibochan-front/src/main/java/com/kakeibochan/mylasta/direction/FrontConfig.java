@@ -30,7 +30,7 @@ public interface FrontConfig extends FrontEnv {
     String DOMAIN_TITLE = "domain.title";
 
     /** The key of the configuration. e.g. DCK */
-    String COOKIE_REMEMBER_ME_DOCKSIDE_KEY = "cookie.remember.me.front.key";
+    String COOKIE_REMEMBER_ME_FRONT_KEY = "cookie.remember.me.front.key";
 
     /**
      * Get the value of property as {@link String}.
@@ -92,7 +92,7 @@ public interface FrontConfig extends FrontEnv {
         }
 
         public String getCookieRememberMeFrontKey() {
-            return get(FrontConfig.COOKIE_REMEMBER_ME_DOCKSIDE_KEY);
+            return get(FrontConfig.COOKIE_REMEMBER_ME_FRONT_KEY);
         }
     }
 }

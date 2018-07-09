@@ -31,7 +31,7 @@ import com.kakeibochan.dbflute.cbean.*;
 import com.kakeibochan.dbflute.cbean.cq.*;
 
 /**
- * The abstract condition-query of member_withdrawal.
+ * The abstract condition-query of MEMBER_WITHDRAWAL.
  * @author DBFlute(AutoGenerator)
  */
 public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuery {
@@ -52,7 +52,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
     }
 
     public String asTableDbName() {
-        return "member_withdrawal";
+        return "MEMBER_WITHDRAWAL";
     }
 
     // ===================================================================================
@@ -60,7 +60,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param memberId The value of memberId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setMemberId_Equal(Integer memberId) {
@@ -73,7 +73,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param memberId The value of memberId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setMemberId_NotEqual(Integer memberId) {
@@ -86,7 +86,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param memberId The value of memberId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setMemberId_GreaterThan(Integer memberId) {
@@ -95,7 +95,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param memberId The value of memberId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setMemberId_LessThan(Integer memberId) {
@@ -104,7 +104,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param memberId The value of memberId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setMemberId_GreaterEqual(Integer memberId) {
@@ -113,7 +113,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param memberId The value of memberId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setMemberId_LessEqual(Integer memberId) {
@@ -124,7 +124,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param minNumber The min number of memberId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of memberId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -137,7 +137,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param minNumber The min number of memberId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of memberId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -148,7 +148,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param memberIdList The collection of memberId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setMemberId_InScope(Collection<Integer> memberIdList) {
@@ -161,7 +161,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      * @param memberIdList The collection of memberId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setMemberId_NotInScope(Collection<Integer> memberIdList) {
@@ -174,13 +174,13 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      */
     public void setMemberId_IsNull() { regMemberId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to MEMBER}
      */
     public void setMemberId_IsNotNull() { regMemberId(CK_ISNN, DOBJ); }
 
@@ -189,53 +189,11 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
      * @param withdrawalReasonCode The value of withdrawalReasonCode as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    protected void setWithdrawalReasonCode_Equal(String withdrawalReasonCode) {
+    public void setWithdrawalReasonCode_Equal(String withdrawalReasonCode) {
         doSetWithdrawalReasonCode_Equal(fRES(withdrawalReasonCode));
-    }
-
-    /**
-     * Equal(=). As WithdrawalReason. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
-     * reason for member withdrawal
-     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
-     */
-    public void setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason cdef) {
-        doSetWithdrawalReasonCode_Equal(cdef != null ? cdef.code() : null);
-    }
-
-    /**
-     * Equal(=). As Sit (SIT). And OnlyOnceRegistered. <br>
-     * SIT: site is not kindness
-     */
-    public void setWithdrawalReasonCode_Equal_Sit() {
-        setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason.Sit);
-    }
-
-    /**
-     * Equal(=). As Prd (PRD). And OnlyOnceRegistered. <br>
-     * PRD: no attractive product
-     */
-    public void setWithdrawalReasonCode_Equal_Prd() {
-        setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason.Prd);
-    }
-
-    /**
-     * Equal(=). As Frt (FRT). And OnlyOnceRegistered. <br>
-     * FRT: because of furiten
-     */
-    public void setWithdrawalReasonCode_Equal_Frt() {
-        setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason.Frt);
-    }
-
-    /**
-     * Equal(=). As Oth (OTH). And OnlyOnceRegistered. <br>
-     * OTH: other reasons
-     */
-    public void setWithdrawalReasonCode_Equal_Oth() {
-        setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason.Oth);
     }
 
     protected void doSetWithdrawalReasonCode_Equal(String withdrawalReasonCode) {
@@ -244,53 +202,11 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
      * @param withdrawalReasonCode The value of withdrawalReasonCode as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    protected void setWithdrawalReasonCode_NotEqual(String withdrawalReasonCode) {
+    public void setWithdrawalReasonCode_NotEqual(String withdrawalReasonCode) {
         doSetWithdrawalReasonCode_NotEqual(fRES(withdrawalReasonCode));
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). As WithdrawalReason. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
-     * reason for member withdrawal
-     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
-     */
-    public void setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason cdef) {
-        doSetWithdrawalReasonCode_NotEqual(cdef != null ? cdef.code() : null);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). As Sit (SIT). And OnlyOnceRegistered. <br>
-     * SIT: site is not kindness
-     */
-    public void setWithdrawalReasonCode_NotEqual_Sit() {
-        setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason.Sit);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). As Prd (PRD). And OnlyOnceRegistered. <br>
-     * PRD: no attractive product
-     */
-    public void setWithdrawalReasonCode_NotEqual_Prd() {
-        setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason.Prd);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). As Frt (FRT). And OnlyOnceRegistered. <br>
-     * FRT: because of furiten
-     */
-    public void setWithdrawalReasonCode_NotEqual_Frt() {
-        setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason.Frt);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). As Oth (OTH). And OnlyOnceRegistered. <br>
-     * OTH: other reasons
-     */
-    public void setWithdrawalReasonCode_NotEqual_Oth() {
-        setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason.Oth);
     }
 
     protected void doSetWithdrawalReasonCode_NotEqual(String withdrawalReasonCode) {
@@ -299,21 +215,11 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
      * @param withdrawalReasonCodeList The collection of withdrawalReasonCode as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    protected void setWithdrawalReasonCode_InScope(Collection<String> withdrawalReasonCodeList) {
+    public void setWithdrawalReasonCode_InScope(Collection<String> withdrawalReasonCodeList) {
         doSetWithdrawalReasonCode_InScope(withdrawalReasonCodeList);
-    }
-
-    /**
-     * InScope {in ('a', 'b')}. As WithdrawalReason. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
-     * reason for member withdrawal
-     * @param cdefList The list of classification definition (as ENUM type). (basically NotNull, NotEmpty: error as default, or no condition as option)
-     */
-    public void setWithdrawalReasonCode_InScope_AsWithdrawalReason(Collection<CDef.WithdrawalReason> cdefList) {
-        doSetWithdrawalReasonCode_InScope(cTStrL(cdefList));
     }
 
     protected void doSetWithdrawalReasonCode_InScope(Collection<String> withdrawalReasonCodeList) {
@@ -322,21 +228,11 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
      * @param withdrawalReasonCodeList The collection of withdrawalReasonCode as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    protected void setWithdrawalReasonCode_NotInScope(Collection<String> withdrawalReasonCodeList) {
+    public void setWithdrawalReasonCode_NotInScope(Collection<String> withdrawalReasonCodeList) {
         doSetWithdrawalReasonCode_NotInScope(withdrawalReasonCodeList);
-    }
-
-    /**
-     * NotInScope {not in ('a', 'b')}. As WithdrawalReason. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br>
-     * reason for member withdrawal
-     * @param cdefList The list of classification definition (as ENUM type). (basically NotNull, NotEmpty: error as default, or no condition as option)
-     */
-    public void setWithdrawalReasonCode_NotInScope_AsWithdrawalReason(Collection<CDef.WithdrawalReason> cdefList) {
-        doSetWithdrawalReasonCode_NotInScope(cTStrL(cdefList));
     }
 
     protected void doSetWithdrawalReasonCode_NotInScope(Collection<String> withdrawalReasonCodeList) {
@@ -344,20 +240,64 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
     }
 
     /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON} <br>
+     * <pre>e.g. setWithdrawalReasonCode_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param withdrawalReasonCode The value of withdrawalReasonCode as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setWithdrawalReasonCode_LikeSearch(String withdrawalReasonCode, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setWithdrawalReasonCode_LikeSearch(withdrawalReasonCode, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON} <br>
+     * <pre>e.g. setWithdrawalReasonCode_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param withdrawalReasonCode The value of withdrawalReasonCode as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setWithdrawalReasonCode_LikeSearch(String withdrawalReasonCode, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(withdrawalReasonCode), xgetCValueWithdrawalReasonCode(), "WITHDRAWAL_REASON_CODE", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
+     * @param withdrawalReasonCode The value of withdrawalReasonCode as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setWithdrawalReasonCode_NotLikeSearch(String withdrawalReasonCode, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setWithdrawalReasonCode_NotLikeSearch(withdrawalReasonCode, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
+     * @param withdrawalReasonCode The value of withdrawalReasonCode as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setWithdrawalReasonCode_NotLikeSearch(String withdrawalReasonCode, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(withdrawalReasonCode), xgetCValueWithdrawalReasonCode(), "WITHDRAWAL_REASON_CODE", likeSearchOption);
+    }
+
+    /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
      */
     public void setWithdrawalReasonCode_IsNull() { regWithdrawalReasonCode(CK_ISN, DOBJ); }
 
     /**
      * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
      */
     public void setWithdrawalReasonCode_IsNullOrEmpty() { regWithdrawalReasonCode(CK_ISNOE, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON}
      */
     public void setWithdrawalReasonCode_IsNotNull() { regWithdrawalReasonCode(CK_ISNN, DOBJ); }
 

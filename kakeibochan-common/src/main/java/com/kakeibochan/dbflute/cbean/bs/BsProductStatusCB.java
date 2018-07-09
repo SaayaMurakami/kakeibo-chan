@@ -27,7 +27,6 @@ import org.dbflute.cbean.scoping.*;
 import org.dbflute.dbmeta.DBMetaProvider;
 import org.dbflute.twowaysql.factory.SqlAnalyzerFactory;
 import org.dbflute.twowaysql.style.BoundDateDisplayTimeZoneProvider;
-import com.kakeibochan.dbflute.allcommon.CDef;
 import com.kakeibochan.dbflute.allcommon.DBFluteConfig;
 import com.kakeibochan.dbflute.allcommon.DBMetaInstanceHandler;
 import com.kakeibochan.dbflute.allcommon.ImplementedInvokerAssistant;
@@ -36,7 +35,7 @@ import com.kakeibochan.dbflute.cbean.*;
 import com.kakeibochan.dbflute.cbean.cq.*;
 
 /**
- * The base condition-bean of product_status.
+ * The base condition-bean of PRODUCT_STATUS.
  * @author DBFlute(AutoGenerator)
  */
 public class BsProductStatusCB extends AbstractConditionBean {
@@ -89,7 +88,7 @@ public class BsProductStatusCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "product_status";
+        return "PRODUCT_STATUS";
     }
 
     // ===================================================================================
@@ -97,13 +96,13 @@ public class BsProductStatusCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param productStatusCode (商品ステータスコード): PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
+     * @param productStatusCode (商品ステータスコード): PK, NotNull, CHAR(3). (NotNull)
      * @return this. (NotNull)
      */
-    public ProductStatusCB acceptPK(CDef.ProductStatus productStatusCode) {
+    public ProductStatusCB acceptPK(String productStatusCode) {
         assertObjectNotNull("productStatusCode", productStatusCode);
         BsProductStatusCB cb = this;
-        cb.query().setProductStatusCode_Equal_AsProductStatus(productStatusCode);
+        cb.query().setProductStatusCode_Equal(productStatusCode);
         return (ProductStatusCB)this;
     }
 
@@ -312,7 +311,7 @@ public class BsProductStatusCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
+         * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnProductStatusCode() { return doColumn("PRODUCT_STATUS_CODE"); }
@@ -333,10 +332,10 @@ public class BsProductStatusCB extends AbstractConditionBean {
             columnProductStatusCode(); // PK
         }
         @Override
-        protected String getTableDbName() { return "product_status"; }
+        protected String getTableDbName() { return "PRODUCT_STATUS"; }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from product where ...) as FOO_MAX} <br>
+         * {select max(FOO) from PRODUCT where ...) as FOO_MAX} <br>
          * (商品)PRODUCT by PRODUCT_STATUS_CODE, named 'productList'.
          * <pre>
          * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(productCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {

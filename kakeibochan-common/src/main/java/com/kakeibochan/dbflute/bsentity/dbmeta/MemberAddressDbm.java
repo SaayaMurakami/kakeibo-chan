@@ -29,7 +29,7 @@ import com.kakeibochan.dbflute.allcommon.*;
 import com.kakeibochan.dbflute.exentity.*;
 
 /**
- * The DB meta of member_address. (Singleton)
+ * The DB meta of MEMBER_ADDRESS. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class MemberAddressDbm extends AbstractDBMeta {
@@ -63,14 +63,7 @@ public class MemberAddressDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((MemberAddress)et).getValidBeginDate(), (et, vl) -> ((MemberAddress)et).setValidBeginDate(ctld(vl)), "validBeginDate");
         setupEpg(_epgMap, et -> ((MemberAddress)et).getValidEndDate(), (et, vl) -> ((MemberAddress)et).setValidEndDate(ctld(vl)), "validEndDate");
         setupEpg(_epgMap, et -> ((MemberAddress)et).getAddress(), (et, vl) -> ((MemberAddress)et).setAddress((String)vl), "address");
-        setupEpg(_epgMap, et -> ((MemberAddress)et).getRegionId(), (et, vl) -> {
-            CDef.Region cls = (CDef.Region)gcls(et, columnRegionId(), vl);
-            if (cls != null) {
-                ((MemberAddress)et).setRegionIdAsRegion(cls);
-            } else {
-                ((MemberAddress)et).mynativeMappingRegionId(ctn(vl, Integer.class));
-            }
-        }, "regionId");
+        setupEpg(_epgMap, et -> ((MemberAddress)et).getRegionId(), (et, vl) -> ((MemberAddress)et).setRegionId(cti(vl)), "regionId");
         setupEpg(_epgMap, et -> ((MemberAddress)et).getRegisterDatetime(), (et, vl) -> ((MemberAddress)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((MemberAddress)et).getRegisterUser(), (et, vl) -> ((MemberAddress)et).setRegisterUser((String)vl), "registerUser");
         setupEpg(_epgMap, et -> ((MemberAddress)et).getUpdateDatetime(), (et, vl) -> ((MemberAddress)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
@@ -96,7 +89,7 @@ public class MemberAddressDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "member_address";
+    protected final String _tableDbName = "MEMBER_ADDRESS";
     protected final String _tableDispName = "MEMBER_ADDRESS";
     protected final String _tablePropertyName = "memberAddress";
     protected final TableSqlName _tableSqlName = new TableSqlName("MEMBER_ADDRESS", _tableDbName);
@@ -116,7 +109,7 @@ public class MemberAddressDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnValidBeginDate = cci("VALID_BEGIN_DATE", "VALID_BEGIN_DATE", null, "有効開始日", java.time.LocalDate.class, "validBeginDate", null, false, false, true, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnValidEndDate = cci("VALID_END_DATE", "VALID_END_DATE", null, "有効終了日", java.time.LocalDate.class, "validEndDate", null, false, false, true, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnAddress = cci("ADDRESS", "ADDRESS", null, "住所", String.class, "address", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, "地域ID", Integer.class, "regionId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "region", null, CDef.DefMeta.Region, false);
+    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, "地域ID", Integer.class, "regionId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "region", null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
@@ -129,7 +122,7 @@ public class MemberAddressDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnMemberAddressId() { return _columnMemberAddressId; }
     /**
-     * (会員ID)MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ+, NotNull, INT(10), FK to MEMBER}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
@@ -149,7 +142,7 @@ public class MemberAddressDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnAddress() { return _columnAddress; }
     /**
-     * (地域ID)REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
+     * (地域ID)REGION_ID: {IX, NotNull, INT(10), FK to REGION}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRegionId() { return _columnRegionId; }
