@@ -111,7 +111,7 @@ public class KakeibochanMessages extends KakeibochanLabels {
     /** The key of the message: must be a valid URL */
     public static final String CONSTRAINTS_URL_MESSAGE = "{constraints.URL.message}";
 
-    /** The key of the message: is required */
+    /** The key of the message: 入力してください */
     public static final String CONSTRAINTS_Required_MESSAGE = "{constraints.Required.message}";
 
     /** The key of the message: should be {propertyType} */
@@ -567,7 +567,7 @@ public class KakeibochanMessages extends KakeibochanLabels {
     /**
      * Add the created action message for the key 'constraints.Required.message' with parameters.
      * <pre>
-     * message: is required
+     * message: 入力してください
      * comment: --------------------
      * </pre>
      * @param property The property name for the message. (NotNull)

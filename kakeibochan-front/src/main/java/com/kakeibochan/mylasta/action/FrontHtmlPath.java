@@ -29,6 +29,15 @@ public interface FrontHtmlPath {
     /** The path of the HTML: /mypage/mypage.html */
     HtmlNext path_Mypage_MypageHtml = new HtmlNext("/mypage/mypage.html");
 
+    /** The path of the HTML: /prpr/prpr.html */
+    HtmlNext path_Prpr_PrprHtml = new HtmlNext("/prpr/prpr.html");
+
+    /** The path of the HTML: /register/confirm.html */
+    HtmlNext path_Register_ConfirmHtml = new HtmlNext("/register/confirm.html");
+
+    /** The path of the HTML: /register/register.html */
+    HtmlNext path_Register_RegisterHtml = new HtmlNext("/register/register.html");
+
     /** The path of the HTML: /signin/signin.html */
     HtmlNext path_Signin_SigninHtml = new HtmlNext("/signin/signin.html");
 

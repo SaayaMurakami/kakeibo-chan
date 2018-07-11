@@ -41,7 +41,7 @@ constraints.URL.message                     = must be a valid URL
 # ----------------------------------------------------------
 #                                       LastaFlute Validator
 #                                       --------------------
-constraints.Required.message                = 入力してください
+constraints.Required.message                = is required
 constraints.TypeAny.message                 = should be {propertyType}
 constraints.TypeInteger.message             = should be number
 constraints.TypeLong.message                = should be number

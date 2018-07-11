@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>ユーザー登録｜家計簿ちゃん</title>
+	<link href="/css/reset2.css" th:href="@{/css/reset2.css}" rel="stylesheet"></link>
+	<link href="/css/register.css" th:href="@{/css/register.css}" rel="stylesheet"></link>
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<a href="#top-page">家計簿<span class="chan">ちゃん</span></a>
+		</div>
+		<div class="headline"></div>
+	</header>
+	<div class="main">
+		<form class="register-form" th:action="@{/register/confirm/}" action="#" method="post">
+        	<h1>新規登録</h1>
+        	<div class="form-element">
+	        	<span class="form-label">メールアドレス</span>
+	        	<div class="form-input">
+					<input type="text" name="mailAddress" th:value="${mailAddress}" placeholder="メールアドレス"/>
+					<span la:errors="mailAddress"/>
+				</div>
+			</div>
+        	<div class="form-element">
+	        	<span class="form-label">パスワード</span>
+	        	<div class="form-input">
+					<input type="password" name="password" th:value="${password}" placeholder="パスワード"/>
+					<span la:errors="password"/>
+				</div>
+			</div>
+        	<div class="form-element">
+	        	<span class="form-label">ユーザー名</span>
+	        	<div class="form-input">
+					<input type="text" name="userName" th:value="${userName}" placeholder="ユーザー名"/>
+					<span la:errors="userName"/>
+				</div>	
+			</div>
+        	<div class="form-element">
+			<button type="submit" name="button">登録</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

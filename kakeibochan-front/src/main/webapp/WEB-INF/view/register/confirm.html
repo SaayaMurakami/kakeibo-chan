@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>確認：ユーザー登録｜家計簿ちゃん</title>
+	<link href="/css/reset2.css" th:href="@{/css/reset2.css}" rel="stylesheet"></link>
+	<link href="/css/confirm.css" th:href="@{/css/confirm.css}" rel="stylesheet"></link>
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<a href="#top-page">家計簿<span class="chan">ちゃん</span></a>
+		</div>
+		<div class="headline"></div>
+	</header>
+	<div class="main">
+		<div class="confirm">
+			<h1 class="title">確認</h1>
+			<p>メールアドレス：<span th:text="${mailAddress}">入力したメールアドレス</span></p>
+			<p>パスワード：<span th:text="${password}">入力したパスワード</span></p>
+			<p>ユーザー名：<span th:text="${userName}">入力したユーザー名</span></p>
+			<p><button type="button" name="button">登録</button></p>
+			<p><a href="/front/register">修正</a></p>
+		</div>
+	</div>
+</body>
+</html>
