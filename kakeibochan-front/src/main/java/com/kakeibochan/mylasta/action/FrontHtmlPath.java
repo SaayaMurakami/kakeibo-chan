@@ -32,6 +32,9 @@ public interface FrontHtmlPath {
     /** The path of the HTML: /prpr/prpr.html */
     HtmlNext path_Prpr_PrprHtml = new HtmlNext("/prpr/prpr.html");
 
+    /** The path of the HTML: /register/complete.html */
+    HtmlNext path_Register_CompleteHtml = new HtmlNext("/register/complete.html");
+
     /** The path of the HTML: /register/confirm.html */
     HtmlNext path_Register_ConfirmHtml = new HtmlNext("/register/confirm.html");
 

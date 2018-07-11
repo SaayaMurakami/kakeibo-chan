@@ -9,7 +9,10 @@ import com.kakeibochan.app.web.base.FrontBaseAction;
 @AllowAnyoneAccess
 public class RegisterAction extends FrontBaseAction {
     @Execute
-    public HtmlResponse index() {
+    public HtmlResponse index(RegisterConfirmForm form) {
+        validate(form, message -> {}, () -> {
+            return asHtml(path_Register_RegisterHtml);
+        });
         return asHtml(path_Register_RegisterHtml);
     }
 
@@ -19,7 +22,28 @@ public class RegisterAction extends FrontBaseAction {
             return asHtml(path_Register_RegisterHtml);
         });
 
+        saveToken();
         return asHtml(path_Register_ConfirmHtml);
+    }
+
+    @Execute
+    public HtmlResponse doComplete(RegisterConfirmForm form) {
+        validate(form, message -> {}, () -> {
+            return asHtml(path_Register_RegisterHtml);
+        });
+
+        verifyToken(() -> {
+            return asHtml(path_Register_RegisterHtml);
+        });
+
+        //TODO ユーザー登録処理を行う
+
+        return redirectWith(RegisterAction.class, moreUrl("complete"));
+    }
+
+    @Execute
+    public HtmlResponse complete() {
+        return asHtml(path_Register_CompleteHtml);
     }
 
 }

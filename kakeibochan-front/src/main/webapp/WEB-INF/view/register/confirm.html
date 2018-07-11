@@ -16,11 +16,37 @@
 	<div class="main">
 		<div class="confirm">
 			<h1 class="title">確認</h1>
-			<p>メールアドレス：<span th:text="${mailAddress}">入力したメールアドレス</span></p>
-			<p>パスワード：<span th:text="${password}">入力したパスワード</span></p>
-			<p>ユーザー名：<span th:text="${userName}">入力したユーザー名</span></p>
-			<p><button type="button" name="button">登録</button></p>
-			<p><a href="/front/register">修正</a></p>
+			<div class="confirm-element">
+				<span class="element-label">メールアドレス</span>
+				<div class="element-value">
+					<span th:text="${mailAddress}">入力したメールアドレス</span>
+				</div>
+			</div>
+			<div class="confirm-element">
+				<span class="element-label">パスワード</span>
+				<div class="element-value">
+					<span th:text="${password}">入力したパスワード</span>
+				</div>
+			</div>			
+			<div class="confirm-element">
+				<span class="element-label">ユーザー名</span>
+				<div class="element-value">
+					<span th:text="${userName}">入力したユーザー名</span>
+				</div>
+			</div>
+		<form class="confirm-form" th:action="@{/register}" action="#" method="post">		
+			<input type="hidden" name="mailAddress" th:value="${mailAddress}"/>
+			<input type="hidden" name="password" th:value="${password}"/>
+			<input type="hidden" name="userName" th:value="${userName}"/>
+			<button type="submit" name="button">戻る</button>
+		</form>
+		<form class="confirm-form" th:action="@{/register/doComplete}" action="#" method="post">
+			<input type="hidden" la:token="true"/>		
+			<input type="hidden" name="mailAddress" th:value="${mailAddress}"/>
+			<input type="hidden" name="password" th:value="${password}"/>
+			<input type="hidden" name="userName" th:value="${userName}"/>
+			<button type="submit" name="button">登録</button>
+		</form>
 		</div>
 	</div>
 </body>

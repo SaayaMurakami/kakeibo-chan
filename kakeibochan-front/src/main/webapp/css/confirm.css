@@ -10,10 +10,6 @@ body {
     min-width: 987px;
 }
 
-a {
-    text-decoration: none;
-}
-
 /*ヘッダー*/
 header {
     white-space:nowrap;
@@ -37,6 +33,7 @@ header {
 .logo a {
     color: #96C730; 
     margin-left: 15px;
+    text-decoration: none;
 }
 
 .chan {
@@ -72,18 +69,53 @@ header {
     width: 60%;
     min-height: 283px;
     padding: 34px;
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
     position: relative;
     top: 10%;
     border: 1.5px solid rgba(151, 151, 151, 0.62);
     border-radius: 23px;
 }
-.title {
-    font-size: 36px;
+h1.title {
+    font-size: 36px;
+    margin-bottom: 15px;
+    
 }
-p {
+p {    
+	padding: 7px;
+}
+p.back {
+    text-align: left;
+    padding-left: 0;
+    padding-bottom: 21px;
+}
+.confirm-element {
     padding: 20px;
+    height: 30px;
+    clear: both;
+}
+.element-label {
+    display: block;
+    float: left;
+    text-align: right;
+    width: 30%;
+    padding-right: 20px;
+}
+.element-value {
+	 display: block;
+    float: left;
+    width: 60%;
+    text-align: left;
+    padding-left: 20px;
+}
+.back a {
+	color: #C08F63;
+}
+.back a:hover {
+	color: #F4C091;
+}
+form {
+	display: inline-block;
 }
 button {
     width: 300px;

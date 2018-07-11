@@ -9,11 +9,6 @@ body {
     background-color: #FEF9F2;
     min-width: 987px;
 }
-
-a {
-    text-decoration: none;
-}
-
 /*ヘッダー*/
 header {
     white-space:nowrap;
@@ -37,6 +32,7 @@ header {
 .logo a {
     color: #96C730; 
     margin-left: 15px;
+    text-decoration: none;
 }
 
 .chan {
@@ -63,7 +59,7 @@ header {
     background-repeat: repeat-x;
     background-position: bottom;
 }
-form {
+.complete {
     font-size: 20px;
     font-family: KTEGAKI;
     color: #565c6f;
@@ -79,66 +75,14 @@ form {
     border: 1.5px solid rgba(151, 151, 151, 0.62);
     border-radius: 23px;
 }
-form h1 {
-    font-size: 36px;
-    margin-bottom: 15px;
+.complete h1 {
+	font-size: 36px;
 }
-p {
-    padding: 20px;
+.complete a {
+	display: block;
+	margin-top:10%;
+	color: #C08F63;
 }
-.form-element {
-    padding: 20px;
-    height: 30px;
-    clear: both;
+.complete a:hover {
+	color: #F4C091;
 }
-input {
-    width: 267px;
-    height: 22px;
-    padding: 2px 8px;
-    border: 1px solid rgba(151, 151, 151, 0.62);
-    border-radius: 5px;
-    outline-color: #F3B985;
-}
-.form-label {
-    display: block;
-    float: left;
-    text-align: right;
-    width: 30%;
-    padding-right: 20px;
-}
-.form-input {
-	 display: block;
-    float: left;
-    width: 60%;
-    text-align: left;
-    padding-left: 20px;
-}
-button {
-    width: 300px;
-    font-family: KTEGAKI;
-    font-size: 20px;
-    border: 2px solid #C08F63;
-    background-color: #F4C091;
-    border-radius: 23px;
-    color: #fff;
-    line-height: 30px;
-    text-shadow: 0 2px 0px rgba(0, 0, 0, .3);
-    outline: none;
-    cursor: pointer;
-}
-button:hover {
-  border:2px solid #C08F63;
-  background-color: #e3b286;
-}
-button:active {
-  background: #ddac7f;
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .2);
-  color: #c19063;
-  text-shadow: 0 3px  rgba(224,223,223,.5);
-}
-.errors {
-	margin-top: 15px;
-	color: #f36262;
-	font-size: 17px;
-}
-
