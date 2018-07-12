@@ -34,7 +34,7 @@
 					<span th:text="${userName}">入力したユーザー名</span>
 				</div>
 			</div>
-		<form class="confirm-form" th:action="@{/register}" action="#" method="post">		
+		<form class="confirm-form" th:action="@{/register/goBackIndex}" action="#" method="post">		
 			<input type="hidden" name="mailAddress" th:value="${mailAddress}"/>
 			<input type="hidden" name="password" th:value="${password}"/>
 			<input type="hidden" name="userName" th:value="${userName}"/>

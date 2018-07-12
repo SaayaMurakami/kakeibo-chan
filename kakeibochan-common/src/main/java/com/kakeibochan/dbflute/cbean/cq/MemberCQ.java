@@ -17,6 +17,7 @@ package com.kakeibochan.dbflute.cbean.cq;
 
 import org.dbflute.cbean.ConditionQuery;
 import org.dbflute.cbean.sqlclause.SqlClause;
+
 import com.kakeibochan.dbflute.cbean.cq.bs.BsMemberCQ;
 
 /**
@@ -69,9 +70,9 @@ public class MemberCQ extends BsMemberCQ {
             String msg = "The argument 'cipheredPassword' should not be null or empty: " + cipheredPassword;
             throw new IllegalArgumentException(msg);
         }
-        setMemberAccount_Equal(email); // member account (the database has no email)
-        queryMemberSecurityAsOne().setLoginPassword_Equal(cipheredPassword);
-        setMemberStatusCode_InScope_ServiceAvailable();
+        setMailAddress_Equal(email);
+        setPassword_Equal(cipheredPassword);
+        queryWithdrawalAsOne().setWithdrawalId_IsNull();
     }
 
     /**
@@ -82,12 +83,12 @@ public class MemberCQ extends BsMemberCQ {
      * </pre>
      * @param memberId The ID of the login member. (NotNull)
      */
-    public void arrangeLoginByIdentity(Integer memberId) {
+    public void arrangeLoginByIdentity(Long memberId) {
         if (memberId == null) {
             String msg = "The argument 'memberId' should not be null.";
             throw new IllegalArgumentException(msg);
         }
         setMemberId_Equal(memberId);
-        setMemberStatusCode_InScope_ServiceAvailable();
+        queryWithdrawalAsOne().setWithdrawalId_IsNull();
     }
 }

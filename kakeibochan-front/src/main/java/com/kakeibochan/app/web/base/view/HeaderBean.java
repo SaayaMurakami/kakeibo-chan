@@ -24,7 +24,7 @@ public class HeaderBean {
 
     private static final HeaderBean EMPTY_INSTANCE = new HeaderBean();
 
-    public final Integer memberId;
+    public final Long memberId;
     public final String memberName;
     public final boolean isLogin;
 
@@ -36,7 +36,7 @@ public class HeaderBean {
 
     public HeaderBean(FrontUserBean userBean) {
         this.memberId = userBean.getMemberId();
-        this.memberName = userBean.getMemberName();
+        this.memberName = userBean.getName();
         this.isLogin = true;
     }
 

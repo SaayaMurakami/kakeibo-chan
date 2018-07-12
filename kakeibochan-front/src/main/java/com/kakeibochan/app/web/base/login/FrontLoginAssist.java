@@ -19,14 +19,6 @@ import javax.annotation.Resource;
 
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.optional.OptionalThing;
-import com.kakeibochan.app.web.signin.SigninAction;
-import com.kakeibochan.dbflute.cbean.MemberCB;
-import com.kakeibochan.dbflute.exbhv.MemberBhv;
-import com.kakeibochan.dbflute.exbhv.MemberLoginBhv;
-import com.kakeibochan.dbflute.exentity.Member;
-import com.kakeibochan.dbflute.exentity.MemberLogin;
-import com.kakeibochan.mylasta.action.FrontUserBean;
-import com.kakeibochan.mylasta.direction.FrontConfig;
 import org.lastaflute.core.magic.async.AsyncManager;
 import org.lastaflute.core.time.TimeManager;
 import org.lastaflute.db.jta.stage.TransactionStage;
@@ -34,11 +26,17 @@ import org.lastaflute.web.login.PrimaryLoginManager;
 import org.lastaflute.web.login.credential.UserPasswordCredential;
 import org.lastaflute.web.login.option.LoginSpecifiedOption;
 
+import com.kakeibochan.app.web.signin.SigninAction;
+import com.kakeibochan.dbflute.cbean.MemberCB;
+import com.kakeibochan.dbflute.exbhv.MemberBhv;
+import com.kakeibochan.dbflute.exentity.Member;
+import com.kakeibochan.mylasta.action.FrontUserBean;
+import com.kakeibochan.mylasta.direction.FrontConfig;
+
 /**
  * @author jflute
  */
-public class FrontLoginAssist extends KakeibochanLoginAssist<FrontUserBean, Member> // #change_it also UserBean
-        implements PrimaryLoginManager { // #app_customize
+public class FrontLoginAssist extends KakeibochanLoginAssist<FrontUserBean, Member> implements PrimaryLoginManager {
 
     // ===================================================================================
     //                                                                           Attribute
@@ -53,8 +51,10 @@ public class FrontLoginAssist extends KakeibochanLoginAssist<FrontUserBean, Memb
     private FrontConfig config;
     @Resource
     private MemberBhv memberBhv;
-    @Resource
-    private MemberLoginBhv memberLoginBhv;
+
+    // TODO ログイン履歴をDBに記録するようにしたい
+    // @Resource
+    /// private MemberLoginBhv memberLoginBhv;
 
     // ===================================================================================
     //                                                                           Find User
@@ -78,7 +78,7 @@ public class FrontLoginAssist extends KakeibochanLoginAssist<FrontUserBean, Memb
     }
 
     @Override
-    protected OptionalEntity<Member> doFindLoginUser(Integer userId) {
+    protected OptionalEntity<Member> doFindLoginUser(Long userId) {
         return memberBhv.selectEntity(cb -> {
             cb.query().arrangeLoginByIdentity(userId);
         });
@@ -101,19 +101,20 @@ public class FrontLoginAssist extends KakeibochanLoginAssist<FrontUserBean, Memb
     protected void saveLoginHistory(Member member, FrontUserBean userBean, LoginSpecifiedOption option) {
         asyncManager.async(() -> {
             transactionStage.requiresNew(tx -> {
-                insertLogin(member);
+                // TODO ログイン履歴をDBに記録するようにしたい
+                // insertLogin(member);
             });
         });
     }
 
-    protected void insertLogin(Member member) {
-        MemberLogin login = new MemberLogin();
-        login.setMemberId(member.getMemberId());
-        login.setLoginMemberStatusCodeAsMemberStatus(member.getMemberStatusCodeAsMemberStatus());
-        login.setLoginDatetime(timeManager.currentDateTime());
-        login.setMobileLoginFlg_False(); // mobile unsupported for now
-        memberLoginBhv.insert(login);
-    }
+    //    protected void insertLogin(Member member) {
+    //        MemberLogin login = new MemberLogin();
+    //        login.setMemberId(member.getMemberId());
+    //        login.setLoginMemberStatusCodeAsMemberStatus(member.getMemberStatusCodeAsMemberStatus());
+    //        login.setLoginDatetime(timeManager.currentDateTime());
+    //        login.setMobileLoginFlg_False(); // mobile unsupported for now
+    //        memberLoginBhv.insert(login);
+    //    }
 
     // ===================================================================================
     //                                                                      Login Resource

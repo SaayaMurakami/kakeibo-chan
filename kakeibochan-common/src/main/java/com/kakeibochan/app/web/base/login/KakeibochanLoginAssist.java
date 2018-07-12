@@ -15,9 +15,10 @@
  */
 package com.kakeibochan.app.web.base.login;
 
-import com.kakeibochan.mylasta.action.KakeibochanUserBean;
 import org.lastaflute.web.login.PrimaryLoginManager;
 import org.lastaflute.web.login.TypicalLoginAssist;
+
+import com.kakeibochan.mylasta.action.KakeibochanUserBean;
 
 /**
  * @param <USER_BEAN> The type of user bean.
@@ -25,11 +26,10 @@ import org.lastaflute.web.login.TypicalLoginAssist;
  * @author jflute
  */
 public abstract class KakeibochanLoginAssist<USER_BEAN extends KakeibochanUserBean, USER_ENTITY> // project common
-        extends TypicalLoginAssist<Integer, USER_BEAN, USER_ENTITY> // #change_it also UserBean
-        implements PrimaryLoginManager { // interface for framework control
+        extends TypicalLoginAssist<Long, USER_BEAN, USER_ENTITY> implements PrimaryLoginManager { // interface for framework control
 
     @Override
-    protected Integer toTypedUserId(String userKey) {
-        return Integer.valueOf(userKey);
+    protected Long toTypedUserId(String userKey) {
+        return Long.valueOf(userKey);
     }
 }

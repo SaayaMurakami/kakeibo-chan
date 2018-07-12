@@ -19,19 +19,18 @@ import javax.annotation.Resource;
 
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.optional.OptionalThing;
-import com.kakeibochan.app.web.signin.SigninAction;
-import com.kakeibochan.dbflute.cbean.MemberCB;
-import com.kakeibochan.dbflute.exbhv.MemberBhv;
-import com.kakeibochan.dbflute.exbhv.MemberLoginBhv;
-import com.kakeibochan.dbflute.exentity.Member;
-import com.kakeibochan.dbflute.exentity.MemberLogin;
-import com.kakeibochan.mylasta.action.BatchUserBean;
-import com.kakeibochan.mylasta.direction.BatchConfig;
 import org.lastaflute.core.magic.async.AsyncManager;
 import org.lastaflute.core.time.TimeManager;
 import org.lastaflute.db.jta.stage.TransactionStage;
 import org.lastaflute.web.login.credential.UserPasswordCredential;
 import org.lastaflute.web.login.option.LoginSpecifiedOption;
+
+import com.kakeibochan.app.web.signin.SigninAction;
+import com.kakeibochan.dbflute.cbean.MemberCB;
+import com.kakeibochan.dbflute.exbhv.MemberBhv;
+import com.kakeibochan.dbflute.exentity.Member;
+import com.kakeibochan.mylasta.action.BatchUserBean;
+import com.kakeibochan.mylasta.direction.BatchConfig;
 
 /**
  * @author jflute
@@ -51,8 +50,10 @@ public class BatchLoginAssist extends KakeibochanLoginAssist<BatchUserBean, Memb
     private BatchConfig config;
     @Resource
     private MemberBhv memberBhv;
-    @Resource
-    private MemberLoginBhv memberLoginBhv;
+
+    // TODO ログイン履歴をDBに記録するようにしたい
+    //    @Resource
+    //    private MemberLoginBhv memberLoginBhv;
 
     // ===================================================================================
     //                                                                           Find User
@@ -76,7 +77,7 @@ public class BatchLoginAssist extends KakeibochanLoginAssist<BatchUserBean, Memb
     }
 
     @Override
-    protected OptionalEntity<Member> doFindLoginUser(Integer userId) {
+    protected OptionalEntity<Member> doFindLoginUser(Long userId) {
         return memberBhv.selectEntity(cb -> {
             cb.query().arrangeLoginByIdentity(userId);
         });
@@ -99,19 +100,20 @@ public class BatchLoginAssist extends KakeibochanLoginAssist<BatchUserBean, Memb
     protected void saveLoginHistory(Member member, BatchUserBean userBean, LoginSpecifiedOption option) {
         asyncManager.async(() -> {
             transactionStage.requiresNew(tx -> {
-                insertLogin(member);
+                // TODO ログイン履歴をDBに記録するようにしたい
+                // insertLogin(member);
             });
         });
     }
 
-    protected void insertLogin(Member member) {
-        MemberLogin login = new MemberLogin();
-        login.setMemberId(member.getMemberId());
-        login.setLoginMemberStatusCodeAsMemberStatus(member.getMemberStatusCodeAsMemberStatus());
-        login.setLoginDatetime(timeManager.currentDateTime());
-        login.setMobileLoginFlg_False(); // mobile unsupported for now
-        memberLoginBhv.insert(login);
-    }
+    //    protected void insertLogin(Member member) {
+    //        MemberLogin login = new MemberLogin();
+    //        login.setMemberId(member.getMemberId());
+    //        login.setLoginMemberStatusCodeAsMemberStatus(member.getMemberStatusCodeAsMemberStatus());
+    //        login.setLoginDatetime(timeManager.currentDateTime());
+    //        login.setMobileLoginFlg_False(); // mobile unsupported for now
+    //        memberLoginBhv.insert(login);
+    //    }
 
     // ===================================================================================
     //                                                                      Login Resource

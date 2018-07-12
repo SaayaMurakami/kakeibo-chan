@@ -8,8 +8,14 @@ import com.kakeibochan.app.web.base.FrontBaseAction;
 
 @AllowAnyoneAccess
 public class RegisterAction extends FrontBaseAction {
+
     @Execute
-    public HtmlResponse index(RegisterConfirmForm form) {
+    public HtmlResponse index() {
+        return asHtml(path_Register_RegisterHtml);
+    }
+
+    @Execute
+    public HtmlResponse goBackIndex(RegisterConfirmForm form) {
         validate(form, message -> {}, () -> {
             return asHtml(path_Register_RegisterHtml);
         });

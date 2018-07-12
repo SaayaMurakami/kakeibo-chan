@@ -31,39 +31,39 @@ public class FrontUserBean extends KakeibochanUserBean { // #change_it also Logi
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected final Integer memberId;
-    protected final String memberName;
-    protected final String memberAccount;
+    protected final Long memberId;
+    protected final String name;
+    protected final String mailAddress;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
     public FrontUserBean(Member member) {
         memberId = member.getMemberId();
-        memberName = member.getMemberName();
-        memberAccount = member.getMemberAccount();
+        name = member.getName();
+        mailAddress = member.getMailAddress();
     }
 
     // ===================================================================================
     //                                                                      Implementation
     //                                                                      ==============
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return getMemberId();
     }
 
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public Integer getMemberId() {
+    public Long getMemberId() {
         return memberId;
     }
 
-    public String getMemberName() {
-        return memberName;
+    public String getName() {
+        return name;
     }
 
-    public String getMemberAccount() {
-        return memberAccount;
+    public String getMailAddress() {
+        return mailAddress;
     }
 }

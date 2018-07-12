@@ -20,7 +20,7 @@ import org.lastaflute.web.login.TypicalUserBean;
 /**
  * @author jflute
  */
-public abstract class KakeibochanUserBean extends TypicalUserBean<Integer> { // #change_it also LoginAssist
+public abstract class KakeibochanUserBean extends TypicalUserBean<Long> {
 
     private static final long serialVersionUID = 1L;
 }
