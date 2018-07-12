@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>0</x>
+	<x>236</x>
 	<y>0</y>
 	<default_color>
 		<r>128</r>
@@ -138,7 +138,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2018-06-04 19:20:57</creation_date>
-			<updated_date>2018-07-12 14:51:30</updated_date>
+			<updated_date>2018-07-12 14:56:53</updated_date>
 			<model_property>
 				<name>プロジェクト名</name>
 				<value></value>
@@ -187,44 +187,12 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>口座ID</logical_name>
-			<physical_name>ACCOUNT_ID</physical_name>
-			<type>bigint</type>
-		</word>
-		<word>
-			<id>1</id>
-			<length>null</length>
-			<decimal>null</decimal>
-			<array>false</array>
-			<array_dimension>null</array_dimension>
-			<unsigned>false</unsigned>
-			<zerofill>false</zerofill>
-			<binary>false</binary>
-			<args></args>
-			<char_semantics>false</char_semantics>
-			<description></description>
 			<logical_name>勘定科目ID </logical_name>
 			<physical_name>ACCOUNT_ITEM_ID</physical_name>
 			<type>bigint</type>
 		</word>
 		<word>
-			<id>2</id>
-			<length>200</length>
-			<decimal>null</decimal>
-			<array>false</array>
-			<array_dimension>null</array_dimension>
-			<unsigned>false</unsigned>
-			<zerofill>false</zerofill>
-			<binary>false</binary>
-			<args></args>
-			<char_semantics>false</char_semantics>
-			<description></description>
-			<logical_name>口座名</logical_name>
-			<physical_name>ACCOUNT_NAME</physical_name>
-			<type>varchar(n)</type>
-		</word>
-		<word>
-			<id>3</id>
+			<id>1</id>
 			<length>200</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -240,7 +208,7 @@
 			<type>varchar(n)</type>
 		</word>
 		<word>
-			<id>4</id>
+			<id>2</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -254,6 +222,38 @@
 			<logical_name>金額</logical_name>
 			<physical_name>AMOUNT</physical_name>
 			<type>integer</type>
+		</word>
+		<word>
+			<id>3</id>
+			<length>null</length>
+			<decimal>null</decimal>
+			<array>false</array>
+			<array_dimension>null</array_dimension>
+			<unsigned>false</unsigned>
+			<zerofill>false</zerofill>
+			<binary>false</binary>
+			<args></args>
+			<char_semantics>false</char_semantics>
+			<description></description>
+			<logical_name>資産ID</logical_name>
+			<physical_name>ASSET_ID</physical_name>
+			<type>bigint</type>
+		</word>
+		<word>
+			<id>4</id>
+			<length>200</length>
+			<decimal>null</decimal>
+			<array>false</array>
+			<array_dimension>null</array_dimension>
+			<unsigned>false</unsigned>
+			<zerofill>false</zerofill>
+			<binary>false</binary>
+			<args></args>
+			<char_semantics>false</char_semantics>
+			<description></description>
+			<logical_name>資産名</logical_name>
+			<physical_name>ASSET_NAME</physical_name>
+			<type>varchar(n)</type>
 		</word>
 		<word>
 			<id>5</id>
@@ -918,7 +918,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>1</word_id>
+					<word_id>0</word_id>
 					<id>12</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1018,7 +1018,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>3</word_id>
+					<word_id>1</word_id>
 					<id>15</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1113,7 +1113,7 @@
 			<connections>
 				<relation>
 					<id>2</id>
-					<source>4</source>
+					<source>2</source>
 					<target>3</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -1125,7 +1125,7 @@
 							<b>0</b>
 						</color>
 					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>0..1</parent_cardinality>
+					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
 					<name></name>
 					<on_delete_action>RESTRICT</on_delete_action>
@@ -1157,7 +1157,7 @@
 				</relation>
 				<relation>
 					<id>4</id>
-					<source>2</source>
+					<source>4</source>
 					<target>3</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -1169,7 +1169,7 @@
 							<b>0</b>
 						</color>
 					<child_cardinality>1..n</child_cardinality>
-					<parent_cardinality>1</parent_cardinality>
+					<parent_cardinality>0..1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
 					<name></name>
 					<on_delete_action>RESTRICT</on_delete_action>
@@ -1277,7 +1277,7 @@
 				<normal_column>
 					<id>19</id>
 					<referenced_column>12</referenced_column>
-					<relation>4</relation>
+					<relation>2</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1311,7 +1311,7 @@
 				<normal_column>
 					<id>20</id>
 					<referenced_column>26</referenced_column>
-					<relation>2</relation>
+					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name>入金先口座ID</logical_name>
@@ -1345,7 +1345,7 @@
 				<normal_column>
 					<id>21</id>
 					<referenced_column>26</referenced_column>
-					<relation>3</relation>
+					<relation>4</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name>出金元口座ID</logical_name>
@@ -1410,7 +1410,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>4</word_id>
+					<word_id>2</word_id>
 					<id>23</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1559,15 +1559,15 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>ACCOUNT</physical_name>
-			<logical_name>口座</logical_name>
+			<physical_name>ASSET</physical_name>
+			<logical_name>資産</logical_name>
 			<description></description>
 			<constraint></constraint>
 			<primary_key_name></primary_key_name>
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>0</word_id>
+					<word_id>3</word_id>
 					<id>26</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1634,7 +1634,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>2</word_id>
+					<word_id>4</word_id>
 					<id>28</id>
 					<description></description>
 					<unique_key_name></unique_key_name>

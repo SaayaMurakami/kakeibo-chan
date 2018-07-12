@@ -58,19 +58,10 @@ public class MemberDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Member)et).getMemberId(), (et, vl) -> ((Member)et).setMemberId(cti(vl)), "memberId");
-        setupEpg(_epgMap, et -> ((Member)et).getMemberName(), (et, vl) -> ((Member)et).setMemberName((String)vl), "memberName");
-        setupEpg(_epgMap, et -> ((Member)et).getMemberAccount(), (et, vl) -> ((Member)et).setMemberAccount((String)vl), "memberAccount");
-        setupEpg(_epgMap, et -> ((Member)et).getMemberStatusCode(), (et, vl) -> {
-            CDef.MemberStatus cls = (CDef.MemberStatus)gcls(et, columnMemberStatusCode(), vl);
-            if (cls != null) {
-                ((Member)et).setMemberStatusCodeAsMemberStatus(cls);
-            } else {
-                ((Member)et).mynativeMappingMemberStatusCode((String)vl);
-            }
-        }, "memberStatusCode");
-        setupEpg(_epgMap, et -> ((Member)et).getFormalizedDatetime(), (et, vl) -> ((Member)et).setFormalizedDatetime(ctldt(vl)), "formalizedDatetime");
-        setupEpg(_epgMap, et -> ((Member)et).getBirthdate(), (et, vl) -> ((Member)et).setBirthdate(ctld(vl)), "birthdate");
+        setupEpg(_epgMap, et -> ((Member)et).getMemberId(), (et, vl) -> ((Member)et).setMemberId(ctl(vl)), "memberId");
+        setupEpg(_epgMap, et -> ((Member)et).getMailAddress(), (et, vl) -> ((Member)et).setMailAddress((String)vl), "mailAddress");
+        setupEpg(_epgMap, et -> ((Member)et).getName(), (et, vl) -> ((Member)et).setName((String)vl), "name");
+        setupEpg(_epgMap, et -> ((Member)et).getPassword(), (et, vl) -> ((Member)et).setPassword((String)vl), "password");
         setupEpg(_epgMap, et -> ((Member)et).getRegisterDatetime(), (et, vl) -> ((Member)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((Member)et).getRegisterUser(), (et, vl) -> ((Member)et).setRegisterUser((String)vl), "registerUser");
         setupEpg(_epgMap, et -> ((Member)et).getUpdateDatetime(), (et, vl) -> ((Member)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
@@ -87,10 +78,7 @@ public class MemberDbm extends AbstractDBMeta {
     { xsetupEfpg(); }
     @SuppressWarnings("unchecked")
     protected void xsetupEfpg() {
-        setupEfpg(_efpgMap, et -> ((Member)et).getMemberStatus(), (et, vl) -> ((Member)et).setMemberStatus((OptionalEntity<MemberStatus>)vl), "memberStatus");
-        setupEfpg(_efpgMap, et -> ((Member)et).getMemberSecurityAsOne(), (et, vl) -> ((Member)et).setMemberSecurityAsOne((OptionalEntity<MemberSecurity>)vl), "memberSecurityAsOne");
-        setupEfpg(_efpgMap, et -> ((Member)et).getMemberServiceAsOne(), (et, vl) -> ((Member)et).setMemberServiceAsOne((OptionalEntity<MemberService>)vl), "memberServiceAsOne");
-        setupEfpg(_efpgMap, et -> ((Member)et).getMemberWithdrawalAsOne(), (et, vl) -> ((Member)et).setMemberWithdrawalAsOne((OptionalEntity<MemberWithdrawal>)vl), "memberWithdrawalAsOne");
+        setupEfpg(_efpgMap, et -> ((Member)et).getWithdrawalAsOne(), (et, vl) -> ((Member)et).setWithdrawalAsOne((OptionalEntity<Withdrawal>)vl), "withdrawalAsOne");
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -113,12 +101,10 @@ public class MemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "memberAddressList,memberFollowingByMyMemberIdList,memberFollowingByYourMemberIdList,memberLoginList,purchaseList", null, false);
-    protected final ColumnInfo _columnMemberName = cci("MEMBER_NAME", "MEMBER_NAME", null, "会員名称", String.class, "memberName", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnMemberAccount = cci("MEMBER_ACCOUNT", "MEMBER_ACCOUNT", null, "会員アカウント", String.class, "memberAccount", null, false, false, true, "VARCHAR", 50, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, "会員ステータスコード", String.class, "memberStatusCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "memberStatus", null, CDef.DefMeta.MemberStatus, false);
-    protected final ColumnInfo _columnFormalizedDatetime = cci("FORMALIZED_DATETIME", "FORMALIZED_DATETIME", null, "正式会員日時", java.time.LocalDateTime.class, "formalizedDatetime", null, false, false, false, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, "生年月日", java.time.LocalDate.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Long.class, "memberId", null, true, true, true, "BIGINT", 19, 0, null, null, false, null, null, null, "accountItemList,assetList,recordList", null, false);
+    protected final ColumnInfo _columnMailAddress = cci("MAIL_ADDRESS", "MAIL_ADDRESS", null, "メールアドレス", String.class, "mailAddress", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnName = cci("NAME", "NAME", null, "名前", String.class, "name", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnPassword = cci("PASSWORD", "PASSWORD", null, "パスワード", String.class, "password", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
@@ -126,35 +112,25 @@ public class MemberDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT", 19, 0, null, null, false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
-     * (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * (会員ID)MEMBER_ID: {PK, ID, NotNull, BIGINT(19)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
     /**
-     * (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(100)}
+     * (メールアドレス)MAIL_ADDRESS: {UQ, NotNull, VARCHAR(200)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnMemberName() { return _columnMemberName; }
+    public ColumnInfo columnMailAddress() { return _columnMailAddress; }
     /**
-     * (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)}
+     * (名前)NAME: {NotNull, VARCHAR(200)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnMemberAccount() { return _columnMemberAccount; }
+    public ColumnInfo columnName() { return _columnName; }
     /**
-     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS, classification=MemberStatus}
+     * (パスワード)PASSWORD: {NotNull, VARCHAR(200)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnMemberStatusCode() { return _columnMemberStatusCode; }
-    /**
-     * (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnFormalizedDatetime() { return _columnFormalizedDatetime; }
-    /**
-     * (生年月日)BIRTHDATE: {DATE(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnBirthdate() { return _columnBirthdate; }
+    public ColumnInfo columnPassword() { return _columnPassword; }
     /**
      * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
@@ -184,11 +160,9 @@ public class MemberDbm extends AbstractDBMeta {
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnMemberId());
-        ls.add(columnMemberName());
-        ls.add(columnMemberAccount());
-        ls.add(columnMemberStatusCode());
-        ls.add(columnFormalizedDatetime());
-        ls.add(columnBirthdate());
+        ls.add(columnMailAddress());
+        ls.add(columnName());
+        ls.add(columnPassword());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());
         ls.add(columnUpdateDatetime());
@@ -212,7 +186,7 @@ public class MemberDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                        Unique Element
     //                                        --------------
-    public UniqueInfo uniqueOf() { return hpcui(columnMemberAccount()); }
+    public UniqueInfo uniqueOf() { return hpcui(columnMailAddress()); }
 
     // ===================================================================================
     //                                                                       Relation Info
@@ -223,80 +197,40 @@ public class MemberDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * (会員ステータス)MEMBER_STATUS by my MEMBER_STATUS_CODE, named 'memberStatus'.
-     * @return The information object of foreign property. (NotNull)
-     */
-    public ForeignInfo foreignMemberStatus() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberStatusCode(), MemberStatusDbm.getInstance().columnMemberStatusCode());
-        return cfi("FK_MEMBER_MEMBER_STATUS", "memberStatus", this, MemberStatusDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "memberList", false);
-    }
-    /**
-     * (会員セキュリティ)MEMBER_SECURITY by MEMBER_ID, named 'memberSecurityAsOne'.
+     * (退会情報)WITHDRAWAL by MEMBER_ID, named 'withdrawalAsOne'.
      * @return The information object of foreign property(referrer-as-one). (NotNull)
      */
-    public ForeignInfo foreignMemberSecurityAsOne() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberSecurityDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_SECURITY_MEMBER", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
-    }
-    /**
-     * (会員サービス)MEMBER_SERVICE by MEMBER_ID, named 'memberServiceAsOne'.
-     * @return The information object of foreign property(referrer-as-one). (NotNull)
-     */
-    public ForeignInfo foreignMemberServiceAsOne() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberServiceDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_SERVICE_MEMBER", "memberServiceAsOne", this, MemberServiceDbm.getInstance(), mp, 2, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
-    }
-    /**
-     * (会員退会情報)MEMBER_WITHDRAWAL by MEMBER_ID, named 'memberWithdrawalAsOne'.
-     * @return The information object of foreign property(referrer-as-one). (NotNull)
-     */
-    public ForeignInfo foreignMemberWithdrawalAsOne() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberWithdrawalDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_WITHDRAWAL_MEMBER", "memberWithdrawalAsOne", this, MemberWithdrawalDbm.getInstance(), mp, 3, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
+    public ForeignInfo foreignWithdrawalAsOne() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), WithdrawalDbm.getInstance().columnMemberId());
+        return cfi("withdrawal_ibfk_1", "withdrawalAsOne", this, WithdrawalDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "member", false);
     }
 
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
     /**
-     * (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
+     * (勘定科目)ACCOUNT_ITEM by MEMBER_ID, named 'accountItemList'.
      * @return The information object of referrer property. (NotNull)
      */
-    public ReferrerInfo referrerMemberAddressList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberAddressDbm.getInstance().columnMemberId());
-        return cri("FK_MEMBER_ADDRESS_MEMBER", "memberAddressList", this, MemberAddressDbm.getInstance(), mp, false, "member");
+    public ReferrerInfo referrerAccountItemList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), AccountItemDbm.getInstance().columnMemberId());
+        return cri("account_item_ibfk_1", "accountItemList", this, AccountItemDbm.getInstance(), mp, false, "member");
     }
     /**
-     * (会員フォローイング)MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
+     * (資産)ASSET by MEMBER_ID, named 'assetList'.
      * @return The information object of referrer property. (NotNull)
      */
-    public ReferrerInfo referrerMemberFollowingByMyMemberIdList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberFollowingDbm.getInstance().columnMyMemberId());
-        return cri("FK_MEMBER_FOLLOWING_MY_MEMBER_ID", "memberFollowingByMyMemberIdList", this, MemberFollowingDbm.getInstance(), mp, false, "memberByMyMemberId");
+    public ReferrerInfo referrerAssetList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), AssetDbm.getInstance().columnMemberId());
+        return cri("asset_ibfk_1", "assetList", this, AssetDbm.getInstance(), mp, false, "member");
     }
     /**
-     * (会員フォローイング)MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
+     * (明細)RECORD by MEMBER_ID, named 'recordList'.
      * @return The information object of referrer property. (NotNull)
      */
-    public ReferrerInfo referrerMemberFollowingByYourMemberIdList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberFollowingDbm.getInstance().columnYourMemberId());
-        return cri("FK_MEMBER_FOLLOWING_YOUR_MEMBER_ID", "memberFollowingByYourMemberIdList", this, MemberFollowingDbm.getInstance(), mp, false, "memberByYourMemberId");
-    }
-    /**
-     * (会員ログイン)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
-     * @return The information object of referrer property. (NotNull)
-     */
-    public ReferrerInfo referrerMemberLoginList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberLoginDbm.getInstance().columnMemberId());
-        return cri("FK_MEMBER_LOGIN_MEMBER", "memberLoginList", this, MemberLoginDbm.getInstance(), mp, false, "member");
-    }
-    /**
-     * (購入)PURCHASE by MEMBER_ID, named 'purchaseList'.
-     * @return The information object of referrer property. (NotNull)
-     */
-    public ReferrerInfo referrerPurchaseList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), PurchaseDbm.getInstance().columnMemberId());
-        return cri("FK_PURCHASE_MEMBER", "purchaseList", this, PurchaseDbm.getInstance(), mp, false, "member");
+    public ReferrerInfo referrerRecordList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), RecordDbm.getInstance().columnMemberId());
+        return cri("record_ibfk_4", "recordList", this, RecordDbm.getInstance(), mp, false, "member");
     }
 
     // ===================================================================================

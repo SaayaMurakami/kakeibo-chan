@@ -46,22 +46,11 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
     protected static final Map<String, String> _tableDbNameClassNameMap;
     static {
         final Map<String, String> tmpMap = newHashMap();
+        tmpMap.put("ACCOUNT_ITEM", "com.kakeibochan.dbflute.bsentity.dbmeta.AccountItemDbm");
+        tmpMap.put("ASSET", "com.kakeibochan.dbflute.bsentity.dbmeta.AssetDbm");
         tmpMap.put("MEMBER", "com.kakeibochan.dbflute.bsentity.dbmeta.MemberDbm");
-        tmpMap.put("MEMBER_ADDRESS", "com.kakeibochan.dbflute.bsentity.dbmeta.MemberAddressDbm");
-        tmpMap.put("MEMBER_FOLLOWING", "com.kakeibochan.dbflute.bsentity.dbmeta.MemberFollowingDbm");
-        tmpMap.put("MEMBER_LOGIN", "com.kakeibochan.dbflute.bsentity.dbmeta.MemberLoginDbm");
-        tmpMap.put("MEMBER_SECURITY", "com.kakeibochan.dbflute.bsentity.dbmeta.MemberSecurityDbm");
-        tmpMap.put("MEMBER_SERVICE", "com.kakeibochan.dbflute.bsentity.dbmeta.MemberServiceDbm");
-        tmpMap.put("MEMBER_STATUS", "com.kakeibochan.dbflute.bsentity.dbmeta.MemberStatusDbm");
-        tmpMap.put("MEMBER_WITHDRAWAL", "com.kakeibochan.dbflute.bsentity.dbmeta.MemberWithdrawalDbm");
-        tmpMap.put("PRODUCT", "com.kakeibochan.dbflute.bsentity.dbmeta.ProductDbm");
-        tmpMap.put("PRODUCT_CATEGORY", "com.kakeibochan.dbflute.bsentity.dbmeta.ProductCategoryDbm");
-        tmpMap.put("PRODUCT_STATUS", "com.kakeibochan.dbflute.bsentity.dbmeta.ProductStatusDbm");
-        tmpMap.put("PURCHASE", "com.kakeibochan.dbflute.bsentity.dbmeta.PurchaseDbm");
-        tmpMap.put("PURCHASE_PAYMENT", "com.kakeibochan.dbflute.bsentity.dbmeta.PurchasePaymentDbm");
-        tmpMap.put("REGION", "com.kakeibochan.dbflute.bsentity.dbmeta.RegionDbm");
-        tmpMap.put("SERVICE_RANK", "com.kakeibochan.dbflute.bsentity.dbmeta.ServiceRankDbm");
-        tmpMap.put("WITHDRAWAL_REASON", "com.kakeibochan.dbflute.bsentity.dbmeta.WithdrawalReasonDbm");
+        tmpMap.put("RECORD", "com.kakeibochan.dbflute.bsentity.dbmeta.RecordDbm");
+        tmpMap.put("WITHDRAWAL", "com.kakeibochan.dbflute.bsentity.dbmeta.WithdrawalDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);
     }
 

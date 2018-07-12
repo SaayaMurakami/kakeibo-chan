@@ -97,10 +97,10 @@ public class BsMemberCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberId (会員ID): PK, ID, NotNull, INT(10). (NotNull)
+     * @param memberId (会員ID): PK, ID, NotNull, BIGINT(19). (NotNull)
      * @return this. (NotNull)
      */
-    public MemberCB acceptPK(Integer memberId) {
+    public MemberCB acceptPK(Long memberId) {
         assertObjectNotNull("memberId", memberId);
         BsMemberCB cb = this;
         cb.query().setMemberId_Equal(memberId);
@@ -109,13 +109,13 @@ public class BsMemberCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param memberAccount (会員アカウント): UQ, NotNull, VARCHAR(50). (NotNull)
+     * @param mailAddress (メールアドレス): UQ, NotNull, VARCHAR(200). (NotNull)
      * @return this. (NotNull)
      */
-    public MemberCB acceptUniqueOf(String memberAccount) {
-        assertObjectNotNull("memberAccount", memberAccount);
+    public MemberCB acceptUniqueOf(String mailAddress) {
+        assertObjectNotNull("mailAddress", mailAddress);
         BsMemberCB cb = this;
-        cb.query().setMemberAccount_Equal(memberAccount);
+        cb.query().setMailAddress_Equal(mailAddress);
         return (MemberCB)this;
     }
 
@@ -266,102 +266,30 @@ public class BsMemberCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-    /**
-     * Set up relation columns to select clause. <br>
-     * (会員ステータス)MEMBER_STATUS by my MEMBER_STATUS_CODE, named 'memberStatus'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_MemberStatus()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
-     *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getMemberStatus()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
-     * });
-     * </pre>
-     */
-    public void setupSelect_MemberStatus() {
-        assertSetupSelectPurpose("memberStatus");
-        if (hasSpecifiedLocalColumn()) {
-            specify().columnMemberStatusCode();
-        }
-        doSetupSelect(() -> query().queryMemberStatus());
-    }
-
-    protected MemberSecurityNss _nssMemberSecurityAsOne;
-    public MemberSecurityNss xdfgetNssMemberSecurityAsOne() {
-        if (_nssMemberSecurityAsOne == null) { _nssMemberSecurityAsOne = new MemberSecurityNss(null); }
-        return _nssMemberSecurityAsOne;
+    protected WithdrawalNss _nssWithdrawalAsOne;
+    public WithdrawalNss xdfgetNssWithdrawalAsOne() {
+        if (_nssWithdrawalAsOne == null) { _nssWithdrawalAsOne = new WithdrawalNss(null); }
+        return _nssWithdrawalAsOne;
     }
     /**
      * Set up relation columns to select clause. <br>
-     * (会員セキュリティ)MEMBER_SECURITY by MEMBER_ID, named 'memberSecurityAsOne'.
+     * (退会情報)WITHDRAWAL by MEMBER_ID, named 'withdrawalAsOne'.
      * <pre>
      * <span style="color: #0000C0">memberBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_MemberSecurityAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_WithdrawalAsOne(${dynamicFixedConditionVariables})</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * }).alwaysPresent(<span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getMemberSecurityAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     *     ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getWithdrawalAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * });
      * </pre>
      * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public MemberSecurityNss setupSelect_MemberSecurityAsOne() {
-        assertSetupSelectPurpose("memberSecurityAsOne");
-        doSetupSelect(() -> query().queryMemberSecurityAsOne());
-        if (_nssMemberSecurityAsOne == null || !_nssMemberSecurityAsOne.hasConditionQuery())
-        { _nssMemberSecurityAsOne = new MemberSecurityNss(query().queryMemberSecurityAsOne()); }
-        return _nssMemberSecurityAsOne;
-    }
-
-    protected MemberServiceNss _nssMemberServiceAsOne;
-    public MemberServiceNss xdfgetNssMemberServiceAsOne() {
-        if (_nssMemberServiceAsOne == null) { _nssMemberServiceAsOne = new MemberServiceNss(null); }
-        return _nssMemberServiceAsOne;
-    }
-    /**
-     * Set up relation columns to select clause. <br>
-     * (会員サービス)MEMBER_SERVICE by MEMBER_ID, named 'memberServiceAsOne'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_MemberServiceAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
-     *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getMemberServiceAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
-     * });
-     * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
-     */
-    public MemberServiceNss setupSelect_MemberServiceAsOne() {
-        assertSetupSelectPurpose("memberServiceAsOne");
-        doSetupSelect(() -> query().queryMemberServiceAsOne());
-        if (_nssMemberServiceAsOne == null || !_nssMemberServiceAsOne.hasConditionQuery())
-        { _nssMemberServiceAsOne = new MemberServiceNss(query().queryMemberServiceAsOne()); }
-        return _nssMemberServiceAsOne;
-    }
-
-    protected MemberWithdrawalNss _nssMemberWithdrawalAsOne;
-    public MemberWithdrawalNss xdfgetNssMemberWithdrawalAsOne() {
-        if (_nssMemberWithdrawalAsOne == null) { _nssMemberWithdrawalAsOne = new MemberWithdrawalNss(null); }
-        return _nssMemberWithdrawalAsOne;
-    }
-    /**
-     * Set up relation columns to select clause. <br>
-     * (会員退会情報)MEMBER_WITHDRAWAL by MEMBER_ID, named 'memberWithdrawalAsOne'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_MemberWithdrawalAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
-     *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getMemberWithdrawalAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
-     * });
-     * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
-     */
-    public MemberWithdrawalNss setupSelect_MemberWithdrawalAsOne() {
-        assertSetupSelectPurpose("memberWithdrawalAsOne");
-        doSetupSelect(() -> query().queryMemberWithdrawalAsOne());
-        if (_nssMemberWithdrawalAsOne == null || !_nssMemberWithdrawalAsOne.hasConditionQuery())
-        { _nssMemberWithdrawalAsOne = new MemberWithdrawalNss(query().queryMemberWithdrawalAsOne()); }
-        return _nssMemberWithdrawalAsOne;
+    public WithdrawalNss setupSelect_WithdrawalAsOne() {
+        assertSetupSelectPurpose("withdrawalAsOne");
+        doSetupSelect(() -> query().queryWithdrawalAsOne());
+        if (_nssWithdrawalAsOne == null || !_nssWithdrawalAsOne.hasConditionQuery())
+        { _nssWithdrawalAsOne = new WithdrawalNss(query().queryWithdrawalAsOne()); }
+        return _nssWithdrawalAsOne;
     }
 
     // [DBFlute-0.7.4]
@@ -405,44 +333,31 @@ public class BsMemberCB extends AbstractConditionBean {
     }
 
     public static class HpSpecification extends HpAbstractSpecification<MemberCQ> {
-        protected MemberStatusCB.HpSpecification _memberStatus;
-        protected MemberSecurityCB.HpSpecification _memberSecurityAsOne;
-        protected MemberServiceCB.HpSpecification _memberServiceAsOne;
-        protected MemberWithdrawalCB.HpSpecification _memberWithdrawalAsOne;
+        protected WithdrawalCB.HpSpecification _withdrawalAsOne;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<MemberCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10)}
+         * (会員ID)MEMBER_ID: {PK, ID, NotNull, BIGINT(19)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(100)}
+         * (メールアドレス)MAIL_ADDRESS: {UQ, NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnMemberName() { return doColumn("MEMBER_NAME"); }
+        public SpecifiedColumn columnMailAddress() { return doColumn("MAIL_ADDRESS"); }
         /**
-         * (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)}
+         * (名前)NAME: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnMemberAccount() { return doColumn("MEMBER_ACCOUNT"); }
+        public SpecifiedColumn columnName() { return doColumn("NAME"); }
         /**
-         * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS, classification=MemberStatus}
+         * (パスワード)PASSWORD: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnMemberStatusCode() { return doColumn("MEMBER_STATUS_CODE"); }
-        /**
-         * (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnFormalizedDatetime() { return doColumn("FORMALIZED_DATETIME"); }
-        /**
-         * (生年月日)BIRTHDATE: {DATE(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnBirthdate() { return doColumn("BIRTHDATE"); }
+        public SpecifiedColumn columnPassword() { return doColumn("PASSWORD"); }
         /**
          * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
@@ -473,177 +388,79 @@ public class BsMemberCB extends AbstractConditionBean {
         @Override
         protected void doSpecifyRequiredColumn() {
             columnMemberId(); // PK
-            if (qyCall().qy().hasConditionQueryMemberStatus()
-                    || qyCall().qy().xgetReferrerQuery() instanceof MemberStatusCQ) {
-                columnMemberStatusCode(); // FK or one-to-one referrer
-            }
         }
         @Override
         protected String getTableDbName() { return "MEMBER"; }
         /**
          * Prepare to specify functions about relation table. <br>
-         * (会員ステータス)MEMBER_STATUS by my MEMBER_STATUS_CODE, named 'memberStatus'.
+         * (退会情報)WITHDRAWAL by MEMBER_ID, named 'withdrawalAsOne'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public MemberStatusCB.HpSpecification specifyMemberStatus() {
-            assertRelation("memberStatus");
-            if (_memberStatus == null) {
-                _memberStatus = new MemberStatusCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryMemberStatus()
-                                    , () -> _qyCall.qy().queryMemberStatus())
+        public WithdrawalCB.HpSpecification specifyWithdrawalAsOne() {
+            assertRelation("withdrawalAsOne");
+            if (_withdrawalAsOne == null) {
+                _withdrawalAsOne = new WithdrawalCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryWithdrawalAsOne()
+                                    , () -> _qyCall.qy().queryWithdrawalAsOne())
                     , _purpose, _dbmetaProvider, xgetSDRFnFc());
                 if (xhasSyncQyCall()) { // inherits it
-                    _memberStatus.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberStatus()
-                      , () -> xsyncQyCall().qy().queryMemberStatus()));
+                    _withdrawalAsOne.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryWithdrawalAsOne()
+                      , () -> xsyncQyCall().qy().queryWithdrawalAsOne()));
                 }
             }
-            return _memberStatus;
-        }
-        /**
-         * Prepare to specify functions about relation table. <br>
-         * (会員セキュリティ)MEMBER_SECURITY by MEMBER_ID, named 'memberSecurityAsOne'.
-         * @return The instance for specification for relation table to specify. (NotNull)
-         */
-        public MemberSecurityCB.HpSpecification specifyMemberSecurityAsOne() {
-            assertRelation("memberSecurityAsOne");
-            if (_memberSecurityAsOne == null) {
-                _memberSecurityAsOne = new MemberSecurityCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryMemberSecurityAsOne()
-                                    , () -> _qyCall.qy().queryMemberSecurityAsOne())
-                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
-                if (xhasSyncQyCall()) { // inherits it
-                    _memberSecurityAsOne.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberSecurityAsOne()
-                      , () -> xsyncQyCall().qy().queryMemberSecurityAsOne()));
-                }
-            }
-            return _memberSecurityAsOne;
-        }
-        /**
-         * Prepare to specify functions about relation table. <br>
-         * (会員サービス)MEMBER_SERVICE by MEMBER_ID, named 'memberServiceAsOne'.
-         * @return The instance for specification for relation table to specify. (NotNull)
-         */
-        public MemberServiceCB.HpSpecification specifyMemberServiceAsOne() {
-            assertRelation("memberServiceAsOne");
-            if (_memberServiceAsOne == null) {
-                _memberServiceAsOne = new MemberServiceCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryMemberServiceAsOne()
-                                    , () -> _qyCall.qy().queryMemberServiceAsOne())
-                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
-                if (xhasSyncQyCall()) { // inherits it
-                    _memberServiceAsOne.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberServiceAsOne()
-                      , () -> xsyncQyCall().qy().queryMemberServiceAsOne()));
-                }
-            }
-            return _memberServiceAsOne;
-        }
-        /**
-         * Prepare to specify functions about relation table. <br>
-         * (会員退会情報)MEMBER_WITHDRAWAL by MEMBER_ID, named 'memberWithdrawalAsOne'.
-         * @return The instance for specification for relation table to specify. (NotNull)
-         */
-        public MemberWithdrawalCB.HpSpecification specifyMemberWithdrawalAsOne() {
-            assertRelation("memberWithdrawalAsOne");
-            if (_memberWithdrawalAsOne == null) {
-                _memberWithdrawalAsOne = new MemberWithdrawalCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryMemberWithdrawalAsOne()
-                                    , () -> _qyCall.qy().queryMemberWithdrawalAsOne())
-                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
-                if (xhasSyncQyCall()) { // inherits it
-                    _memberWithdrawalAsOne.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberWithdrawalAsOne()
-                      , () -> xsyncQyCall().qy().queryMemberWithdrawalAsOne()));
-                }
-            }
-            return _memberWithdrawalAsOne;
+            return _withdrawalAsOne;
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from MEMBER_ADDRESS where ...) as FOO_MAX} <br>
-         * (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
+         * {select max(FOO) from ACCOUNT_ITEM where ...) as FOO_MAX} <br>
+         * (勘定科目)ACCOUNT_ITEM by MEMBER_ID, named 'accountItemList'.
          * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(addressCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     addressCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     addressCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, MemberAddress.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(itemCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     itemCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     itemCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, AccountItem.<span style="color: #CC4747">ALIAS_foo...</span>);
          * </pre>
          * @return The object to set up a function for referrer table. (NotNull)
          */
-        public HpSDRFunction<MemberAddressCB, MemberCQ> derivedMemberAddress() {
-            assertDerived("memberAddressList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<MemberAddressCB> sq, MemberCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveMemberAddressList(fn, sq, al, op), _dbmetaProvider);
+        public HpSDRFunction<AccountItemCB, MemberCQ> derivedAccountItem() {
+            assertDerived("accountItemList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<AccountItemCB> sq, MemberCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveAccountItemList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from MEMBER_FOLLOWING where ...) as FOO_MAX} <br>
-         * (会員フォローイング)MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
+         * {select max(FOO) from ASSET where ...) as FOO_MAX} <br>
+         * (資産)ASSET by MEMBER_ID, named 'assetList'.
          * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     followingCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     followingCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, MemberFollowing.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(assetCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     assetCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     assetCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, Asset.<span style="color: #CC4747">ALIAS_foo...</span>);
          * </pre>
          * @return The object to set up a function for referrer table. (NotNull)
          */
-        public HpSDRFunction<MemberFollowingCB, MemberCQ> derivedMemberFollowingByMyMemberId() {
-            assertDerived("memberFollowingByMyMemberIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<MemberFollowingCB> sq, MemberCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveMemberFollowingByMyMemberIdList(fn, sq, al, op), _dbmetaProvider);
+        public HpSDRFunction<AssetCB, MemberCQ> derivedAsset() {
+            assertDerived("assetList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<AssetCB> sq, MemberCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveAssetList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from MEMBER_FOLLOWING where ...) as FOO_MAX} <br>
-         * (会員フォローイング)MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
+         * {select max(FOO) from RECORD where ...) as FOO_MAX} <br>
+         * (明細)RECORD by MEMBER_ID, named 'recordList'.
          * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     followingCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     followingCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, MemberFollowing.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     recordCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     recordCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, Record.<span style="color: #CC4747">ALIAS_foo...</span>);
          * </pre>
          * @return The object to set up a function for referrer table. (NotNull)
          */
-        public HpSDRFunction<MemberFollowingCB, MemberCQ> derivedMemberFollowingByYourMemberId() {
-            assertDerived("memberFollowingByYourMemberIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<MemberFollowingCB> sq, MemberCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveMemberFollowingByYourMemberIdList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from MEMBER_LOGIN where ...) as FOO_MAX} <br>
-         * (会員ログイン)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(loginCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     loginCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     loginCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, MemberLogin.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<MemberLoginCB, MemberCQ> derivedMemberLogin() {
-            assertDerived("memberLoginList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<MemberLoginCB> sq, MemberCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveMemberLoginList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from PURCHASE where ...) as FOO_MAX} <br>
-         * (購入)PURCHASE by MEMBER_ID, named 'purchaseList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     purchaseCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, Purchase.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<PurchaseCB, MemberCQ> derivedPurchase() {
-            assertDerived("purchaseList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<PurchaseCB> sq, MemberCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderivePurchaseList(fn, sq, al, op), _dbmetaProvider);
+        public HpSDRFunction<RecordCB, MemberCQ> derivedRecord() {
+            assertDerived("recordList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<RecordCB> sq, MemberCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveRecordList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

@@ -1,4 +1,442 @@
 map:{
+    ; 2018/07/12 14:56:42 = map:{
+        ; diffDate = 2018/07/12 14:56:42
+        ; diffAuthor = s-murakami
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; ACCOUNT_ITEM = map:{
+                ; tableName = ACCOUNT_ITEM
+                ; diffType = ADD
+            }
+            ; ASSET = map:{
+                ; tableName = ASSET
+                ; diffType = ADD
+            }
+            ; RECORD = map:{
+                ; tableName = RECORD
+                ; diffType = ADD
+            }
+            ; ACCOUNT = map:{
+                ; tableName = ACCOUNT
+                ; diffType = DELETE
+            }
+            ; CATEGORY = map:{
+                ; tableName = CATEGORY
+                ; diffType = DELETE
+            }
+            ; STATEMENT = map:{
+                ; tableName = STATEMENT
+                ; diffType = DELETE
+            }
+        }
+    }
+    ; 2018/07/12 12:49:48 = map:{
+        ; diffDate = 2018/07/12 12:49:48
+        ; tableCount = map:{
+            ; next = 5
+            ; previous = 4
+        }
+        ; diffAuthor = s-murakami
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; WITHDRAWAL = map:{
+                ; tableName = WITHDRAWAL
+                ; diffType = ADD
+            }
+            ; ACCOUNT = map:{
+                ; tableName = ACCOUNT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMBER_ID = map:{
+                        ; columnName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; DEL_FLG = map:{
+                        ; columnName = DEL_FLG
+                        ; diffType = ADD
+                    }
+                    ; USER_ID = map:{
+                        ; columnName = USER_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; account_ibfk_1(new) = map:{
+                        ; constraintName = account_ibfk_1(new)
+                        ; diffType = ADD
+                    }
+                    ; account_ibfk_1(old) = map:{
+                        ; constraintName = account_ibfk_1(old)
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; MEMBER_ID = map:{
+                        ; constraintName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; USER_ID = map:{
+                        ; constraintName = USER_ID
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; CATEGORY = map:{
+                ; tableName = CATEGORY
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMBER_ID = map:{
+                        ; columnName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; CATEGORY_NAME = map:{
+                        ; columnName = CATEGORY_NAME
+                        ; diffType = ADD
+                    }
+                    ; DEL_FLG = map:{
+                        ; columnName = DEL_FLG
+                        ; diffType = ADD
+                    }
+                    ; USER_ID = map:{
+                        ; columnName = USER_ID
+                        ; diffType = DELETE
+                    }
+                    ; CATEGORY = map:{
+                        ; columnName = CATEGORY
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; category_ibfk_1(new) = map:{
+                        ; constraintName = category_ibfk_1(new)
+                        ; diffType = ADD
+                    }
+                    ; category_ibfk_1(old) = map:{
+                        ; constraintName = category_ibfk_1(old)
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; MEMBER_ID = map:{
+                        ; constraintName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; USER_ID = map:{
+                        ; constraintName = USER_ID
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; MEMBER = map:{
+                ; tableName = MEMBER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMBER_ID = map:{
+                        ; columnName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; NAME = map:{
+                        ; columnName = NAME
+                        ; diffType = ADD
+                    }
+                    ; USER_ID = map:{
+                        ; columnName = USER_ID
+                        ; diffType = DELETE
+                    }
+                    ; USER_NAME = map:{
+                        ; columnName = USER_NAME
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = MEMBER_ID
+                            ; previous = USER_ID
+                        }
+                    }
+                }
+            }
+            ; STATEMENT = map:{
+                ; tableName = STATEMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMBER_ID = map:{
+                        ; columnName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; DEPOSIT_ACCOUNT_ID = map:{
+                        ; columnName = DEPOSIT_ACCOUNT_ID
+                        ; diffType = ADD
+                    }
+                    ; WITHDRAWAL_ACCOUNT_ID = map:{
+                        ; columnName = WITHDRAWAL_ACCOUNT_ID
+                        ; diffType = ADD
+                    }
+                    ; DEL_FLG = map:{
+                        ; columnName = DEL_FLG
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = CHAR
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 1
+                            ; previous = 10
+                        }
+                        ; defaultValueDiff = map:{
+                            ; next = null
+                            ; previous = "0"
+                        }
+                    }
+                    ; USER_ID = map:{
+                        ; columnName = USER_ID
+                        ; diffType = DELETE
+                    }
+                    ; ACCOUNT_ID = map:{
+                        ; columnName = ACCOUNT_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; statement_ibfk_1(new) = map:{
+                        ; constraintName = statement_ibfk_1(new)
+                        ; diffType = ADD
+                    }
+                    ; statement_ibfk_4(new) = map:{
+                        ; constraintName = statement_ibfk_4(new)
+                        ; diffType = ADD
+                    }
+                    ; statement_ibfk_2(new) = map:{
+                        ; constraintName = statement_ibfk_2(new)
+                        ; diffType = ADD
+                    }
+                    ; statement_ibfk_1(old) = map:{
+                        ; constraintName = statement_ibfk_1(old)
+                        ; diffType = DELETE
+                    }
+                    ; statement_ibfk_3(old) = map:{
+                        ; constraintName = statement_ibfk_3(old)
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; DEPOSIT_ACCOUNT_ID = map:{
+                        ; constraintName = DEPOSIT_ACCOUNT_ID
+                        ; diffType = ADD
+                    }
+                    ; MEMBER_ID = map:{
+                        ; constraintName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; WITHDRAWAL_ACCOUNT_ID = map:{
+                        ; constraintName = WITHDRAWAL_ACCOUNT_ID
+                        ; diffType = ADD
+                    }
+                    ; ACCOUNT_ID = map:{
+                        ; constraintName = ACCOUNT_ID
+                        ; diffType = DELETE
+                    }
+                    ; USER_ID = map:{
+                        ; constraintName = USER_ID
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/07/12 12:01:35 = map:{
+        ; diffDate = 2018/07/12 12:01:35
+        ; diffAuthor = s-murakami
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; STATEMENT = map:{
+                ; tableName = STATEMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; DEL_FLG = map:{
+                        ; columnName = DEL_FLG
+                        ; diffType = ADD
+                    }
+                    ; DEL_FLAG = map:{
+                        ; columnName = DEL_FLAG
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/07/12 12:00:37 = map:{
+        ; diffDate = 2018/07/12 12:00:37
+        ; tableCount = map:{
+            ; next = 4
+            ; previous = 16
+        }
+        ; diffAuthor = s-murakami
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; ACCOUNT = map:{
+                ; tableName = ACCOUNT
+                ; diffType = ADD
+            }
+            ; CATEGORY = map:{
+                ; tableName = CATEGORY
+                ; diffType = ADD
+            }
+            ; STATEMENT = map:{
+                ; tableName = STATEMENT
+                ; diffType = ADD
+            }
+            ; MEMBER = map:{
+                ; tableName = MEMBER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USER_ID = map:{
+                        ; columnName = USER_ID
+                        ; diffType = ADD
+                    }
+                    ; MAIL_ADDRESS = map:{
+                        ; columnName = MAIL_ADDRESS
+                        ; diffType = ADD
+                    }
+                    ; USER_NAME = map:{
+                        ; columnName = USER_NAME
+                        ; diffType = ADD
+                    }
+                    ; PASSWORD = map:{
+                        ; columnName = PASSWORD
+                        ; diffType = ADD
+                    }
+                    ; MEMBER_ID = map:{
+                        ; columnName = MEMBER_ID
+                        ; diffType = DELETE
+                    }
+                    ; MEMBER_NAME = map:{
+                        ; columnName = MEMBER_NAME
+                        ; diffType = DELETE
+                    }
+                    ; MEMBER_ACCOUNT = map:{
+                        ; columnName = MEMBER_ACCOUNT
+                        ; diffType = DELETE
+                    }
+                    ; MEMBER_STATUS_CODE = map:{
+                        ; columnName = MEMBER_STATUS_CODE
+                        ; diffType = DELETE
+                    }
+                    ; FORMALIZED_DATETIME = map:{
+                        ; columnName = FORMALIZED_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; BIRTHDATE = map:{
+                        ; columnName = BIRTHDATE
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = USER_ID
+                            ; previous = MEMBER_ID
+                        }
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_MEMBER_MEMBER_STATUS = map:{
+                        ; constraintName = FK_MEMBER_MEMBER_STATUS
+                        ; diffType = DELETE
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; MAIL_ADDRESS = map:{
+                        ; constraintName = MAIL_ADDRESS
+                        ; diffType = ADD
+                    }
+                    ; MEMBER_ACCOUNT = map:{
+                        ; constraintName = MEMBER_ACCOUNT
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_MEMBER_MEMBER_STATUS = map:{
+                        ; constraintName = FK_MEMBER_MEMBER_STATUS
+                        ; diffType = DELETE
+                    }
+                    ; IX_MEMBER_FORMALIZED_DATETIME = map:{
+                        ; constraintName = IX_MEMBER_FORMALIZED_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; IX_MEMBER_MEMBER_NAME = map:{
+                        ; constraintName = IX_MEMBER_MEMBER_NAME
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; MEMBER_ADDRESS = map:{
+                ; tableName = MEMBER_ADDRESS
+                ; diffType = DELETE
+            }
+            ; MEMBER_FOLLOWING = map:{
+                ; tableName = MEMBER_FOLLOWING
+                ; diffType = DELETE
+            }
+            ; MEMBER_LOGIN = map:{
+                ; tableName = MEMBER_LOGIN
+                ; diffType = DELETE
+            }
+            ; MEMBER_SECURITY = map:{
+                ; tableName = MEMBER_SECURITY
+                ; diffType = DELETE
+            }
+            ; MEMBER_SERVICE = map:{
+                ; tableName = MEMBER_SERVICE
+                ; diffType = DELETE
+            }
+            ; MEMBER_STATUS = map:{
+                ; tableName = MEMBER_STATUS
+                ; diffType = DELETE
+            }
+            ; MEMBER_WITHDRAWAL = map:{
+                ; tableName = MEMBER_WITHDRAWAL
+                ; diffType = DELETE
+            }
+            ; PRODUCT = map:{
+                ; tableName = PRODUCT
+                ; diffType = DELETE
+            }
+            ; PRODUCT_CATEGORY = map:{
+                ; tableName = PRODUCT_CATEGORY
+                ; diffType = DELETE
+            }
+            ; PRODUCT_STATUS = map:{
+                ; tableName = PRODUCT_STATUS
+                ; diffType = DELETE
+            }
+            ; PURCHASE = map:{
+                ; tableName = PURCHASE
+                ; diffType = DELETE
+            }
+            ; PURCHASE_PAYMENT = map:{
+                ; tableName = PURCHASE_PAYMENT
+                ; diffType = DELETE
+            }
+            ; REGION = map:{
+                ; tableName = REGION
+                ; diffType = DELETE
+            }
+            ; SERVICE_RANK = map:{
+                ; tableName = SERVICE_RANK
+                ; diffType = DELETE
+            }
+            ; WITHDRAWAL_REASON = map:{
+                ; tableName = WITHDRAWAL_REASON
+                ; diffType = DELETE
+            }
+        }
+    }
     ; 2018/07/09 15:52:41 = map:{
         ; diffDate = 2018/07/09 15:52:41
         ; diffAuthor = ta-kato2

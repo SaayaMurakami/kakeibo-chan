@@ -13,20 +13,9 @@
 	<component name="commonColumnAutoSetupper" class="com.kakeibochan.dbflute.allcommon.ImplementedCommonColumnAutoSetupper"/>
 
 	<!-- The components of Behavior. -->
+	<component name="accountItemBhv" class="com.kakeibochan.dbflute.exbhv.AccountItemBhv"/>
+	<component name="assetBhv" class="com.kakeibochan.dbflute.exbhv.AssetBhv"/>
 	<component name="memberBhv" class="com.kakeibochan.dbflute.exbhv.MemberBhv"/>
-	<component name="memberAddressBhv" class="com.kakeibochan.dbflute.exbhv.MemberAddressBhv"/>
-	<component name="memberFollowingBhv" class="com.kakeibochan.dbflute.exbhv.MemberFollowingBhv"/>
-	<component name="memberLoginBhv" class="com.kakeibochan.dbflute.exbhv.MemberLoginBhv"/>
-	<component name="memberSecurityBhv" class="com.kakeibochan.dbflute.exbhv.MemberSecurityBhv"/>
-	<component name="memberServiceBhv" class="com.kakeibochan.dbflute.exbhv.MemberServiceBhv"/>
-	<component name="memberStatusBhv" class="com.kakeibochan.dbflute.exbhv.MemberStatusBhv"/>
-	<component name="memberWithdrawalBhv" class="com.kakeibochan.dbflute.exbhv.MemberWithdrawalBhv"/>
-	<component name="productBhv" class="com.kakeibochan.dbflute.exbhv.ProductBhv"/>
-	<component name="productCategoryBhv" class="com.kakeibochan.dbflute.exbhv.ProductCategoryBhv"/>
-	<component name="productStatusBhv" class="com.kakeibochan.dbflute.exbhv.ProductStatusBhv"/>
-	<component name="purchaseBhv" class="com.kakeibochan.dbflute.exbhv.PurchaseBhv"/>
-	<component name="purchasePaymentBhv" class="com.kakeibochan.dbflute.exbhv.PurchasePaymentBhv"/>
-	<component name="regionBhv" class="com.kakeibochan.dbflute.exbhv.RegionBhv"/>
-	<component name="serviceRankBhv" class="com.kakeibochan.dbflute.exbhv.ServiceRankBhv"/>
-	<component name="withdrawalReasonBhv" class="com.kakeibochan.dbflute.exbhv.WithdrawalReasonBhv"/>
+	<component name="recordBhv" class="com.kakeibochan.dbflute.exbhv.RecordBhv"/>
+	<component name="withdrawalBhv" class="com.kakeibochan.dbflute.exbhv.WithdrawalBhv"/>
 </components>

@@ -214,6 +214,265 @@ dl.column-content dd span {
 <p class="sistersublink"><a href="./properties-kakeibochandb.html">to PropertiesHTML</a></p>
 </div>
 
+<div class="section diffCode_20180712145642">
+	<h2>
+		<span class="titlediffno">diffNo. 12:</span> <span class="titlediffdatepart">2018/07/12</span> <span class="titledifftimepart">14:56:42</span>
+		<span class="titlediffauthor">by s-murakami</span>
+		<span class="titlediffgitbranch">on master</span>
+	</h2>
+	<pre class="diffcomment"></pre>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li><a href="./schema-kakeibochandb.html#account_item">ACCOUNT_ITEM</a></li>
+		<li><a href="./schema-kakeibochandb.html#asset">ASSET</a></li>
+		<li><a href="./schema-kakeibochandb.html#record">RECORD</a></li>
+	</ul>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>ACCOUNT</li>
+		<li>CATEGORY</li>
+		<li>STATEMENT</li>
+	</ul>
+</div>
+<div class="section diffCode_20180712124948">
+	<h2>
+		<span class="titlediffno">diffNo. 11:</span> <span class="titlediffdatepart">2018/07/12</span> <span class="titledifftimepart">12:49:48</span>
+		<span class="titlediffauthor">by s-murakami</span>
+		<span class="titlediffgitbranch">on master</span>
+	</h2>
+	<pre class="diffcomment"></pre>
+	<p class="tablecount">table count: 4&nbsp;-&gt;&nbsp;5</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>WITHDRAWAL</li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>ACCOUNT</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+				<li>DEL_FLG</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>USER_ID</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>account_ibfk_1(new)</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>account_ibfk_1(old)</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>USER_ID</li>
+			</ul>
+		</div>
+		<h4>CATEGORY</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+				<li>CATEGORY_NAME</li>
+				<li>DEL_FLG</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>USER_ID</li>
+				<li>CATEGORY</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>category_ibfk_1(new)</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>category_ibfk_1(old)</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>USER_ID</li>
+			</ul>
+		</div>
+		<h4>MEMBER</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+				<li>NAME</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>USER_ID</li>
+				<li>USER_NAME</li>
+			</ul>
+			<h5>Change PK</h5>
+			<dl class="column-content">
+				<dt>PRIMARY</dt>
+				<dd><span>Column</span>USER_ID&nbsp;-&gt;&nbsp;MEMBER_ID</dd>
+			</dl>
+		</div>
+		<h4>STATEMENT</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+				<li>DEPOSIT_ACCOUNT_ID</li>
+				<li>WITHDRAWAL_ACCOUNT_ID</li>
+			</ul>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>DEL_FLG</dt>
+				<dd><span>Type</span>INT&nbsp;-&gt;&nbsp;CHAR</dd>
+				<dd><span>Size</span>10&nbsp;-&gt;&nbsp;1</dd>
+				<dd><span>Default</span>0&nbsp;-&gt;&nbsp;null</dd>
+			</dl>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>USER_ID</li>
+				<li>ACCOUNT_ID</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>statement_ibfk_1(new)</li>
+				<li>statement_ibfk_4(new)</li>
+				<li>statement_ibfk_2(new)</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>statement_ibfk_1(old)</li>
+				<li>statement_ibfk_3(old)</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>DEPOSIT_ACCOUNT_ID</li>
+				<li>MEMBER_ID</li>
+				<li>WITHDRAWAL_ACCOUNT_ID</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>ACCOUNT_ID</li>
+				<li>USER_ID</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section diffCode_20180712120135">
+	<h2>
+		<span class="titlediffno">diffNo. 10:</span> <span class="titlediffdatepart">2018/07/12</span> <span class="titledifftimepart">12:01:35</span>
+		<span class="titlediffauthor">by s-murakami</span>
+		<span class="titlediffgitbranch">on master</span>
+	</h2>
+	<pre class="diffcomment"></pre>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>STATEMENT</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>DEL_FLG</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>DEL_FLAG</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section diffCode_20180712120037">
+	<h2>
+		<span class="titlediffno">diffNo. 9:</span> <span class="titlediffdatepart">2018/07/12</span> <span class="titledifftimepart">12:00:37</span>
+		<span class="titlediffauthor">by s-murakami</span>
+		<span class="titlediffgitbranch">on master</span>
+	</h2>
+	<pre class="diffcomment"></pre>
+	<p class="tablecount">table count: 16&nbsp;-&gt;&nbsp;4</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>ACCOUNT</li>
+		<li>CATEGORY</li>
+		<li>STATEMENT</li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>MEMBER</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>USER_ID</li>
+				<li>MAIL_ADDRESS</li>
+				<li>USER_NAME</li>
+				<li>PASSWORD</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+				<li>MEMBER_NAME</li>
+				<li>MEMBER_ACCOUNT</li>
+				<li>MEMBER_STATUS_CODE</li>
+				<li>FORMALIZED_DATETIME</li>
+				<li>BIRTHDATE</li>
+			</ul>
+			<h5>Change PK</h5>
+			<dl class="column-content">
+				<dt>PRIMARY</dt>
+				<dd><span>Column</span>MEMBER_ID&nbsp;-&gt;&nbsp;USER_ID</dd>
+			</dl>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>FK_MEMBER_MEMBER_STATUS</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>MAIL_ADDRESS</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>MEMBER_ACCOUNT</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>FK_MEMBER_MEMBER_STATUS</li>
+				<li>IX_MEMBER_FORMALIZED_DATETIME</li>
+				<li>IX_MEMBER_MEMBER_NAME</li>
+			</ul>
+		</div>
+	</div>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>MEMBER_ADDRESS</li>
+		<li>MEMBER_FOLLOWING</li>
+		<li>MEMBER_LOGIN</li>
+		<li>MEMBER_SECURITY</li>
+		<li>MEMBER_SERVICE</li>
+		<li>MEMBER_STATUS</li>
+		<li>MEMBER_WITHDRAWAL</li>
+		<li>PRODUCT</li>
+		<li>PRODUCT_CATEGORY</li>
+		<li>PRODUCT_STATUS</li>
+		<li>PURCHASE</li>
+		<li>PURCHASE_PAYMENT</li>
+		<li>REGION</li>
+		<li>SERVICE_RANK</li>
+		<li>WITHDRAWAL_REASON</li>
+	</ul>
+</div>
 <div class="section diffCode_20180709155241">
 	<h2>
 		<span class="titlediffno">diffNo. 8:</span> <span class="titlediffdatepart">2018/07/09</span> <span class="titledifftimepart">15:52:41</span>
@@ -224,22 +483,22 @@ dl.column-content dd span {
 
 	<h3>Add Table</h3>
 	<ul class="table-content">
-		<li><a href="./schema-kakeibochandb.html#member">MEMBER</a></li>
-		<li><a href="./schema-kakeibochandb.html#member_address">MEMBER_ADDRESS</a></li>
-		<li><a href="./schema-kakeibochandb.html#member_following">MEMBER_FOLLOWING</a></li>
-		<li><a href="./schema-kakeibochandb.html#member_login">MEMBER_LOGIN</a></li>
-		<li><a href="./schema-kakeibochandb.html#member_security">MEMBER_SECURITY</a></li>
-		<li><a href="./schema-kakeibochandb.html#member_service">MEMBER_SERVICE</a></li>
-		<li><a href="./schema-kakeibochandb.html#member_status">MEMBER_STATUS</a></li>
-		<li><a href="./schema-kakeibochandb.html#member_withdrawal">MEMBER_WITHDRAWAL</a></li>
-		<li><a href="./schema-kakeibochandb.html#product">PRODUCT</a></li>
-		<li><a href="./schema-kakeibochandb.html#product_category">PRODUCT_CATEGORY</a></li>
-		<li><a href="./schema-kakeibochandb.html#product_status">PRODUCT_STATUS</a></li>
-		<li><a href="./schema-kakeibochandb.html#purchase">PURCHASE</a></li>
-		<li><a href="./schema-kakeibochandb.html#purchase_payment">PURCHASE_PAYMENT</a></li>
-		<li><a href="./schema-kakeibochandb.html#region">REGION</a></li>
-		<li><a href="./schema-kakeibochandb.html#service_rank">SERVICE_RANK</a></li>
-		<li><a href="./schema-kakeibochandb.html#withdrawal_reason">WITHDRAWAL_REASON</a></li>
+		<li>MEMBER</li>
+		<li>MEMBER_ADDRESS</li>
+		<li>MEMBER_FOLLOWING</li>
+		<li>MEMBER_LOGIN</li>
+		<li>MEMBER_SECURITY</li>
+		<li>MEMBER_SERVICE</li>
+		<li>MEMBER_STATUS</li>
+		<li>MEMBER_WITHDRAWAL</li>
+		<li>PRODUCT</li>
+		<li>PRODUCT_CATEGORY</li>
+		<li>PRODUCT_STATUS</li>
+		<li>PURCHASE</li>
+		<li>PURCHASE_PAYMENT</li>
+		<li>REGION</li>
+		<li>SERVICE_RANK</li>
+		<li>WITHDRAWAL_REASON</li>
 	</ul>
 	<h3>Delete Table</h3>
 	<ul class="table-content">
@@ -658,7 +917,23 @@ dl.column-content dd span {
             ]
         };
         this.pickupStore = {
-            '20180709155241' : {
+            '20180712145642' : {
+                'diffDate' : '2018/07/12 14:56:42',
+                'diffComment' : ''
+            }
+            , '20180712124948' : {
+                'diffDate' : '2018/07/12 12:49:48',
+                'diffComment' : ''
+            }
+            , '20180712120135' : {
+                'diffDate' : '2018/07/12 12:01:35',
+                'diffComment' : ''
+            }
+            , '20180712120037' : {
+                'diffDate' : '2018/07/12 12:00:37',
+                'diffComment' : ''
+            }
+            , '20180709155241' : {
                 'diffDate' : '2018/07/09 15:52:41',
                 'diffComment' : ''
             }

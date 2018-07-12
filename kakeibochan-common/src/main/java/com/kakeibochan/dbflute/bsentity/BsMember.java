@@ -25,20 +25,16 @@ import org.dbflute.dbmeta.accessory.DomainEntity;
 import org.dbflute.optional.OptionalEntity;
 import com.kakeibochan.dbflute.allcommon.EntityDefinedCommonColumn;
 import com.kakeibochan.dbflute.allcommon.DBMetaInstanceHandler;
-import com.kakeibochan.dbflute.allcommon.CDef;
 import com.kakeibochan.dbflute.exentity.*;
 
 /**
  * The entity of (会員)MEMBER as TABLE. <br>
- * 会員のプロフィールやアカウントなどの基本情報を保持する。<br>
- * 基本的に物理削除はなく、退会したらステータスが退会会員になる。<br>
- * ライフサイクルやカテゴリの違う会員情報は、one-to-oneなどの関連テーブルにて。
  * <pre>
  * [primary-key]
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, MEMBER_NAME, MEMBER_ACCOUNT, MEMBER_STATUS_CODE, FORMALIZED_DATETIME, BIRTHDATE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_ID, MAIL_ADDRESS, NAME, PASSWORD, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -50,36 +46,32 @@ import com.kakeibochan.dbflute.exentity.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     MEMBER_STATUS, MEMBER_SECURITY(AsOne), MEMBER_SERVICE(AsOne), MEMBER_WITHDRAWAL(AsOne)
+ *     WITHDRAWAL(AsOne)
  *
  * [referrer table]
- *     MEMBER_ADDRESS, MEMBER_FOLLOWING, MEMBER_LOGIN, PURCHASE, MEMBER_SECURITY, MEMBER_SERVICE, MEMBER_WITHDRAWAL
+ *     ACCOUNT_ITEM, ASSET, RECORD, WITHDRAWAL
  *
  * [foreign property]
- *     memberStatus, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
+ *     withdrawalAsOne
  *
  * [referrer property]
- *     memberAddressList, memberFollowingByMyMemberIdList, memberFollowingByYourMemberIdList, memberLoginList, purchaseList
+ *     accountItemList, assetList, recordList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Integer memberId = entity.getMemberId();
- * String memberName = entity.getMemberName();
- * String memberAccount = entity.getMemberAccount();
- * String memberStatusCode = entity.getMemberStatusCode();
- * java.time.LocalDateTime formalizedDatetime = entity.getFormalizedDatetime();
- * java.time.LocalDate birthdate = entity.getBirthdate();
+ * Long memberId = entity.getMemberId();
+ * String mailAddress = entity.getMailAddress();
+ * String name = entity.getName();
+ * String password = entity.getPassword();
  * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
  * String registerUser = entity.getRegisterUser();
  * java.time.LocalDateTime updateDatetime = entity.getUpdateDatetime();
  * String updateUser = entity.getUpdateUser();
  * Long versionNo = entity.getVersionNo();
  * entity.setMemberId(memberId);
- * entity.setMemberName(memberName);
- * entity.setMemberAccount(memberAccount);
- * entity.setMemberStatusCode(memberStatusCode);
- * entity.setFormalizedDatetime(formalizedDatetime);
- * entity.setBirthdate(birthdate);
+ * entity.setMailAddress(mailAddress);
+ * entity.setName(name);
+ * entity.setPassword(password);
  * entity.setRegisterDatetime(registerDatetime);
  * entity.setRegisterUser(registerUser);
  * entity.setUpdateDatetime(updateDatetime);
@@ -100,23 +92,17 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10)} */
-    protected Integer _memberId;
+    /** (会員ID)MEMBER_ID: {PK, ID, NotNull, BIGINT(19)} */
+    protected Long _memberId;
 
-    /** (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(100)} */
-    protected String _memberName;
+    /** (メールアドレス)MAIL_ADDRESS: {UQ, NotNull, VARCHAR(200)} */
+    protected String _mailAddress;
 
-    /** (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} */
-    protected String _memberAccount;
+    /** (名前)NAME: {NotNull, VARCHAR(200)} */
+    protected String _name;
 
-    /** (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS, classification=MemberStatus} */
-    protected String _memberStatusCode;
-
-    /** (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)} */
-    protected java.time.LocalDateTime _formalizedDatetime;
-
-    /** (生年月日)BIRTHDATE: {DATE(10)} */
-    protected java.time.LocalDate _birthdate;
+    /** (パスワード)PASSWORD: {NotNull, VARCHAR(200)} */
+    protected String _password;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
     protected java.time.LocalDateTime _registerDatetime;
@@ -158,309 +144,99 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param memberAccount (会員アカウント): UQ, NotNull, VARCHAR(50). (NotNull)
+     * @param mailAddress (メールアドレス): UQ, NotNull, VARCHAR(200). (NotNull)
      */
-    public void uniqueBy(String memberAccount) {
+    public void uniqueBy(String mailAddress) {
         __uniqueDrivenProperties.clear();
-        __uniqueDrivenProperties.addPropertyName("memberAccount");
-        setMemberAccount(memberAccount);
-    }
-
-    // ===================================================================================
-    //                                                             Classification Property
-    //                                                             =======================
-    /**
-     * Get the value of memberStatusCode as the classification of MemberStatus. <br>
-     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS, classification=MemberStatus} <br>
-     * status of member from entry to withdrawal
-     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
-     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
-     */
-    public CDef.MemberStatus getMemberStatusCodeAsMemberStatus() {
-        return CDef.MemberStatus.codeOf(getMemberStatusCode());
-    }
-
-    /**
-     * Set the value of memberStatusCode as the classification of MemberStatus. <br>
-     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS, classification=MemberStatus} <br>
-     * status of member from entry to withdrawal
-     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
-     */
-    public void setMemberStatusCodeAsMemberStatus(CDef.MemberStatus cdef) {
-        setMemberStatusCode(cdef != null ? cdef.code() : null);
-    }
-
-    // ===================================================================================
-    //                                                              Classification Setting
-    //                                                              ======================
-    /**
-     * Set the value of memberStatusCode as Formalized (FML). <br>
-     * Formalized: as formal member, allowed to use all service
-     */
-    public void setMemberStatusCode_Formalized() {
-        setMemberStatusCodeAsMemberStatus(CDef.MemberStatus.Formalized);
-    }
-
-    /**
-     * Set the value of memberStatusCode as Withdrawal (WDL). <br>
-     * Withdrawal: withdrawal is fixed, not allowed to use service
-     */
-    public void setMemberStatusCode_Withdrawal() {
-        setMemberStatusCodeAsMemberStatus(CDef.MemberStatus.Withdrawal);
-    }
-
-    /**
-     * Set the value of memberStatusCode as Provisional (PRV). <br>
-     * Provisional: first status after entry, allowed to use only part of service
-     */
-    public void setMemberStatusCode_Provisional() {
-        setMemberStatusCodeAsMemberStatus(CDef.MemberStatus.Provisional);
-    }
-
-    // ===================================================================================
-    //                                                        Classification Determination
-    //                                                        ============================
-    /**
-     * Is the value of memberStatusCode Formalized? <br>
-     * Formalized: as formal member, allowed to use all service
-     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
-     * @return The determination, true or false.
-     */
-    public boolean isMemberStatusCodeFormalized() {
-        CDef.MemberStatus cdef = getMemberStatusCodeAsMemberStatus();
-        return cdef != null ? cdef.equals(CDef.MemberStatus.Formalized) : false;
-    }
-
-    /**
-     * Is the value of memberStatusCode Withdrawal? <br>
-     * Withdrawal: withdrawal is fixed, not allowed to use service
-     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
-     * @return The determination, true or false.
-     */
-    public boolean isMemberStatusCodeWithdrawal() {
-        CDef.MemberStatus cdef = getMemberStatusCodeAsMemberStatus();
-        return cdef != null ? cdef.equals(CDef.MemberStatus.Withdrawal) : false;
-    }
-
-    /**
-     * Is the value of memberStatusCode Provisional? <br>
-     * Provisional: first status after entry, allowed to use only part of service
-     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
-     * @return The determination, true or false.
-     */
-    public boolean isMemberStatusCodeProvisional() {
-        CDef.MemberStatus cdef = getMemberStatusCodeAsMemberStatus();
-        return cdef != null ? cdef.equals(CDef.MemberStatus.Provisional) : false;
-    }
-
-    /**
-     * means member that can use services <br>
-     * The group elements:[Formalized, Provisional]
-     * @return The determination, true or false.
-     */
-    public boolean isMemberStatusCode_ServiceAvailable() {
-        CDef.MemberStatus cdef = getMemberStatusCodeAsMemberStatus();
-        return cdef != null && cdef.isServiceAvailable();
-    }
-
-    /**
-     * Members are not formalized yet <br>
-     * The group elements:[Provisional]
-     * @return The determination, true or false.
-     */
-    public boolean isMemberStatusCode_ShortOfFormalized() {
-        CDef.MemberStatus cdef = getMemberStatusCodeAsMemberStatus();
-        return cdef != null && cdef.isShortOfFormalized();
+        __uniqueDrivenProperties.addPropertyName("mailAddress");
+        setMailAddress(mailAddress);
     }
 
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** (会員ステータス)MEMBER_STATUS by my MEMBER_STATUS_CODE, named 'memberStatus'. */
-    protected OptionalEntity<MemberStatus> _memberStatus;
+    /** (退会情報)WITHDRAWAL by MEMBER_ID, named 'withdrawalAsOne'. */
+    protected OptionalEntity<Withdrawal> _withdrawalAsOne;
 
     /**
-     * [get] (会員ステータス)MEMBER_STATUS by my MEMBER_STATUS_CODE, named 'memberStatus'. <br>
+     * [get] (退会情報)WITHDRAWAL by MEMBER_ID, named 'withdrawalAsOne'.
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
-     * @return The entity of foreign property 'memberStatus'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
+     * @return the entity of foreign property(referrer-as-one) 'withdrawalAsOne'. (NotNull, EmptyAllowed: when e.g. no data, no setupSelect)
      */
-    public OptionalEntity<MemberStatus> getMemberStatus() {
-        if (_memberStatus == null) { _memberStatus = OptionalEntity.relationEmpty(this, "memberStatus"); }
-        return _memberStatus;
+    public OptionalEntity<Withdrawal> getWithdrawalAsOne() {
+        if (_withdrawalAsOne == null) { _withdrawalAsOne = OptionalEntity.relationEmpty(this, "withdrawalAsOne"); }
+        return _withdrawalAsOne;
     }
 
     /**
-     * [set] (会員ステータス)MEMBER_STATUS by my MEMBER_STATUS_CODE, named 'memberStatus'.
-     * @param memberStatus The entity of foreign property 'memberStatus'. (NullAllowed)
+     * [set] (退会情報)WITHDRAWAL by MEMBER_ID, named 'withdrawalAsOne'.
+     * @param withdrawalAsOne The entity of foreign property(referrer-as-one) 'withdrawalAsOne'. (NullAllowed)
      */
-    public void setMemberStatus(OptionalEntity<MemberStatus> memberStatus) {
-        _memberStatus = memberStatus;
-    }
-
-    /** (会員セキュリティ)MEMBER_SECURITY by MEMBER_ID, named 'memberSecurityAsOne'. */
-    protected OptionalEntity<MemberSecurity> _memberSecurityAsOne;
-
-    /**
-     * [get] (会員セキュリティ)MEMBER_SECURITY by MEMBER_ID, named 'memberSecurityAsOne'.
-     * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
-     * @return the entity of foreign property(referrer-as-one) 'memberSecurityAsOne'. (NotNull, EmptyAllowed: when e.g. no data, no setupSelect)
-     */
-    public OptionalEntity<MemberSecurity> getMemberSecurityAsOne() {
-        if (_memberSecurityAsOne == null) { _memberSecurityAsOne = OptionalEntity.relationEmpty(this, "memberSecurityAsOne"); }
-        return _memberSecurityAsOne;
-    }
-
-    /**
-     * [set] (会員セキュリティ)MEMBER_SECURITY by MEMBER_ID, named 'memberSecurityAsOne'.
-     * @param memberSecurityAsOne The entity of foreign property(referrer-as-one) 'memberSecurityAsOne'. (NullAllowed)
-     */
-    public void setMemberSecurityAsOne(OptionalEntity<MemberSecurity> memberSecurityAsOne) {
-        _memberSecurityAsOne = memberSecurityAsOne;
-    }
-
-    /** (会員サービス)MEMBER_SERVICE by MEMBER_ID, named 'memberServiceAsOne'. */
-    protected OptionalEntity<MemberService> _memberServiceAsOne;
-
-    /**
-     * [get] (会員サービス)MEMBER_SERVICE by MEMBER_ID, named 'memberServiceAsOne'.
-     * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
-     * @return the entity of foreign property(referrer-as-one) 'memberServiceAsOne'. (NotNull, EmptyAllowed: when e.g. no data, no setupSelect)
-     */
-    public OptionalEntity<MemberService> getMemberServiceAsOne() {
-        if (_memberServiceAsOne == null) { _memberServiceAsOne = OptionalEntity.relationEmpty(this, "memberServiceAsOne"); }
-        return _memberServiceAsOne;
-    }
-
-    /**
-     * [set] (会員サービス)MEMBER_SERVICE by MEMBER_ID, named 'memberServiceAsOne'.
-     * @param memberServiceAsOne The entity of foreign property(referrer-as-one) 'memberServiceAsOne'. (NullAllowed)
-     */
-    public void setMemberServiceAsOne(OptionalEntity<MemberService> memberServiceAsOne) {
-        _memberServiceAsOne = memberServiceAsOne;
-    }
-
-    /** (会員退会情報)MEMBER_WITHDRAWAL by MEMBER_ID, named 'memberWithdrawalAsOne'. */
-    protected OptionalEntity<MemberWithdrawal> _memberWithdrawalAsOne;
-
-    /**
-     * [get] (会員退会情報)MEMBER_WITHDRAWAL by MEMBER_ID, named 'memberWithdrawalAsOne'.
-     * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
-     * @return the entity of foreign property(referrer-as-one) 'memberWithdrawalAsOne'. (NotNull, EmptyAllowed: when e.g. no data, no setupSelect)
-     */
-    public OptionalEntity<MemberWithdrawal> getMemberWithdrawalAsOne() {
-        if (_memberWithdrawalAsOne == null) { _memberWithdrawalAsOne = OptionalEntity.relationEmpty(this, "memberWithdrawalAsOne"); }
-        return _memberWithdrawalAsOne;
-    }
-
-    /**
-     * [set] (会員退会情報)MEMBER_WITHDRAWAL by MEMBER_ID, named 'memberWithdrawalAsOne'.
-     * @param memberWithdrawalAsOne The entity of foreign property(referrer-as-one) 'memberWithdrawalAsOne'. (NullAllowed)
-     */
-    public void setMemberWithdrawalAsOne(OptionalEntity<MemberWithdrawal> memberWithdrawalAsOne) {
-        _memberWithdrawalAsOne = memberWithdrawalAsOne;
+    public void setWithdrawalAsOne(OptionalEntity<Withdrawal> withdrawalAsOne) {
+        _withdrawalAsOne = withdrawalAsOne;
     }
 
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'. */
-    protected List<MemberAddress> _memberAddressList;
+    /** (勘定科目)ACCOUNT_ITEM by MEMBER_ID, named 'accountItemList'. */
+    protected List<AccountItem> _accountItemList;
 
     /**
-     * [get] (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
-     * @return The entity list of referrer property 'memberAddressList'. (NotNull: even if no loading, returns empty list)
+     * [get] (勘定科目)ACCOUNT_ITEM by MEMBER_ID, named 'accountItemList'.
+     * @return The entity list of referrer property 'accountItemList'. (NotNull: even if no loading, returns empty list)
      */
-    public List<MemberAddress> getMemberAddressList() {
-        if (_memberAddressList == null) { _memberAddressList = newReferrerList(); }
-        return _memberAddressList;
+    public List<AccountItem> getAccountItemList() {
+        if (_accountItemList == null) { _accountItemList = newReferrerList(); }
+        return _accountItemList;
     }
 
     /**
-     * [set] (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
-     * @param memberAddressList The entity list of referrer property 'memberAddressList'. (NullAllowed)
+     * [set] (勘定科目)ACCOUNT_ITEM by MEMBER_ID, named 'accountItemList'.
+     * @param accountItemList The entity list of referrer property 'accountItemList'. (NullAllowed)
      */
-    public void setMemberAddressList(List<MemberAddress> memberAddressList) {
-        _memberAddressList = memberAddressList;
+    public void setAccountItemList(List<AccountItem> accountItemList) {
+        _accountItemList = accountItemList;
     }
 
-    /** (会員フォローイング)MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'. */
-    protected List<MemberFollowing> _memberFollowingByMyMemberIdList;
+    /** (資産)ASSET by MEMBER_ID, named 'assetList'. */
+    protected List<Asset> _assetList;
 
     /**
-     * [get] (会員フォローイング)MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
-     * @return The entity list of referrer property 'memberFollowingByMyMemberIdList'. (NotNull: even if no loading, returns empty list)
+     * [get] (資産)ASSET by MEMBER_ID, named 'assetList'.
+     * @return The entity list of referrer property 'assetList'. (NotNull: even if no loading, returns empty list)
      */
-    public List<MemberFollowing> getMemberFollowingByMyMemberIdList() {
-        if (_memberFollowingByMyMemberIdList == null) { _memberFollowingByMyMemberIdList = newReferrerList(); }
-        return _memberFollowingByMyMemberIdList;
-    }
-
-    /**
-     * [set] (会員フォローイング)MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
-     * @param memberFollowingByMyMemberIdList The entity list of referrer property 'memberFollowingByMyMemberIdList'. (NullAllowed)
-     */
-    public void setMemberFollowingByMyMemberIdList(List<MemberFollowing> memberFollowingByMyMemberIdList) {
-        _memberFollowingByMyMemberIdList = memberFollowingByMyMemberIdList;
-    }
-
-    /** (会員フォローイング)MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'. */
-    protected List<MemberFollowing> _memberFollowingByYourMemberIdList;
-
-    /**
-     * [get] (会員フォローイング)MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
-     * @return The entity list of referrer property 'memberFollowingByYourMemberIdList'. (NotNull: even if no loading, returns empty list)
-     */
-    public List<MemberFollowing> getMemberFollowingByYourMemberIdList() {
-        if (_memberFollowingByYourMemberIdList == null) { _memberFollowingByYourMemberIdList = newReferrerList(); }
-        return _memberFollowingByYourMemberIdList;
+    public List<Asset> getAssetList() {
+        if (_assetList == null) { _assetList = newReferrerList(); }
+        return _assetList;
     }
 
     /**
-     * [set] (会員フォローイング)MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
-     * @param memberFollowingByYourMemberIdList The entity list of referrer property 'memberFollowingByYourMemberIdList'. (NullAllowed)
+     * [set] (資産)ASSET by MEMBER_ID, named 'assetList'.
+     * @param assetList The entity list of referrer property 'assetList'. (NullAllowed)
      */
-    public void setMemberFollowingByYourMemberIdList(List<MemberFollowing> memberFollowingByYourMemberIdList) {
-        _memberFollowingByYourMemberIdList = memberFollowingByYourMemberIdList;
+    public void setAssetList(List<Asset> assetList) {
+        _assetList = assetList;
     }
 
-    /** (会員ログイン)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'. */
-    protected List<MemberLogin> _memberLoginList;
+    /** (明細)RECORD by MEMBER_ID, named 'recordList'. */
+    protected List<Record> _recordList;
 
     /**
-     * [get] (会員ログイン)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
-     * @return The entity list of referrer property 'memberLoginList'. (NotNull: even if no loading, returns empty list)
+     * [get] (明細)RECORD by MEMBER_ID, named 'recordList'.
+     * @return The entity list of referrer property 'recordList'. (NotNull: even if no loading, returns empty list)
      */
-    public List<MemberLogin> getMemberLoginList() {
-        if (_memberLoginList == null) { _memberLoginList = newReferrerList(); }
-        return _memberLoginList;
-    }
-
-    /**
-     * [set] (会員ログイン)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
-     * @param memberLoginList The entity list of referrer property 'memberLoginList'. (NullAllowed)
-     */
-    public void setMemberLoginList(List<MemberLogin> memberLoginList) {
-        _memberLoginList = memberLoginList;
-    }
-
-    /** (購入)PURCHASE by MEMBER_ID, named 'purchaseList'. */
-    protected List<Purchase> _purchaseList;
-
-    /**
-     * [get] (購入)PURCHASE by MEMBER_ID, named 'purchaseList'.
-     * @return The entity list of referrer property 'purchaseList'. (NotNull: even if no loading, returns empty list)
-     */
-    public List<Purchase> getPurchaseList() {
-        if (_purchaseList == null) { _purchaseList = newReferrerList(); }
-        return _purchaseList;
+    public List<Record> getRecordList() {
+        if (_recordList == null) { _recordList = newReferrerList(); }
+        return _recordList;
     }
 
     /**
-     * [set] (購入)PURCHASE by MEMBER_ID, named 'purchaseList'.
-     * @param purchaseList The entity list of referrer property 'purchaseList'. (NullAllowed)
+     * [set] (明細)RECORD by MEMBER_ID, named 'recordList'.
+     * @param recordList The entity list of referrer property 'recordList'. (NullAllowed)
      */
-    public void setPurchaseList(List<Purchase> purchaseList) {
-        _purchaseList = purchaseList;
+    public void setRecordList(List<Record> recordList) {
+        _recordList = recordList;
     }
 
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
@@ -492,24 +268,14 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
     @Override
     protected String doBuildStringWithRelation(String li) {
         StringBuilder sb = new StringBuilder();
-        if (_memberStatus != null && _memberStatus.isPresent())
-        { sb.append(li).append(xbRDS(_memberStatus, "memberStatus")); }
-        if (_memberSecurityAsOne != null && _memberSecurityAsOne.isPresent())
-        { sb.append(li).append(xbRDS(_memberSecurityAsOne, "memberSecurityAsOne")); }
-        if (_memberServiceAsOne != null && _memberServiceAsOne.isPresent())
-        { sb.append(li).append(xbRDS(_memberServiceAsOne, "memberServiceAsOne")); }
-        if (_memberWithdrawalAsOne != null && _memberWithdrawalAsOne.isPresent())
-        { sb.append(li).append(xbRDS(_memberWithdrawalAsOne, "memberWithdrawalAsOne")); }
-        if (_memberAddressList != null) { for (MemberAddress et : _memberAddressList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "memberAddressList")); } } }
-        if (_memberFollowingByMyMemberIdList != null) { for (MemberFollowing et : _memberFollowingByMyMemberIdList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "memberFollowingByMyMemberIdList")); } } }
-        if (_memberFollowingByYourMemberIdList != null) { for (MemberFollowing et : _memberFollowingByYourMemberIdList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "memberFollowingByYourMemberIdList")); } } }
-        if (_memberLoginList != null) { for (MemberLogin et : _memberLoginList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "memberLoginList")); } } }
-        if (_purchaseList != null) { for (Purchase et : _purchaseList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "purchaseList")); } } }
+        if (_withdrawalAsOne != null && _withdrawalAsOne.isPresent())
+        { sb.append(li).append(xbRDS(_withdrawalAsOne, "withdrawalAsOne")); }
+        if (_accountItemList != null) { for (AccountItem et : _accountItemList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "accountItemList")); } } }
+        if (_assetList != null) { for (Asset et : _assetList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "assetList")); } } }
+        if (_recordList != null) { for (Record et : _recordList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "recordList")); } } }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -520,11 +286,9 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
         sb.append(dm).append(xfND(_memberId));
-        sb.append(dm).append(xfND(_memberName));
-        sb.append(dm).append(xfND(_memberAccount));
-        sb.append(dm).append(xfND(_memberStatusCode));
-        sb.append(dm).append(xfND(_formalizedDatetime));
-        sb.append(dm).append(xfND(_birthdate));
+        sb.append(dm).append(xfND(_mailAddress));
+        sb.append(dm).append(xfND(_name));
+        sb.append(dm).append(xfND(_password));
         sb.append(dm).append(xfND(_registerDatetime));
         sb.append(dm).append(xfND(_registerUser));
         sb.append(dm).append(xfND(_updateDatetime));
@@ -540,24 +304,14 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
     @Override
     protected String doBuildRelationString(String dm) {
         StringBuilder sb = new StringBuilder();
-        if (_memberStatus != null && _memberStatus.isPresent())
-        { sb.append(dm).append("memberStatus"); }
-        if (_memberSecurityAsOne != null && _memberSecurityAsOne.isPresent())
-        { sb.append(dm).append("memberSecurityAsOne"); }
-        if (_memberServiceAsOne != null && _memberServiceAsOne.isPresent())
-        { sb.append(dm).append("memberServiceAsOne"); }
-        if (_memberWithdrawalAsOne != null && _memberWithdrawalAsOne.isPresent())
-        { sb.append(dm).append("memberWithdrawalAsOne"); }
-        if (_memberAddressList != null && !_memberAddressList.isEmpty())
-        { sb.append(dm).append("memberAddressList"); }
-        if (_memberFollowingByMyMemberIdList != null && !_memberFollowingByMyMemberIdList.isEmpty())
-        { sb.append(dm).append("memberFollowingByMyMemberIdList"); }
-        if (_memberFollowingByYourMemberIdList != null && !_memberFollowingByYourMemberIdList.isEmpty())
-        { sb.append(dm).append("memberFollowingByYourMemberIdList"); }
-        if (_memberLoginList != null && !_memberLoginList.isEmpty())
-        { sb.append(dm).append("memberLoginList"); }
-        if (_purchaseList != null && !_purchaseList.isEmpty())
-        { sb.append(dm).append("purchaseList"); }
+        if (_withdrawalAsOne != null && _withdrawalAsOne.isPresent())
+        { sb.append(dm).append("withdrawalAsOne"); }
+        if (_accountItemList != null && !_accountItemList.isEmpty())
+        { sb.append(dm).append("accountItemList"); }
+        if (_assetList != null && !_assetList.isEmpty())
+        { sb.append(dm).append("assetList"); }
+        if (_recordList != null && !_recordList.isEmpty())
+        { sb.append(dm).append("recordList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }
@@ -573,137 +327,79 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10)} <br>
-     * 連番として自動採番される。会員IDだけに限らず採番方法はDBMS次第。
+     * [get] (会員ID)MEMBER_ID: {PK, ID, NotNull, BIGINT(19)} <br>
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getMemberId() {
+    public Long getMemberId() {
         checkSpecifiedProperty("memberId");
         return _memberId;
     }
 
     /**
-     * [set] (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10)} <br>
-     * 連番として自動採番される。会員IDだけに限らず採番方法はDBMS次第。
+     * [set] (会員ID)MEMBER_ID: {PK, ID, NotNull, BIGINT(19)} <br>
      * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setMemberId(Integer memberId) {
+    public void setMemberId(Long memberId) {
         registerModifiedProperty("memberId");
         _memberId = memberId;
     }
 
     /**
-     * [get] (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(100)} <br>
-     * 会員のフルネームの名称。<br>
-     * 苗字と名前を分けて管理することが多いが、ここでは単純にひとまとめ。
-     * @return The value of the column 'MEMBER_NAME'. (basically NotNull if selected: for the constraint)
+     * [get] (メールアドレス)MAIL_ADDRESS: {UQ, NotNull, VARCHAR(200)} <br>
+     * @return The value of the column 'MAIL_ADDRESS'. (basically NotNull if selected: for the constraint)
      */
-    public String getMemberName() {
-        checkSpecifiedProperty("memberName");
-        return convertEmptyToNull(_memberName);
+    public String getMailAddress() {
+        checkSpecifiedProperty("mailAddress");
+        return convertEmptyToNull(_mailAddress);
     }
 
     /**
-     * [set] (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(100)} <br>
-     * 会員のフルネームの名称。<br>
-     * 苗字と名前を分けて管理することが多いが、ここでは単純にひとまとめ。
-     * @param memberName The value of the column 'MEMBER_NAME'. (basically NotNull if update: for the constraint)
+     * [set] (メールアドレス)MAIL_ADDRESS: {UQ, NotNull, VARCHAR(200)} <br>
+     * @param mailAddress The value of the column 'MAIL_ADDRESS'. (basically NotNull if update: for the constraint)
      */
-    public void setMemberName(String memberName) {
-        registerModifiedProperty("memberName");
-        _memberName = memberName;
+    public void setMailAddress(String mailAddress) {
+        registerModifiedProperty("mailAddress");
+        _mailAddress = mailAddress;
     }
 
     /**
-     * [get] (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} <br>
-     * ログインIDとして利用する。<br>
-     * 昨今メールアドレスをログインIDとすることが多いので、あまり見かけないかも!?
-     * @return The value of the column 'MEMBER_ACCOUNT'. (basically NotNull if selected: for the constraint)
+     * [get] (名前)NAME: {NotNull, VARCHAR(200)} <br>
+     * @return The value of the column 'NAME'. (basically NotNull if selected: for the constraint)
      */
-    public String getMemberAccount() {
-        checkSpecifiedProperty("memberAccount");
-        return convertEmptyToNull(_memberAccount);
+    public String getName() {
+        checkSpecifiedProperty("name");
+        return convertEmptyToNull(_name);
     }
 
     /**
-     * [set] (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} <br>
-     * ログインIDとして利用する。<br>
-     * 昨今メールアドレスをログインIDとすることが多いので、あまり見かけないかも!?
-     * @param memberAccount The value of the column 'MEMBER_ACCOUNT'. (basically NotNull if update: for the constraint)
+     * [set] (名前)NAME: {NotNull, VARCHAR(200)} <br>
+     * @param name The value of the column 'NAME'. (basically NotNull if update: for the constraint)
      */
-    public void setMemberAccount(String memberAccount) {
-        registerModifiedProperty("memberAccount");
-        _memberAccount = memberAccount;
+    public void setName(String name) {
+        registerModifiedProperty("name");
+        _name = name;
     }
 
     /**
-     * [get] (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS, classification=MemberStatus} <br>
-     * 会員ステータスを参照するコード。<br>
-     * ステータスが変わるたびに、このカラムが更新される。
-     * @return The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if selected: for the constraint)
+     * [get] (パスワード)PASSWORD: {NotNull, VARCHAR(200)} <br>
+     * @return The value of the column 'PASSWORD'. (basically NotNull if selected: for the constraint)
      */
-    public String getMemberStatusCode() {
-        checkSpecifiedProperty("memberStatusCode");
-        return convertEmptyToNull(_memberStatusCode);
+    public String getPassword() {
+        checkSpecifiedProperty("password");
+        return convertEmptyToNull(_password);
     }
 
     /**
-     * [set] (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to MEMBER_STATUS, classification=MemberStatus} <br>
-     * 会員ステータスを参照するコード。<br>
-     * ステータスが変わるたびに、このカラムが更新される。
-     * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if update: for the constraint)
+     * [set] (パスワード)PASSWORD: {NotNull, VARCHAR(200)} <br>
+     * @param password The value of the column 'PASSWORD'. (basically NotNull if update: for the constraint)
      */
-    protected void setMemberStatusCode(String memberStatusCode) {
-        checkClassificationCode("MEMBER_STATUS_CODE", CDef.DefMeta.MemberStatus, memberStatusCode);
-        registerModifiedProperty("memberStatusCode");
-        _memberStatusCode = memberStatusCode;
-    }
-
-    /**
-     * [get] (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)} <br>
-     * 会員が正式に確定した(正式会員になった)日時。<br>
-     * 一度確定したらもう二度と更新されないはずだ！
-     * @return The value of the column 'FORMALIZED_DATETIME'. (NullAllowed even if selected: for no constraint)
-     */
-    public java.time.LocalDateTime getFormalizedDatetime() {
-        checkSpecifiedProperty("formalizedDatetime");
-        return _formalizedDatetime;
-    }
-
-    /**
-     * [set] (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)} <br>
-     * 会員が正式に確定した(正式会員になった)日時。<br>
-     * 一度確定したらもう二度と更新されないはずだ！
-     * @param formalizedDatetime The value of the column 'FORMALIZED_DATETIME'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setFormalizedDatetime(java.time.LocalDateTime formalizedDatetime) {
-        registerModifiedProperty("formalizedDatetime");
-        _formalizedDatetime = formalizedDatetime;
-    }
-
-    /**
-     * [get] (生年月日)BIRTHDATE: {DATE(10)} <br>
-     * 必須項目ではないので、このデータがない会員もいる。
-     * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
-     */
-    public java.time.LocalDate getBirthdate() {
-        checkSpecifiedProperty("birthdate");
-        return _birthdate;
-    }
-
-    /**
-     * [set] (生年月日)BIRTHDATE: {DATE(10)} <br>
-     * 必須項目ではないので、このデータがない会員もいる。
-     * @param birthdate The value of the column 'BIRTHDATE'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setBirthdate(java.time.LocalDate birthdate) {
-        registerModifiedProperty("birthdate");
-        _birthdate = birthdate;
+    public void setPassword(String password) {
+        registerModifiedProperty("password");
+        _password = password;
     }
 
     /**
      * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
      * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getRegisterDatetime() {
@@ -713,7 +409,6 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
      * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterDatetime(java.time.LocalDateTime registerDatetime) {
@@ -723,7 +418,6 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
@@ -733,7 +427,6 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
      * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterUser(String registerUser) {
@@ -743,7 +436,6 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
      * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getUpdateDatetime() {
@@ -753,7 +445,6 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
      * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateDatetime(java.time.LocalDateTime updateDatetime) {
@@ -763,7 +454,6 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
@@ -773,7 +463,6 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
      * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateUser(String updateUser) {
@@ -783,7 +472,6 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (バージョン番号)VERSION_NO: {NotNull, BIGINT(19)} <br>
-     * 排他制御用、更新されるごとにインクリメントされる
      * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
      */
     public Long getVersionNo() {
@@ -793,19 +481,10 @@ public abstract class BsMember extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (バージョン番号)VERSION_NO: {NotNull, BIGINT(19)} <br>
-     * 排他制御用、更新されるごとにインクリメントされる
      * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
      */
     public void setVersionNo(Long versionNo) {
         registerModifiedProperty("versionNo");
         _versionNo = versionNo;
-    }
-
-    /**
-     * For framework so basically DON'T use this method.
-     * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if update: for the constraint)
-     */
-    public void mynativeMappingMemberStatusCode(String memberStatusCode) {
-        setMemberStatusCode(memberStatusCode);
     }
 }

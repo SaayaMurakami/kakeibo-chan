@@ -48,12 +48,12 @@ map:{
     ; wholeMap = map:{
         ; themeList = list:{ uniqueTableAlias ; sameColumnAliasIfSameColumnName }
     }
-    ; tableMap = map:{
-        ; themeList = list:{ hasPK ; upperCaseBasis ; identityIfPureIDPK }
-        ; statementList = list:{
-            ; if tableName is $$ALL$$ then fkName is prefix:FK_$$table$$
-        }
-    }
+    #; tableMap = map:{
+    #    ; themeList = list:{ hasPK ; upperCaseBasis ; identityIfPureIDPK }
+    #    ; statementList = list:{
+    #        ; if tableName is $$ALL$$ then fkName is prefix:FK_$$table$$
+    #    }
+    #}
     ; columnMap = map:{
         ; themeList = list:{ upperCaseBasis }
         ; statementList = list:{

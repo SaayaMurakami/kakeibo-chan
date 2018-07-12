@@ -42,34 +42,23 @@ map:{
     #                                                                               ======
     ; Flg = list:{
         ; map:{
-            ; topComment=general boolean classification for every flg-column; codeType=Number
+            ; topComment=フラグ。共通的なフラグを示す区分値で、基本的にXxxフラグと呼べるものに関連付けられる。; codeType=String
         }
-        ; map:{code=1; name=True ; alias=Checked  ; comment=means yes; sisterCode=true }
-        ; map:{code=0; name=False; alias=Unchecked; comment=means no ; sisterCode=false}
+        ; map:{code=Y; name=True ; alias=Yes  ; comment=フラグがTrue(Yes)であることを示す ; sisterCode=true }
+        ; map:{code=N; name=False; alias=No   ; comment=フラグがFalse(No)であることを示す ; sisterCode=false}
     }
 
     # ====================================================================================
-    #                                                                               Member
+    #                                                                                Table
     #                                                                               ======
-    ; MemberStatus = list:{
+    ; CategoryType = list:{
         ; map:{
-            ; topComment=status of member from entry to withdrawal; codeType=String
-            ; groupingMap = map:{
-                ; serviceAvailable = map:{
-                    ; groupComment = means member that can use services
-                    ; elementList = list:{Formalized;Provisional}
-                }
-                ; shortOfFormalized = map:{
-                    ; groupComment = Members are not formalized yet
-                    ; elementList = list:{Provisional}
-                }
-            }
+            ; topComment=勘定科目の種別を表す区分値
+            ; codeType=String
         }
-        ; map:{
-            ; table=MEMBER_STATUS
-            ; code=MEMBER_STATUS_CODE; name=MEMBER_STATUS_NAME
-            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
-        }
+        ; map:{code=INCOME; name=Income ; alias=収入  ; comment=収入を表す; }
+        ; map:{code=SPEND; name=Spend; alias=支出; comment=支出を表す; }
+        ; map:{code=MOVE; name=Move; alias=振替; comment=振替を表す;}
     }
 }
 # ----------------/
