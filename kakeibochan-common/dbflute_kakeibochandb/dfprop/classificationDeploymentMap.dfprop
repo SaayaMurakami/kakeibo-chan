@@ -16,6 +16,8 @@
 #
 map:{
     ; $$ALL$$ = map:{suffix:_FLG=Flg}
+    ;ACCOUNT_ITEM = map:{CATEGORY_TYPE=CategoryType}
 }
+
 # ----------------/
 

@@ -60,7 +60,14 @@ public class AccountItemDbm extends AbstractDBMeta {
     protected void xsetupEpg() {
         setupEpg(_epgMap, et -> ((AccountItem)et).getAccountItemId(), (et, vl) -> ((AccountItem)et).setAccountItemId(ctl(vl)), "accountItemId");
         setupEpg(_epgMap, et -> ((AccountItem)et).getMemberId(), (et, vl) -> ((AccountItem)et).setMemberId(ctl(vl)), "memberId");
-        setupEpg(_epgMap, et -> ((AccountItem)et).getCategoryType(), (et, vl) -> ((AccountItem)et).setCategoryType((String)vl), "categoryType");
+        setupEpg(_epgMap, et -> ((AccountItem)et).getCategoryType(), (et, vl) -> {
+            CDef.CategoryType cls = (CDef.CategoryType)gcls(et, columnCategoryType(), vl);
+            if (cls != null) {
+                ((AccountItem)et).setCategoryTypeAsCategoryType(cls);
+            } else {
+                ((AccountItem)et).mynativeMappingCategoryType((String)vl);
+            }
+        }, "categoryType");
         setupEpg(_epgMap, et -> ((AccountItem)et).getAccountTitle(), (et, vl) -> ((AccountItem)et).setAccountTitle((String)vl), "accountTitle");
         setupEpg(_epgMap, et -> ((AccountItem)et).getDelFlg(), (et, vl) -> {
             CDef.Flg cls = (CDef.Flg)gcls(et, columnDelFlg(), vl);
@@ -111,7 +118,7 @@ public class AccountItemDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnAccountItemId = cci("ACCOUNT_ITEM_ID", "ACCOUNT_ITEM_ID", null, "勘定科目ID", Long.class, "accountItemId", null, true, true, true, "BIGINT", 19, 0, null, null, false, null, null, null, "recordList", null, false);
     protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Long.class, "memberId", null, false, false, true, "BIGINT", 19, 0, null, null, false, null, null, "member", null, null, false);
-    protected final ColumnInfo _columnCategoryType = cci("CATEGORY_TYPE", "CATEGORY_TYPE", null, "カテゴリ種別", String.class, "categoryType", null, false, false, true, "VARCHAR", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnCategoryType = cci("CATEGORY_TYPE", "CATEGORY_TYPE", null, "カテゴリ種別", String.class, "categoryType", null, false, false, true, "VARCHAR", 10, 0, null, null, false, null, null, null, null, CDef.DefMeta.CategoryType, false);
     protected final ColumnInfo _columnAccountTitle = cci("ACCOUNT_TITLE", "ACCOUNT_TITLE", null, "勘定科目名", String.class, "accountTitle", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDelFlg = cci("DEL_FLG", "DEL_FLG", null, "削除フラグ", String.class, "delFlg", null, false, false, true, "CHAR", 1, 0, null, null, false, null, null, null, null, CDef.DefMeta.Flg, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
@@ -131,7 +138,7 @@ public class AccountItemDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
     /**
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnCategoryType() { return _columnCategoryType; }

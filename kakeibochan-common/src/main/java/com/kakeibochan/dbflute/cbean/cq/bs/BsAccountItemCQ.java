@@ -150,14 +150,14 @@ public class BsAccountItemCQ extends AbstractBsAccountItemCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType}
      * @return this. (NotNull)
      */
     public BsAccountItemCQ addOrderBy_CategoryType_Asc() { regOBA("CATEGORY_TYPE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType}
      * @return this. (NotNull)
      */
     public BsAccountItemCQ addOrderBy_CategoryType_Desc() { regOBD("CATEGORY_TYPE"); return this; }

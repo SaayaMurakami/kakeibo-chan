@@ -340,7 +340,7 @@ public class BsAccountItemCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
+         * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnCategoryType() { return doColumn("CATEGORY_TYPE"); }

@@ -379,11 +379,45 @@ public abstract class AbstractBsAccountItemCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType}
      * @param categoryType The value of categoryType as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setCategoryType_Equal(String categoryType) {
+    protected void setCategoryType_Equal(String categoryType) {
         doSetCategoryType_Equal(fRES(categoryType));
+    }
+
+    /**
+     * Equal(=). As CategoryType. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} <br>
+     * 勘定科目の種別を表す区分値
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCategoryType_Equal_AsCategoryType(CDef.CategoryType cdef) {
+        doSetCategoryType_Equal(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * Equal(=). As Income (INCOME). And OnlyOnceRegistered. <br>
+     * 収入: 収入を表す
+     */
+    public void setCategoryType_Equal_Income() {
+        setCategoryType_Equal_AsCategoryType(CDef.CategoryType.Income);
+    }
+
+    /**
+     * Equal(=). As Spend (SPEND). And OnlyOnceRegistered. <br>
+     * 支出: 支出を表す
+     */
+    public void setCategoryType_Equal_Spend() {
+        setCategoryType_Equal_AsCategoryType(CDef.CategoryType.Spend);
+    }
+
+    /**
+     * Equal(=). As Move (MOVE). And OnlyOnceRegistered. <br>
+     * 振替: 振替を表す
+     */
+    public void setCategoryType_Equal_Move() {
+        setCategoryType_Equal_AsCategoryType(CDef.CategoryType.Move);
     }
 
     protected void doSetCategoryType_Equal(String categoryType) {
@@ -392,11 +426,45 @@ public abstract class AbstractBsAccountItemCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType}
      * @param categoryType The value of categoryType as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setCategoryType_NotEqual(String categoryType) {
+    protected void setCategoryType_NotEqual(String categoryType) {
         doSetCategoryType_NotEqual(fRES(categoryType));
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As CategoryType. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} <br>
+     * 勘定科目の種別を表す区分値
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCategoryType_NotEqual_AsCategoryType(CDef.CategoryType cdef) {
+        doSetCategoryType_NotEqual(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Income (INCOME). And OnlyOnceRegistered. <br>
+     * 収入: 収入を表す
+     */
+    public void setCategoryType_NotEqual_Income() {
+        setCategoryType_NotEqual_AsCategoryType(CDef.CategoryType.Income);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Spend (SPEND). And OnlyOnceRegistered. <br>
+     * 支出: 支出を表す
+     */
+    public void setCategoryType_NotEqual_Spend() {
+        setCategoryType_NotEqual_AsCategoryType(CDef.CategoryType.Spend);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Move (MOVE). And OnlyOnceRegistered. <br>
+     * 振替: 振替を表す
+     */
+    public void setCategoryType_NotEqual_Move() {
+        setCategoryType_NotEqual_AsCategoryType(CDef.CategoryType.Move);
     }
 
     protected void doSetCategoryType_NotEqual(String categoryType) {
@@ -405,11 +473,21 @@ public abstract class AbstractBsAccountItemCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType}
      * @param categoryTypeList The collection of categoryType as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setCategoryType_InScope(Collection<String> categoryTypeList) {
+    protected void setCategoryType_InScope(Collection<String> categoryTypeList) {
         doSetCategoryType_InScope(categoryTypeList);
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. As CategoryType. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} <br>
+     * 勘定科目の種別を表す区分値
+     * @param cdefList The list of classification definition (as ENUM type). (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setCategoryType_InScope_AsCategoryType(Collection<CDef.CategoryType> cdefList) {
+        doSetCategoryType_InScope(cTStrL(cdefList));
     }
 
     protected void doSetCategoryType_InScope(Collection<String> categoryTypeList) {
@@ -418,59 +496,25 @@ public abstract class AbstractBsAccountItemCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType}
      * @param categoryTypeList The collection of categoryType as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setCategoryType_NotInScope(Collection<String> categoryTypeList) {
+    protected void setCategoryType_NotInScope(Collection<String> categoryTypeList) {
         doSetCategoryType_NotInScope(categoryTypeList);
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. As CategoryType. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} <br>
+     * 勘定科目の種別を表す区分値
+     * @param cdefList The list of classification definition (as ENUM type). (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setCategoryType_NotInScope_AsCategoryType(Collection<CDef.CategoryType> cdefList) {
+        doSetCategoryType_NotInScope(cTStrL(cdefList));
     }
 
     protected void doSetCategoryType_NotInScope(Collection<String> categoryTypeList) {
         regINS(CK_NINS, cTL(categoryTypeList), xgetCValueCategoryType(), "CATEGORY_TYPE");
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)} <br>
-     * <pre>e.g. setCategoryType_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param categoryType The value of categoryType as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setCategoryType_LikeSearch(String categoryType, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setCategoryType_LikeSearch(categoryType, xcLSOP(opLambda));
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)} <br>
-     * <pre>e.g. setCategoryType_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param categoryType The value of categoryType as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    protected void setCategoryType_LikeSearch(String categoryType, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(categoryType), xgetCValueCategoryType(), "CATEGORY_TYPE", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
-     * @param categoryType The value of categoryType as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setCategoryType_NotLikeSearch(String categoryType, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setCategoryType_NotLikeSearch(categoryType, xcLSOP(opLambda));
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)}
-     * @param categoryType The value of categoryType as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    protected void setCategoryType_NotLikeSearch(String categoryType, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(categoryType), xgetCValueCategoryType(), "CATEGORY_TYPE", likeSearchOption);
     }
 
     protected void regCategoryType(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueCategoryType(), "CATEGORY_TYPE"); }

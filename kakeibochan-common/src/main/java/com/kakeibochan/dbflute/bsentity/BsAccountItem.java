@@ -101,7 +101,7 @@ public abstract class BsAccountItem extends AbstractEntity implements DomainEnti
     /** (会員ID)MEMBER_ID: {IX, NotNull, BIGINT(19), FK to MEMBER} */
     protected Long _memberId;
 
-    /** (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)} */
+    /** (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} */
     protected String _categoryType;
 
     /** (勘定科目名)ACCOUNT_TITLE: {NotNull, VARCHAR(200)} */
@@ -151,6 +151,27 @@ public abstract class BsAccountItem extends AbstractEntity implements DomainEnti
     //                                                             Classification Property
     //                                                             =======================
     /**
+     * Get the value of categoryType as the classification of CategoryType. <br>
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} <br>
+     * 勘定科目の種別を表す区分値
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.CategoryType getCategoryTypeAsCategoryType() {
+        return CDef.CategoryType.codeOf(getCategoryType());
+    }
+
+    /**
+     * Set the value of categoryType as the classification of CategoryType. <br>
+     * (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} <br>
+     * 勘定科目の種別を表す区分値
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setCategoryTypeAsCategoryType(CDef.CategoryType cdef) {
+        setCategoryType(cdef != null ? cdef.code() : null);
+    }
+
+    /**
      * Get the value of delFlg as the classification of Flg. <br>
      * (削除フラグ)DEL_FLG: {NotNull, CHAR(1), classification=Flg} <br>
      * フラグ。共通的なフラグを示す区分値で、基本的にXxxフラグと呼べるものに関連付けられる。
@@ -185,6 +206,30 @@ public abstract class BsAccountItem extends AbstractEntity implements DomainEnti
     //                                                              Classification Setting
     //                                                              ======================
     /**
+     * Set the value of categoryType as Income (INCOME). <br>
+     * 収入: 収入を表す
+     */
+    public void setCategoryType_Income() {
+        setCategoryTypeAsCategoryType(CDef.CategoryType.Income);
+    }
+
+    /**
+     * Set the value of categoryType as Spend (SPEND). <br>
+     * 支出: 支出を表す
+     */
+    public void setCategoryType_Spend() {
+        setCategoryTypeAsCategoryType(CDef.CategoryType.Spend);
+    }
+
+    /**
+     * Set the value of categoryType as Move (MOVE). <br>
+     * 振替: 振替を表す
+     */
+    public void setCategoryType_Move() {
+        setCategoryTypeAsCategoryType(CDef.CategoryType.Move);
+    }
+
+    /**
      * Set the value of delFlg as True (Y). <br>
      * Yes: フラグがTrue(Yes)であることを示す
      */
@@ -203,6 +248,39 @@ public abstract class BsAccountItem extends AbstractEntity implements DomainEnti
     // ===================================================================================
     //                                                        Classification Determination
     //                                                        ============================
+    /**
+     * Is the value of categoryType Income? <br>
+     * 収入: 収入を表す
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isCategoryTypeIncome() {
+        CDef.CategoryType cdef = getCategoryTypeAsCategoryType();
+        return cdef != null ? cdef.equals(CDef.CategoryType.Income) : false;
+    }
+
+    /**
+     * Is the value of categoryType Spend? <br>
+     * 支出: 支出を表す
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isCategoryTypeSpend() {
+        CDef.CategoryType cdef = getCategoryTypeAsCategoryType();
+        return cdef != null ? cdef.equals(CDef.CategoryType.Spend) : false;
+    }
+
+    /**
+     * Is the value of categoryType Move? <br>
+     * 振替: 振替を表す
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isCategoryTypeMove() {
+        CDef.CategoryType cdef = getCategoryTypeAsCategoryType();
+        return cdef != null ? cdef.equals(CDef.CategoryType.Move) : false;
+    }
+
     /**
      * Is the value of delFlg True? <br>
      * Yes: フラグがTrue(Yes)であることを示す
@@ -228,6 +306,15 @@ public abstract class BsAccountItem extends AbstractEntity implements DomainEnti
     // ===================================================================================
     //                                                           Classification Name/Alias
     //                                                           =========================
+    /**
+     * Get the value of the column 'categoryType' as classification alias.
+     * @return The string of classification alias. (NullAllowed: when the column value is null)
+     */
+    public String getCategoryTypeAlias() {
+        CDef.CategoryType cdef = getCategoryTypeAsCategoryType();
+        return cdef != null ? cdef.alias() : null;
+    }
+
     /**
      * Get the value of the column 'delFlg' as classification name.
      * @return The string of classification name. (NullAllowed: when the column value is null)
@@ -410,7 +497,7 @@ public abstract class BsAccountItem extends AbstractEntity implements DomainEnti
     }
 
     /**
-     * [get] (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)} <br>
+     * [get] (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} <br>
      * @return The value of the column 'CATEGORY_TYPE'. (basically NotNull if selected: for the constraint)
      */
     public String getCategoryType() {
@@ -419,10 +506,11 @@ public abstract class BsAccountItem extends AbstractEntity implements DomainEnti
     }
 
     /**
-     * [set] (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10)} <br>
+     * [set] (カテゴリ種別)CATEGORY_TYPE: {NotNull, VARCHAR(10), classification=CategoryType} <br>
      * @param categoryType The value of the column 'CATEGORY_TYPE'. (basically NotNull if update: for the constraint)
      */
-    public void setCategoryType(String categoryType) {
+    protected void setCategoryType(String categoryType) {
+        checkClassificationCode("CATEGORY_TYPE", CDef.DefMeta.CategoryType, categoryType);
         registerModifiedProperty("categoryType");
         _categoryType = categoryType;
     }
@@ -552,6 +640,14 @@ public abstract class BsAccountItem extends AbstractEntity implements DomainEnti
     public void setVersionNo(Long versionNo) {
         registerModifiedProperty("versionNo");
         _versionNo = versionNo;
+    }
+
+    /**
+     * For framework so basically DON'T use this method.
+     * @param categoryType The value of the column 'CATEGORY_TYPE'. (basically NotNull if update: for the constraint)
+     */
+    public void mynativeMappingCategoryType(String categoryType) {
+        setCategoryType(categoryType);
     }
 
     /**
