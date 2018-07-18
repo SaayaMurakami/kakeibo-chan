@@ -77,11 +77,15 @@ header {
 }
 .complete h1 {
 	font-size: 36px;
+    margin-top: 69px;
 }
 .complete a {
-	display: block;
-	margin-top:10%;
-	color: #C08F63;
+    display: block;
+    margin-top: 10%;
+    color: #C08F63;
+    width: 100px;
+    margin-right: auto;
+    margin-left: auto;
 }
 .complete a:hover {
 	color: #F4C091;

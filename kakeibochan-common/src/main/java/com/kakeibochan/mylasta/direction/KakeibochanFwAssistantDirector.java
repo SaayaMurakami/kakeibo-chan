@@ -19,15 +19,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanActionAdjustmentProvider;
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanCookieResourceProvider;
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanCurtainBeforeHook;
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanJsonResourceProvider;
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanMailDeliveryDepartmentCreator;
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanSecurityResourceProvider;
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanTimeResourceProvider;
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanUserLocaleProcessProvider;
-import com.kakeibochan.mylasta.direction.sponsor.KakeibochanUserTimeZoneProcessProvider;
 import org.lastaflute.core.direction.CachedFwAssistantDirector;
 import org.lastaflute.core.direction.CurtainBeforeHook;
 import org.lastaflute.core.direction.FwAssistDirection;
@@ -45,6 +36,16 @@ import org.lastaflute.web.path.ActionAdjustmentProvider;
 import org.lastaflute.web.servlet.cookie.CookieResourceProvider;
 import org.lastaflute.web.servlet.request.UserLocaleProcessProvider;
 import org.lastaflute.web.servlet.request.UserTimeZoneProcessProvider;
+
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanActionAdjustmentProvider;
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanCookieResourceProvider;
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanCurtainBeforeHook;
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanJsonResourceProvider;
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanMailDeliveryDepartmentCreator;
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanSecurityResourceProvider;
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanTimeResourceProvider;
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanUserLocaleProcessProvider;
+import com.kakeibochan.mylasta.direction.sponsor.KakeibochanUserTimeZoneProcessProvider;
 
 /**
  * @author jflute
@@ -95,8 +96,8 @@ public abstract class KakeibochanFwAssistantDirector extends CachedFwAssistantDi
         return new KakeibochanCurtainBeforeHook();
     }
 
-    protected SecurityResourceProvider createSecurityResourceProvider() { // #change_it_first
-        final InvertibleCryptographer inver = InvertibleCryptographer.createAesCipher("kakeibochan:dockside");
+    protected SecurityResourceProvider createSecurityResourceProvider() {
+        final InvertibleCryptographer inver = InvertibleCryptographer.createAesCipher("KE6MV7R:qR2FXo9b");
         final OneWayCryptographer oneWay = OneWayCryptographer.createSha256Cryptographer();
         return new KakeibochanSecurityResourceProvider(inver, oneWay);
     }
@@ -143,8 +144,8 @@ public abstract class KakeibochanFwAssistantDirector extends CachedFwAssistantDi
         return new KakeibochanUserTimeZoneProcessProvider();
     }
 
-    protected CookieResourceProvider createCookieResourceProvider() { // #change_it_first
-        final InvertibleCryptographer cr = InvertibleCryptographer.createAesCipher("dockside:kakeibochan");
+    protected CookieResourceProvider createCookieResourceProvider() {
+        final InvertibleCryptographer cr = InvertibleCryptographer.createAesCipher("BZ9cx02:VxpQAF8A");
         return new KakeibochanCookieResourceProvider(config, cr);
     }
 

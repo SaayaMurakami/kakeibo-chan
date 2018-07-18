@@ -26,7 +26,7 @@ import org.lastaflute.web.login.PrimaryLoginManager;
 import org.lastaflute.web.login.credential.UserPasswordCredential;
 import org.lastaflute.web.login.option.LoginSpecifiedOption;
 
-import com.kakeibochan.app.web.signin.SigninAction;
+import com.kakeibochan.app.web.login.LoginAction;
 import com.kakeibochan.dbflute.cbean.MemberCB;
 import com.kakeibochan.dbflute.exbhv.MemberBhv;
 import com.kakeibochan.dbflute.exentity.Member;
@@ -126,6 +126,6 @@ public class FrontLoginAssist extends KakeibochanLoginAssist<FrontUserBean, Memb
 
     @Override
     protected Class<?> getLoginActionType() {
-        return SigninAction.class;
+        return LoginAction.class;
     }
 }

@@ -26,6 +26,9 @@ public interface FrontHtmlPath {
     /** The path of the HTML: /error/show_errors.html */
     HtmlNext path_Error_ShowErrorsHtml = new HtmlNext("/error/show_errors.html");
 
+    /** The path of the HTML: /login/login.html */
+    HtmlNext path_Login_LoginHtml = new HtmlNext("/login/login.html");
+
     /** The path of the HTML: /mypage/mypage.html */
     HtmlNext path_Mypage_MypageHtml = new HtmlNext("/mypage/mypage.html");
 
@@ -46,4 +49,7 @@ public interface FrontHtmlPath {
 
     /** The path of the HTML: /signin/signin_reminder.html */
     HtmlNext path_Signin_SigninReminderHtml = new HtmlNext("/signin/signin_reminder.html");
+
+    /** The path of the HTML: /top/top.html */
+    HtmlNext path_Top_TopHtml = new HtmlNext("/top/top.html");
 }

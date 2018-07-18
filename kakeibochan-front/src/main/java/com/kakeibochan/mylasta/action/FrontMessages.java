@@ -27,13 +27,13 @@ public class FrontMessages extends FrontLabels {
     /** The serial version UID for object serialization. (Default) */
     private static final long serialVersionUID = 1L;
 
-    /** The key of the message: the account already exists so input others */
+    /** The key of the message: すでにこのメールアドレスは登録されています。 */
     public static final String ERRORS_SIGNUP_ACCOUNT_ALREADY_EXISTS = "{errors.signup.account.already.exists}";
 
     /**
      * Add the created action message for the key 'errors.signup.account.already.exists' with parameters.
      * <pre>
-     * message: the account already exists so input others
+     * message: すでにこのメールアドレスは登録されています。
      * </pre>
      * @param property The property name for the message. (NotNull)
      * @return this. (NotNull)

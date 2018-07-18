@@ -21,9 +21,17 @@ header {
     height: 123px;
     position: relative;
 }
+.element {
+    padding-top: 10px;
+}
+.aa{
+    width: 100%;
+    height: 78px;
+    padding-top: 10px;
+}
 .logo {
     background-color: #FEF9F2;
-    width: 300px;
+    width: 291px;
     height: 78px;
     overflow: hidden;
     display: inline-block;
@@ -31,18 +39,54 @@ header {
     color: #96C730;
     font-size: 56px;
     float: left;
-    padding-top: 10px;
+    text-align: center;
 }
 
 .logo a {
-    color: #96C730; 
-    margin-left: 15px;
+    color: #96C730;
 }
 
 .chan {
     font-family: KTEGAKI;
     color: #96C730;
     font-size: 40px;
+}
+nav {
+    background-color: #FEF9F2;
+    display: inline-block;
+    width: calc(100% - 316px);
+}
+.navigation ul {
+    display: inline-block;
+}
+.navigation ul li {
+    font-family: KTEGAKI;
+    list-style-type: none;
+    display: inline-block;
+    width: 104px;
+    font-size: 31px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 31px;
+}
+.navigation ul li a {
+    color: #96C730;
+    text-decoration: none;
+}
+.navigation ul li a:hover {
+    color: #F3B985;
+}
+.menu {
+    text-align: center;
+    width: calc(100% - 107px);
+    padding: 0;
+    min-width: 530px;
+}
+ul.logout {
+    width: 120px;
+    text-align: right;
+    padding: 0;
+    margin-right: 10px;
 }
 .headline {
     clear: both;
@@ -58,70 +102,27 @@ header {
 .main {
     background-image: url(../img/mainvisual.png);
     max-width: 100%;
-    min-height: 530px;
+    min-height: 389px;
     height: calc(100vh - 123px);
     background-repeat: repeat-x;
     background-position: bottom;
 }
-form {
-    font-size: 20px;
-    font-family: KTEGAKI;
-    color: #565c6f;
-    background-color: #FFFDFD;
+.button {
+    width: 100%;
+    position: absolute;
+    bottom: 40%;
     text-align: center;
-    width: 60%;
-    min-height: 283px;
-    padding: 34px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    top: 10%;
-    border: 1.5px solid rgba(151, 151, 151, 0.62);
-    border-radius: 23px;
-}
-form h1 {
-    font-size: 36px;
-    margin-bottom: 15px;
-}
-p {
-    padding: 20px;
-}
-.form-element {
-    padding: 20px;
-    height: 30px;
-    clear: both;
-}
-input {
-    width: 267px;
-    height: 22px;
-    padding: 2px 8px;
-    border: 1px solid rgba(151, 151, 151, 0.62);
-    border-radius: 5px;
-    outline-color: #F3B985;
-}
-.form-label {
-    display: block;
-    float: left;
-    text-align: right;
-    width: 30%;
-    padding-right: 20px;
-}
-.form-input {
-	 display: block;
-    float: left;
-    width: 60%;
-    text-align: left;
-    padding-left: 20px;
+    min-width: 987px;
 }
 button {
-    width: 300px;
+    width: 400px;
     font-family: KTEGAKI;
-    font-size: 20px;
+    font-size: 30px;
     border: 2px solid #C08F63;
     background-color: #F4C091;
     border-radius: 23px;
     color: #fff;
-    line-height: 30px;
+    line-height: 40px;
     text-shadow: 0 2px 0px rgba(0, 0, 0, .3);
     outline: none;
     cursor: pointer;
@@ -136,10 +137,3 @@ button:active {
   color: #c19063;
   text-shadow: 0 3px  rgba(224,223,223,.5);
 }
-.errors {
-	display: block;
-    margin-top: 2px;
-	color: #f36262;
-	font-size: 17px;
-}
-

@@ -7,7 +7,7 @@
 # ========================================================================================
 #                                                                                  Sign up
 #                                                                                  =======
-errors.signup.account.already.exists=すでにこのメールアドレスは登録されています。
+errors.signup.account.already.exists=the account already exists so input others
 
 
 # ========================================================================================
