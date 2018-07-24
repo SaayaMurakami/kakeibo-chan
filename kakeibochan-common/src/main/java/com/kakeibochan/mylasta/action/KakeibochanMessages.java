@@ -51,7 +51,7 @@ public class KakeibochanMessages extends KakeibochanLabels {
     /** The key of the message: must be less than or equal to {value} */
     public static final String CONSTRAINTS_Max_MESSAGE = "{constraints.Max.message}";
 
-    /** The key of the message: must be greater than or equal to {value} */
+    /** The key of the message: {value}以上の数字を入力してください */
     public static final String CONSTRAINTS_Min_MESSAGE = "{constraints.Min.message}";
 
     /** The key of the message: may not be empty */
@@ -81,7 +81,7 @@ public class KakeibochanMessages extends KakeibochanLabels {
     /** The key of the message: invalid {type} barcode */
     public static final String CONSTRAINTS_EAN_MESSAGE = "{constraints.EAN.message}";
 
-    /** The key of the message: length must be between {min} and {max} */
+    /** The key of the message: {min}ー{max}文字で入力してください */
     public static final String CONSTRAINTS_Length_MESSAGE = "{constraints.Length.message}";
 
     /** The key of the message: The check digit for ${value} is invalid, Luhn Modulo 10 checksum failed */
@@ -271,7 +271,7 @@ public class KakeibochanMessages extends KakeibochanLabels {
     /**
      * Add the created action message for the key 'constraints.Min.message' with parameters.
      * <pre>
-     * message: must be greater than or equal to {value}
+     * message: {value}以上の数字を入力してください
      * </pre>
      * @param property The property name for the message. (NotNull)
      * @param value The parameter value for message. (NotNull)
@@ -416,7 +416,7 @@ public class KakeibochanMessages extends KakeibochanLabels {
     /**
      * Add the created action message for the key 'constraints.Length.message' with parameters.
      * <pre>
-     * message: length must be between {min} and {max}
+     * message: {min}ー{max}文字で入力してください
      * </pre>
      * @param property The property name for the message. (NotNull)
      * @param min The parameter min for message. (NotNull)

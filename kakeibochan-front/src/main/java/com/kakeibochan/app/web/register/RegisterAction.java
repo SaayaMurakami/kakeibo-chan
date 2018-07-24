@@ -43,7 +43,7 @@ public class RegisterAction extends FrontBaseAction {
     }
 
     @Execute
-    public HtmlResponse goBackIndex(RegisterConfirmForm form) {
+    public HtmlResponse goBackIndex(RegisterForm form) {
         validate(form, messages -> {}, () -> {
             return asHtml(path_Register_RegisterHtml);
         });
@@ -51,7 +51,7 @@ public class RegisterAction extends FrontBaseAction {
     }
 
     @Execute
-    public HtmlResponse confirm(RegisterConfirmForm form) {
+    public HtmlResponse confirm(RegisterForm form) {
         validate(form, messages -> moreValidate(form, messages), () -> {
             return asHtml(path_Register_RegisterHtml);
         });
@@ -69,7 +69,7 @@ public class RegisterAction extends FrontBaseAction {
     }
 
     @Execute
-    public HtmlResponse doComplete(RegisterConfirmForm form) {
+    public HtmlResponse doComplete(RegisterForm form) {
         validate(form, messages -> moreValidate(form, messages), () -> {
             return asHtml(path_Register_RegisterHtml);
         });
@@ -157,19 +157,15 @@ public class RegisterAction extends FrontBaseAction {
 
     @Execute
     public HtmlResponse complete() {
-        return asHtml(path_Register_CompleteHtml).renderWith(data -> {
-            data.register("userName", getUserBean().get().getName());
-            data.register("mailAddress", getUserBean().get().getMailAddress());
-        });
+        return asHtml(path_Register_CompleteHtml);
     }
 
-    private void moreValidate(RegisterConfirmForm form, FrontMessages messages) {
+    private void moreValidate(RegisterForm form, FrontMessages messages) {
         if (form.mailAddress != null) {
-            //TODO 検証する
             OptionalEntity<Member> member = memberBhv.selectEntity(cb -> {
                 cb.query().setMailAddress_Equal(form.mailAddress);
             });
-            if (member.isPresent()) { //TODO 検証した結果NGだったら
+            if (member.isPresent()) {
                 messages.addErrorsSignupAccountAlreadyExists("mailAddress");
             }
         }
