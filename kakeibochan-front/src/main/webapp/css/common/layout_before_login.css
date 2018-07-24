@@ -1,0 +1,68 @@
+/*フォント*/
+@font-face {
+font-family: KTEGAKI;
+    src: url("../font/KTEGAKI.eot");/*For IE*/
+    src: url("../font/KTEGAKI.woff") format("woff"),/*For Modern browser*/
+        url("../font/KTEGAKI.ttf") format("truetype");/*For iOS Android*/
+}
+
+/*ボディ*/
+body {
+    margin: 0;
+    background-color: #FEF9F2;
+    min-width: 987px;
+}
+
+.logo a {
+    text-decoration: none;
+}
+
+/*ヘッダー*/
+header {
+    white-space:nowrap;
+    max-width: 100%;
+    height: 123px;
+    position: relative;
+}
+.logo {
+    background-color: #FEF9F2;
+    width: 300px;
+    height: 78px;
+    overflow: hidden;
+    display: inline-block;
+    font-family: KTEGAKI;
+    color: #96C730;
+    font-size: 56px;
+    float: left;
+    padding-top: 10px;
+}
+
+.logo a {
+    color: #96C730;
+    margin-left: 15px;
+}
+
+.chan {
+    font-family: KTEGAKI;
+    color: #96C730;
+    font-size: 40px;
+}
+.headline {
+    clear: both;
+    background-image: url(../img/headline.png);
+    height: 45px;
+    background-repeat: repeat-x;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/*メイン*/
+.main {
+    background-image: url(../img/mainvisual.png);
+    max-width: 100%;
+    min-height: 530px;
+    height: calc(100vh - 123px);
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
