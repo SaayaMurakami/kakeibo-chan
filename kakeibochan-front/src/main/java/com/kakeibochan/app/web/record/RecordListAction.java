@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
-import org.dbflute.cbean.result.ListResultBean;
+import org.dbflute.cbean.result.PagingResultBean;
+import org.dbflute.optional.OptionalThing;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.response.HtmlResponse;
 
 import com.kakeibochan.app.web.base.FrontBaseAction;
+import com.kakeibochan.app.web.base.paging.PagingAssist;
 import com.kakeibochan.dbflute.exbhv.AccountItemBhv;
 import com.kakeibochan.dbflute.exbhv.AssetBhv;
 import com.kakeibochan.dbflute.exbhv.RecordBhv;
@@ -23,18 +25,25 @@ public class RecordListAction extends FrontBaseAction {
     private AccountItemBhv accountItemBhv;
     @Resource
     private AssetBhv assetBhv;
+    @Resource
+    private PagingAssist pagingAssist;
+
+    private static int PAGE_SIZE = 2;
 
     @Execute
-    public HtmlResponse index() {
+    public HtmlResponse index(OptionalThing<Integer> pageNo, RecordListForm form) {
         FrontUserBean userBean = getUserBean().get();
         Long userId = userBean.getUserId();
 
-        ListResultBean<Record> records = recordBhv.selectList(cb -> {
+        PagingResultBean<Record> records = recordBhv.selectPage(cb -> {
             cb.setupSelect_AccountItem();
             cb.setupSelect_AssetByDepositAccountId();
             cb.setupSelect_AssetByWithdrawalAccountId();
 
             cb.query().setMemberId_Equal(userId);
+            cb.query().addOrderBy_Date_Desc();
+
+            cb.paging(PAGE_SIZE, pageNo.orElse(1));
         });
 
         ArrayList<RecordBean> recordBeans = new ArrayList<>();
@@ -53,6 +62,7 @@ public class RecordListAction extends FrontBaseAction {
 
         return asHtml(path_Record_ListHtml).renderWith(data -> {
             data.register("recordBeans", recordBeans);
+            pagingAssist.registerPagingNavi(data, records, form);
         });
     }
 

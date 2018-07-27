@@ -44,6 +44,16 @@
 				</tr>
 			</table>
 		</div>
+		
+		<div class="paging-area">
+			<span th:text="${pagingNavi.currentPageNumber}">${pagingNavi.currentPageNumber}</span>/<span th:text="${pagingNavi.allPageCount}">${pagingNavi.allPageCount}</span> (<span th:text="${pagingNavi.allRecordCount}">${pagingNavi.allRecordCount}</span>)
+			<a th:if="${pagingNavi.existsPreviousPage}" th:href="${pagingNavi.previousPageLinkHref}">pre</a>
+			<span th:each="link : ${pagingNavi.pageNumberLinkList}" >
+				<span id="pageNumberElement" th:unless="${link.current}"><a th:href="${link.pageNumberLinkHref}" th:text="${link.pageNumberElement}">${link.pageNumberElement}</a></span>
+				<span id="pageNumberElement" th:if="${link.current}" th:text="${link.pageNumberElement}">${link.pageNumberElement}</span>
+			</span>
+			<a th:if="${pagingNavi.existsNextPage}" th:href="${pagingNavi.nextPageLinkHref}">next</a>
+		</div>
 	</div>
 </body>
 </html>
