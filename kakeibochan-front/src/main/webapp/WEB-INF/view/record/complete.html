@@ -1,1 +1,19 @@
-かんりょう
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>完了：ユーザー登録｜家計簿ちゃん</title>
+	<link href="/css/common/reset.css" th:href="@{/css/common/reset.css}" rel="stylesheet"></link>
+	<link href="/css/common/layout_after_login.css" th:href="@{/css/common/layout_after_login.css}" rel="stylesheet"></link>
+	<link href="/css/record/confirm.css" th:href="@{/css/record/complete.css}" rel="stylesheet"></link>
+</head>
+<body>
+	<header th:include="/common/layout_after_login.html :: header"></header>
+	<div class="main">
+		<div class="complete">
+			<h1>登録しました！</h1>
+			<a href="/top/" th:href="@{/top/}">マイページへ</a>
+		</div>
+	</div>
+</body>
+</html>

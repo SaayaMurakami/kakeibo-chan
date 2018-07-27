@@ -1,0 +1,109 @@
+@font-face {
+font-family: KTEGAKI;
+    src: url("../../font/KTEGAKI.eot");/*For IE*/
+    src: url("../../font/KTEGAKI.woff") format("woff"),/*For Modern browser*/
+        url("../../font/KTEGAKI.ttf") format("truetype");/*For iOS Android*/
+}
+body {
+    margin: 0;
+    background-color: #FEF9F2;
+    min-width: 987px;
+}
+
+.element a {
+    text-decoration: none;
+}
+
+/*ヘッダー*/
+header {
+    white-space:nowrap;
+    max-width: 100%;
+    height: 123px;
+    position: relative;
+}
+.element {
+    padding-top: 10px;
+}
+.aa{
+    width: 100%;
+    height: 78px;
+    padding-top: 10px;
+}
+.logo {
+    background-color: #FEF9F2;
+    width: 291px;
+    height: 78px;
+    overflow: hidden;
+    display: inline-block;
+    font-family: KTEGAKI;
+    color: #96C730;
+    font-size: 56px;
+    float: left;
+    text-align: center;
+}
+
+.logo a {
+    color: #96C730;
+}
+
+.chan {
+    font-family: KTEGAKI;
+    color: #96C730;
+    font-size: 40px;
+}
+nav {
+    background-color: #FEF9F2;
+    display: inline-block;
+    width: calc(100% - 316px);
+}
+.navigation ul {
+    display: inline-block;
+}
+.navigation ul li {
+    font-family: KTEGAKI;
+    list-style-type: none;
+    display: inline-block;
+    width: 104px;
+    font-size: 31px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 31px;
+}
+.navigation ul li a {
+    color: #96C730;
+    text-decoration: none;
+}
+.navigation ul li a:hover {
+    color: #F3B985;
+}
+.menu {
+    text-align: center;
+    width: calc(100% - 107px);
+    padding: 0;
+    min-width: 530px;
+}
+ul.logout {
+    width: 120px;
+    text-align: right;
+    padding: 0;
+    margin-right: 10px;
+}
+.headline {
+    clear: both;
+    background-image: url(../../img/headline.png);
+    height: 45px;
+    background-repeat: repeat-x;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/*メイン*/
+.main {
+    background-image: url(../../img/mainvisual.png);
+    max-width: 100%;
+    min-height: 389px;
+    height: calc(100vh - 123px);
+    background-repeat: repeat-x;
+    background-position: bottom;
+}

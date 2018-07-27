@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>明細一覧｜家計簿ちゃん</title>
+	<link href="/css/common/reset.css" th:href="@{/css/common/reset.css}" rel="stylesheet"></link>
+	<link href="/css/common/layout_after_login.css" th:href="@{/css/common/layout_after_login.css}" rel="stylesheet"></link>
+	<link href="/css/record/lidt.css" th:href="@{/css/record/list.css}" rel="stylesheet"></link>
+</head>
+<body>
+	<header th:include="/common/layout_after_login.html :: header"></header>
+	<div class="main">
+		<div class="search">
+			<span id="date" class="search-column">日付</span>
+			<span id="category-type" class="search-column">収支</span>
+			<span id="category" class="search-column">カテゴリ</span>
+			<span id="deposit-account" class="search-column">支払元</span>
+			<span id="withdrawal-account" class="search-column">支払先</span>
+			<span id="amount" class="search-column">金額</span>
+			<span id="memo" class="search-column">メモ</span>
+			<span id="search" class="search-coulum"><img src="../../../img/search.png" th:src="@{/img/search.png}" alt="虫眼鏡のイラスト"/>検索</span>
+		</div>
+		<div class="table">
+			<table>
+				<tr>
+					<td>編集</td>
+					<td>日付</td>
+					<td>収支</td>
+					<td>カテゴリ</td>
+					<td>支払い元</td>
+					<td>支払先</td>
+					<td>金額</td>
+					<td>メモ</td>
+				</tr>
+				<tr th:each="recordBean:${recordBeans}">
+					<td><img class="pencil" src="../../../img/pencil.png" th:src="@{/img/pencil.png}" alt="鉛筆のイラスト" /></td>
+					<td th:text="${recordBean.date}"></td>
+					<td th:text="${recordBean.categoryType}"></td>
+					<td th:text="${recordBean.accountTitle}"></td>
+					<td th:text="${recordBean.depositAccount}"></td>
+					<td th:text="${recordBean.withdrawalAccount}"></td>
+					<td th:text="${recordBean.amount}"></td>
+					<td th:text="${recordBean.memo}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

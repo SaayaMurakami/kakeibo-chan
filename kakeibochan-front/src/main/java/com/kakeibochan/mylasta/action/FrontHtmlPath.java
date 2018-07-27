@@ -23,8 +23,8 @@ import org.lastaflute.web.response.next.HtmlNext;
  */
 public interface FrontHtmlPath {
 
-    /** The path of the HTML: /common_lasta/layout.html */
-    HtmlNext path_CommonLasta_LayoutHtml = new HtmlNext("/common_lasta/layout.html");
+    /** The path of the HTML: /common_defualt/layout.html */
+    HtmlNext path_CommonDefualt_LayoutHtml = new HtmlNext("/common_defualt/layout.html");
 
     /** The path of the HTML: /error/show_errors.html */
     HtmlNext path_Error_ShowErrorsHtml = new HtmlNext("/error/show_errors.html");
@@ -43,6 +43,9 @@ public interface FrontHtmlPath {
 
     /** The path of the HTML: /record/confirm.html */
     HtmlNext path_Record_ConfirmHtml = new HtmlNext("/record/confirm.html");
+
+    /** The path of the HTML: /record/list.html */
+    HtmlNext path_Record_ListHtml = new HtmlNext("/record/list.html");
 
     /** The path of the HTML: /record/register.html */
     HtmlNext path_Record_RegisterHtml = new HtmlNext("/record/register.html");

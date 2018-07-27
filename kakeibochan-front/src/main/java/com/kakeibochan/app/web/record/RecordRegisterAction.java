@@ -14,6 +14,7 @@ import com.kakeibochan.dbflute.exbhv.AssetBhv;
 import com.kakeibochan.dbflute.exbhv.RecordBhv;
 import com.kakeibochan.dbflute.exentity.AccountItem;
 import com.kakeibochan.dbflute.exentity.Asset;
+import com.kakeibochan.dbflute.exentity.Record;
 import com.kakeibochan.mylasta.action.FrontUserBean;
 
 public class RecordRegisterAction extends FrontBaseAction {
@@ -33,10 +34,10 @@ public class RecordRegisterAction extends FrontBaseAction {
     @Execute
     public HtmlResponse goBackIndex(RecordForm form) {
         validate(form, message -> {}, () -> {
-            return asHtml(path_Record_RegisterHtml);
+            return renderIndex();
         });
 
-        return asHtml(path_Record_RegisterHtml);
+        return renderIndex();
     }
 
     @Execute
@@ -47,24 +48,50 @@ public class RecordRegisterAction extends FrontBaseAction {
 
         saveToken();
 
-        return asHtml(path_Record_ConfirmHtml);
+        AccountItem accountItem = accountItemBhv.selectEntityWithDeletedCheck(cb -> {
+            cb.query().setAccountItemId_Equal(form.accountItemId);
+        });
+
+        AccountItemBean accountItemBean = new AccountItemBean();
+        accountItemBean.title = accountItem.getAccountTitle();
+        accountItemBean.id = accountItem.getAccountItemId();
+
+        Asset asset = assetBhv.selectEntityWithDeletedCheck(cb -> {
+            cb.query().setAssetId_Equal(form.assetId);
+        });
+
+        AssetBean assetBean = new AssetBean();
+        assetBean.name = asset.getAssetName();
+        assetBean.id = asset.getAssetId();
+
+        return asHtml(path_Record_ConfirmHtml).renderWith(data -> {
+            data.register("accountItemBean", accountItemBean);
+            data.register("assetBean", assetBean);
+        });
     }
 
     @Execute
     public HtmlResponse doComplete(RecordForm form) {
         validate(form, message -> {}, () -> {
-            return asHtml(path_Record_RegisterHtml);
+            return renderIndex();
         });
 
         verifyToken(() -> {
-            return asHtml(path_Record_RegisterHtml);
+            return renderIndex();
         });
 
-        //        Record record = new Record();
-        //        record.setDate(form.date);
-        //        record.setAmount(form.ammount);
-        //        record.setMemo(form.memo);
-        //        recordBhv.insert(record);
+        FrontUserBean userBean = getUserBean().get();
+        Long userId = userBean.getUserId();
+
+        Record record = new Record();
+        record.setMemberId(userId);
+        record.setAccountItemId(form.accountItemId);
+        record.setDepositAccountId(form.assetId);
+        record.setDate(form.date);
+        record.setAmount(form.amount);
+        record.setMemo(form.memo);
+        record.setDelFlg_False();
+        recordBhv.insert(record);
 
         return redirectWith(RecordRegisterAction.class, moreUrl("complete"));
     }
@@ -80,6 +107,7 @@ public class RecordRegisterAction extends FrontBaseAction {
 
         ListResultBean<AccountItem> accountItemList = accountItemBhv.selectList(cb -> {
             cb.query().setMemberId_Equal(userId);
+            cb.query().setCategoryType_Equal_Spend();
         });
 
         ArrayList<AccountItemBean> accountItemBeans = new ArrayList<>();
