@@ -27,7 +27,7 @@ public class RecordRegisterAction extends FrontBaseAction {
     private AssetBhv assetBhv;
 
     @Execute
-    public HtmlResponse index(categoryType) {
+    public HtmlResponse index() {
         return renderIndex();
     }
 
