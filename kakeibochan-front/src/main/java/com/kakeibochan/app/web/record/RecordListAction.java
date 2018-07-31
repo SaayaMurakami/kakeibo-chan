@@ -28,7 +28,7 @@ public class RecordListAction extends FrontBaseAction {
     @Resource
     private PagingAssist pagingAssist;
 
-    private static int PAGE_SIZE = 2;
+    private static final int PAGE_SIZE = 7;
 
     @Execute
     public HtmlResponse index(OptionalThing<Integer> pageNo, RecordListForm form) {
