@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 
 import org.dbflute.cbean.result.ListResultBean;
-import org.dbflute.optional.OptionalThing;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.response.HtmlResponse;
 
@@ -28,7 +27,7 @@ public class RecordRegisterAction extends FrontBaseAction {
     private AssetBhv assetBhv;
 
     @Execute
-    public HtmlResponse index(OptionalThing<String> categoryType) {
+    public HtmlResponse index(categoryType) {
         return renderIndex();
     }
 
