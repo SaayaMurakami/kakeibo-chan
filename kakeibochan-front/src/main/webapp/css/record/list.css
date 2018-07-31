@@ -31,8 +31,8 @@ table {
     background-color: #FFFDFD;
     text-align: center;
 	width: 70%;
-    min-height: 283px;
-    padding: 10px;
+    min-width: 926px;
+    padding: 30px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -52,4 +52,22 @@ td{
 .pencil{
 	height: 30px;
     vertical-align: middle;
+}
+.paging-area {
+    margin-top: 19px;
+    margin-bottom: 0px;
+}
+.paging-area a {
+	color: #C08F63;
+    text-decoration-line: none;
+}
+.paging-area a:hover {
+    color: #F4C091;
+	border: 1px #c0bfbf solid;
+}
+.page-number-element {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+	color: #565c6f;
 }
