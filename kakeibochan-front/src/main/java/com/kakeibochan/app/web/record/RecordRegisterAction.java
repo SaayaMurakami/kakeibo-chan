@@ -16,6 +16,7 @@ import com.kakeibochan.dbflute.exbhv.RecordBhv;
 import com.kakeibochan.dbflute.exentity.AccountItem;
 import com.kakeibochan.dbflute.exentity.Asset;
 import com.kakeibochan.dbflute.exentity.Record;
+import com.kakeibochan.mylasta.action.FrontMessages;
 import com.kakeibochan.mylasta.action.FrontUserBean;
 
 public class RecordRegisterAction extends FrontBaseAction {
@@ -43,8 +44,8 @@ public class RecordRegisterAction extends FrontBaseAction {
 
     @Execute
     public HtmlResponse confirm(RecordForm form) {
-        validate(form, message -> {}, () -> {
-            return renderIndex(CategoryType.Spend);
+        validate(form, messages -> moreValidate(form, messages), () -> {
+            return renderIndex(form.categoryType);
         });
 
         saveToken();
@@ -57,17 +58,38 @@ public class RecordRegisterAction extends FrontBaseAction {
         accountItemBean.title = accountItem.getAccountTitle();
         accountItemBean.id = accountItem.getAccountItemId();
 
-        Asset asset = assetBhv.selectEntityWithDeletedCheck(cb -> {
-            cb.query().setAssetId_Equal(form.assetId);
-        });
+        AssetBean withdrawalAccountBean = new AssetBean();
+        AssetBean depositAccountBean = new AssetBean();
 
-        AssetBean assetBean = new AssetBean();
-        assetBean.name = asset.getAssetName();
-        assetBean.id = asset.getAssetId();
+        if (form.categoryType == CategoryType.Spend) {
+            Asset withdrawalAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setAssetId_Equal(form.withdrawalAccountId);
+            });
+            withdrawalAccountBean.name = withdrawalAccount.getAssetName();
+            withdrawalAccountBean.id = withdrawalAccount.getAssetId();
+        } else if (form.categoryType == CategoryType.Income) {
+            Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setAssetId_Equal(form.depositAccountId);
+            });
+            depositAccountBean.name = depositAccount.getAssetName();
+            depositAccountBean.id = depositAccount.getAssetId();
+        } else if (form.categoryType == CategoryType.Move) {
+            Asset withdrawalAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setAssetId_Equal(form.withdrawalAccountId);
+            });
+            Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setAssetId_Equal(form.depositAccountId);
+            });
+            withdrawalAccountBean.name = withdrawalAccount.getAssetName();
+            withdrawalAccountBean.id = withdrawalAccount.getAssetId();
+            depositAccountBean.name = depositAccount.getAssetName();
+            depositAccountBean.id = depositAccount.getAssetId();
+        }
 
         return asHtml(path_Record_ConfirmHtml).renderWith(data -> {
             data.register("accountItemBean", accountItemBean);
-            data.register("assetBean", assetBean);
+            data.register("withdrawalAccountBean", withdrawalAccountBean);
+            data.register("depositAccountBean", depositAccountBean);
         });
     }
 
@@ -86,10 +108,17 @@ public class RecordRegisterAction extends FrontBaseAction {
 
         Record record = new Record();
         record.setMemberId(userId);
-        record.setAccountItemId(form.accountItemId);
-        record.setDepositAccountId(form.assetId);
         record.setDate(form.date);
+        record.setAccountItemId(form.accountItemId);
         record.setAmount(form.amount);
+        if (form.categoryType == CategoryType.Spend) {
+            record.setDepositAccountId(form.depositAccountId);
+        } else if (form.categoryType == CategoryType.Income) {
+            record.setWithdrawalAccountId(form.withdrawalAccountId);
+        } else if (form.categoryType == CategoryType.Income) {
+            record.setDepositAccountId(form.depositAccountId);
+            record.setWithdrawalAccountId(form.withdrawalAccountId);
+        }
         record.setMemo(form.memo);
         record.setDelFlg_False();
         recordBhv.insert(record);
@@ -144,6 +173,24 @@ public class RecordRegisterAction extends FrontBaseAction {
             data.register("accountItemBeans", accountItemBeans);
             data.register("assetBeans", assetBeans);
         });
+    }
+
+    private void moreValidate(RecordForm form, FrontMessages messages) {
+        if (form.categoryType == CategoryType.Spend) {
+            if (form.depositAccountId == null) {
+                messages.addConstraintsRequiredMessage("depositAccountId");
+            }
+        } else if (form.categoryType == CategoryType.Income) {
+            if (form.withdrawalAccountId == null) {
+                messages.addConstraintsRequiredMessage("withdrawalAccountId");
+            }
+        } else if (form.categoryType == CategoryType.Move) {
+            if (form.depositAccountId == null) {
+                messages.addConstraintsRequiredMessage("depositAccountId");
+            } else if (form.withdrawalAccountId == null) {
+                messages.addConstraintsRequiredMessage("withdrawalAccountId");
+            }
+        }
     }
 
 }

@@ -7,6 +7,8 @@ import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.Length;
 import org.lastaflute.web.validation.Required;
 
+import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
+
 public class RecordForm {
 
     //TODO あとでやる    
@@ -23,9 +25,13 @@ public class RecordForm {
     @Min(0)
     public Integer amount;
 
-    @Required
-    public Long assetId;
+    public Long depositAccountId;
+
+    public Long withdrawalAccountId;
 
     @Length(max = 200)
     public String memo;
+
+    @Required
+    public CategoryType categoryType;
 }
