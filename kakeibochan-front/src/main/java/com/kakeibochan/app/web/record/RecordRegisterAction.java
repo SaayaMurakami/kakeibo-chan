@@ -58,33 +58,8 @@ public class RecordRegisterAction extends FrontBaseAction {
         accountItemBean.title = accountItem.getAccountTitle();
         accountItemBean.id = accountItem.getAccountItemId();
 
-        AssetBean withdrawalAccountBean = new AssetBean();
-        AssetBean depositAccountBean = new AssetBean();
-
-        if (form.categoryType == CategoryType.Spend) {
-            Asset withdrawalAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
-                cb.query().setAssetId_Equal(form.withdrawalAccountId);
-            });
-            withdrawalAccountBean.name = withdrawalAccount.getAssetName();
-            withdrawalAccountBean.id = withdrawalAccount.getAssetId();
-        } else if (form.categoryType == CategoryType.Income) {
-            Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
-                cb.query().setAssetId_Equal(form.depositAccountId);
-            });
-            depositAccountBean.name = depositAccount.getAssetName();
-            depositAccountBean.id = depositAccount.getAssetId();
-        } else if (form.categoryType == CategoryType.Move) {
-            Asset withdrawalAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
-                cb.query().setAssetId_Equal(form.withdrawalAccountId);
-            });
-            Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
-                cb.query().setAssetId_Equal(form.depositAccountId);
-            });
-            withdrawalAccountBean.name = withdrawalAccount.getAssetName();
-            withdrawalAccountBean.id = withdrawalAccount.getAssetId();
-            depositAccountBean.name = depositAccount.getAssetName();
-            depositAccountBean.id = depositAccount.getAssetId();
-        }
+        AssetBean withdrawalAccountBean = prepareWithdrawalAccountBean(form.categoryType, form.withdrawalAccountId);
+        AssetBean depositAccountBean = prepareDepositAccountBean(form.categoryType, form.depositAccountId);
 
         return asHtml(path_Record_ConfirmHtml).renderWith(data -> {
             data.register("accountItemBean", accountItemBean);
@@ -173,6 +148,58 @@ public class RecordRegisterAction extends FrontBaseAction {
             data.register("accountItemBeans", accountItemBeans);
             data.register("assetBeans", assetBeans);
         });
+    }
+
+    /**
+     * 出金元の口座情報のHTML表示用Beanを取得する
+     * @param categoryType カテゴリー種別
+     * @param assetId 資産ID
+     * @return HTML表示用Bean. 出金・支出の場合にはNotNull. 収入の場合にはNullが返却される。
+     */
+    private AssetBean prepareWithdrawalAccountBean(CategoryType categoryType, long assetId) {
+        switch (categoryType) {
+        case Move:
+        case Spend:
+            return prepareAsssetBean(assetId);
+        case Income:
+            return null;
+        default:
+            throw new IllegalArgumentException("想定外のカテゴリー種別が指定されました。categoryType=" + categoryType.code());
+        }
+    }
+
+    /**
+     * 出金元の口座情報のHTML表示用Beanを取得する
+     * @param categoryType カテゴリー種別
+     * @param assetId 資産ID
+     * @return HTML表示用Bean. 出金・支出の場合にはNotNull. 収入の場合にはNullが返却される。
+     */
+    private AssetBean prepareDepositAccountBean(CategoryType categoryType, long assetId) {
+        switch (categoryType) {
+        case Move:
+        case Income:
+            return prepareAsssetBean(assetId);
+        case Spend:
+            return null;
+        default:
+            throw new IllegalArgumentException("想定外のカテゴリー種別が指定されました。categoryType=" + categoryType.code());
+        }
+    }
+
+    /**
+     * 出金元の口座情報のHTML表示用Beanを取得する
+     * @param assetId 資産ID
+     * @return HTML表示用Bean（NotNull）
+     */
+    private AssetBean prepareAsssetBean(long accountId) {
+        Asset asset = assetBhv.selectEntityWithDeletedCheck(cb -> {
+            cb.query().setAssetId_Equal(accountId);
+        });
+
+        AssetBean bean = new AssetBean();
+        bean.name = asset.getAssetName();
+        bean.id = asset.getAssetId();
+        return bean;
     }
 
     private void moreValidate(RecordForm form, FrontMessages messages) {
