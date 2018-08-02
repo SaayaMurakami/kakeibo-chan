@@ -136,6 +136,13 @@ public class RegisterAction extends FrontBaseAction {
         extraordinaryIncome.setDelFlg_False();
         accountItemBhv.insert(extraordinaryIncome);
 
+        AccountItem move = new AccountItem();
+        move.setMemberId(member.getMemberId());
+        move.setCategoryType_Move();
+        move.setAccountTitle("振替");
+        move.setDelFlg_False();
+        accountItemBhv.insert(move);
+
         Asset bankAccount = new Asset();
         bankAccount.setMemberId(member.getMemberId());
         bankAccount.setAssetName("銀行口座");

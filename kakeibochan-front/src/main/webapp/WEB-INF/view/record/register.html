@@ -15,17 +15,17 @@
         	<h1>家計簿をつける</h1>
         	
         	<div class="block">
-        		<a href="#expend" class="expend">
+        		<a href="/front/record/register/?categoryType=spend" class="expend">
 	        		<div class="block_element">
 	        		支出
 	        		</div>
 	        	</a>
-        		<a href="#income">
+        		<a href="/front/record/register/?categoryType=income">
 	        		<div class="block_element">
 	        		収入
 	        		</div>
 	        	</a>
-        		<a href="#move">
+        		<a href="/front/record/register/?categoryType=move">
 	        		<div class="block_element">
 	        		振替
 	        		</div>
@@ -59,7 +59,7 @@
 	        	</div>
         	</div>
         	
-        	<div class="form-element">
+        	<div th:if="${categoryType.code().equals('SPEND') || categoryType.code().equals('MOVE')}" class="form-element">
         	<span class="element-label">支払い元</span>
         		<div class="element-value">
 	        		<select name="assetId">
@@ -70,16 +70,19 @@
         		</div>
         	</div>
         	
-        	<div th:if="${togashi != null}" class="form-element">
+        	<div th:if="${categoryType.code().equals('INCOME') || categoryType.code().equals('MOVE')}" class="form-element">
         	<span class="element-label">入金先</span>
         		<div class="element-value">
 	        		<select name="assetId">
-	        			<option value="">0</option>
+	        			<option value="">選択してください</option>
 	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == assetId}"></option>
 	        		</select>
 	        		<span la:errors="assetId"/>
         		</div>
         	</div>
+        	
+        	
+        	
         	
         	<div class="form-element">
         	<span class="element-label">メモ</span>

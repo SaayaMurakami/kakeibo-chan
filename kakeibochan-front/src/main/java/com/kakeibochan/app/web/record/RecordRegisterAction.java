@@ -114,8 +114,7 @@ public class RecordRegisterAction extends FrontBaseAction {
             } else if (CategoryType.Income == categoryType) {
                 cb.query().setCategoryType_Equal_Income();
             } else if (CategoryType.Move == categoryType) {
-                cb.query().setCategoryType_Equal_Spend();
-                cb.query().setCategoryType_Equal_Income();
+                cb.query().setCategoryType_Equal_Move();
             }
         });
 
