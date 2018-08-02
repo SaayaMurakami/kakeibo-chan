@@ -70,17 +70,6 @@
         		</div>
         	</div>
         	
-        	<div th:if="${togashi != null}" class="form-element">
-        	<span class="element-label">入金先</span>
-        		<div class="element-value">
-	        		<select name="assetId">
-	        			<option value="">0</option>
-	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == assetId}"></option>
-	        		</select>
-	        		<span la:errors="assetId"/>
-        		</div>
-        	</div>
-        	
         	<div class="form-element">
         	<span class="element-label">メモ</span>
         		<div class="element-value">
@@ -88,8 +77,6 @@
 	        		<span la:errors="memo"/>
         		</div>
         	</div>
-
-			<input type="hidden" name="categoryType" th:value="${categoryType}"></input>
         	
 			<button type="submit" name="button">登録</button>
         	

@@ -9,7 +9,6 @@ import org.lastaflute.web.Execute;
 import org.lastaflute.web.response.HtmlResponse;
 
 import com.kakeibochan.app.web.base.FrontBaseAction;
-import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
 import com.kakeibochan.dbflute.exbhv.AccountItemBhv;
 import com.kakeibochan.dbflute.exbhv.AssetBhv;
 import com.kakeibochan.dbflute.exbhv.RecordBhv;
@@ -28,23 +27,23 @@ public class RecordRegisterAction extends FrontBaseAction {
     private AssetBhv assetBhv;
 
     @Execute
-    public HtmlResponse index(RecordIndexForm form) {
-        return renderIndex(form.categoryType);
+    public HtmlResponse index() {
+        return renderIndex();
     }
 
     @Execute
     public HtmlResponse goBackIndex(RecordForm form) {
         validate(form, message -> {}, () -> {
-            return renderIndex(CategoryType.Spend);
+            return renderIndex();
         });
 
-        return renderIndex(CategoryType.Spend);
+        return renderIndex();
     }
 
     @Execute
     public HtmlResponse confirm(RecordForm form) {
         validate(form, message -> {}, () -> {
-            return renderIndex(CategoryType.Spend);
+            return renderIndex();
         });
 
         saveToken();
@@ -74,11 +73,11 @@ public class RecordRegisterAction extends FrontBaseAction {
     @Execute
     public HtmlResponse doComplete(RecordForm form) {
         validate(form, message -> {}, () -> {
-            return renderIndex(CategoryType.Spend);
+            return renderIndex();
         });
 
         verifyToken(() -> {
-            return renderIndex(CategoryType.Spend);
+            return renderIndex();
         });
 
         FrontUserBean userBean = getUserBean().get();
@@ -102,21 +101,13 @@ public class RecordRegisterAction extends FrontBaseAction {
         return asHtml(path_Record_CompleteHtml);
     }
 
-    private HtmlResponse renderIndex(CategoryType categoryType) {
+    private HtmlResponse renderIndex() {
         FrontUserBean userBean = getUserBean().get();
         Long userId = userBean.getUserId();
 
         ListResultBean<AccountItem> accountItemList = accountItemBhv.selectList(cb -> {
             cb.query().setMemberId_Equal(userId);
-
-            if (CategoryType.Spend == categoryType) {
-                cb.query().setCategoryType_Equal_Spend();
-            } else if (CategoryType.Income == categoryType) {
-                cb.query().setCategoryType_Equal_Income();
-            } else if (CategoryType.Move == categoryType) {
-                cb.query().setCategoryType_Equal_Spend();
-                cb.query().setCategoryType_Equal_Income();
-            }
+            cb.query().setCategoryType_Equal_Spend();
         });
 
         ArrayList<AccountItemBean> accountItemBeans = new ArrayList<>();
