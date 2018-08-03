@@ -11,9 +11,8 @@ import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
 
 public class RecordForm {
 
-    //TODO あとでやる    
-    //    @Required
-    //    public CategoryType categoryType;
+    @Required
+    public CategoryType categoryType;
 
     @Required
     public LocalDate date;
@@ -31,7 +30,4 @@ public class RecordForm {
 
     @Length(max = 200)
     public String memo;
-
-    @Required
-    public CategoryType categoryType;
 }

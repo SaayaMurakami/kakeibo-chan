@@ -16,7 +16,7 @@
 				<span class="element-label">日付</span>
 				<span class="element-value" th:text="${date}"></span>
 			</div>
-			<div class="confirm-element">
+			<div th:unless="${categoryType.code().equals('MOVE')}" class="confirm-element">
 				<span class="element-label">カテゴリ</span>
 				<span class="element-value" th:text="${accountItemBean.title}"></span>
 			</div>			
@@ -24,29 +24,39 @@
 				<span class="element-label">金額</span>
 				<span class="element-value" th:text="${amount}"></span>
 			</div>
-			<div class="confirm-element">
-				<span class="element-label">支払い元</span>
-				<span class="element-value" th:text="${assetBean.name}"></span>
+			<div th:if="${categoryType.code().equals('SPEND') || categoryType.code().equals('MOVE')}" class="confirm-element">
+				<span class="element-label">支払元</span>
+				<span class="element-value" th:text="${withdrawalAccountBean.name}"></span>
 			</div>
+			<div th:if="${categoryType.code().equals('INCOME') || categoryType.code().equals('MOVE')}" class="confirm-element">
+				<span class="element-label">支払先</span>
+				<span class="element-value" th:text="${depositAccountBean.name}"></span>
+			</div>
+			
 			<div class="confirm-element">
 				<span class="element-label">メモ</span>
 				<span class="element-value" th:text="${memo}"></span>
 			</div>
+			
 		<form class="confirm-form" th:action="@{/record/register/goBackIndex}" action="#" method="post">		
 			<input type="hidden" name="date" th:value="${date}"/>
-			<input type="hidden" name="accountItemId" th:value="${accountItemId}"/>
+			<input th:unless="${categoryType.code().equals('MOVE')}" type="hidden" name="accountItemId" th:value="${accountItemId}"/>
 			<input type="hidden" name="amount" th:value="${amount}"/>
-			<input type="hidden" name="assetId" th:value="${assetId}"/>
+			<input th:if="${categoryType.code().equals('SPEND') || categoryType.code().equals('MOVE')}" type="hidden" name="withdrawalAccountId" th:value="${withdrawalAccountId}"/>
+			<input th:if="${categoryType.code().equals('INCOME') || categoryType.code().equals('MOVE')}" type="hidden" name="depositAccountId" th:value="${depositAccountId}"/>
 			<input type="hidden" name="memo" th:value="${memo}"/>
+			<input type="hidden" name="categoryType" th:value="${categoryType}"></input>
 			<button type="submit" name="button">戻る</button>
 		</form>
 		<form class="confirm-form" th:action="@{/record/register/doComplete}" action="#" method="post">
 			<input type="hidden" la:token="true"/>		
 			<input type="hidden" name="date" th:value="${date}"/>
-			<input type="hidden" name="accountItemId" th:value="${accountItemId}"/>
+			<input th:unless="${categoryType.code().equals('MOVE')}" type="hidden" name="accountItemId" th:value="${accountItemId}"/>
 			<input type="hidden" name="amount" th:value="${amount}"/>
-			<input type="hidden" name="assetId" th:value="${assetId}"/>
+			<input th:if="${categoryType.code().equals('SPEND') || categoryType.code().equals('MOVE')}" type="hidden" name="withdrawalAccountId" th:value="${withdrawalAccountId}"/>
+			<input th:if="${categoryType.code().equals('INCOME') || categoryType.code().equals('MOVE')}" type="hidden" name="depositAccountId" th:value="${depositAccountId}"/>
 			<input type="hidden" name="memo" th:value="${memo}"/>
+			<input type="hidden" name="categoryType" th:value="${categoryType}"></input>
 			<button type="submit" name="button">登録</button>
 		</form>
 		</div>

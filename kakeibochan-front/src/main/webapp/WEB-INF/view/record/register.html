@@ -51,6 +51,8 @@
 	        	</div>
         	</div>
         	
+			<input type="hidden" th:if="${categoryType.code().equals('MOVE')}" name="accountItemId" th:value="${moveBean.id}"></input>
+        	
         	<div class="form-element">
 	        	<span class="element-label">金額</span>
 	        	<div class="element-value">
@@ -60,11 +62,11 @@
         	</div>
         	
         	<div th:if="${categoryType.code().equals('SPEND') || categoryType.code().equals('MOVE')}" class="form-element">
-        	<span class="element-label">支払い元</span>
+        	<span class="element-label">支払元</span>
         		<div class="element-value">
 	        		<select name="withdrawalAccountId">
 	        			<option value="">選択してください</option>
-	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == assetId}"></option>
+	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == withdrawalAccountId}"></option>
 	        		</select>
 	        		<span la:errors="withdrawalAccountId"/>
         		</div>
@@ -75,7 +77,7 @@
         		<div class="element-value">
 	        		<select name="depositAccountId">
 	        			<option value="">選択してください</option>
-	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == assetId}"></option>
+	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == depositAccountId}"></option>
 	        		</select>
 	        		<span la:errors="depositAccountId"/>
         		</div>

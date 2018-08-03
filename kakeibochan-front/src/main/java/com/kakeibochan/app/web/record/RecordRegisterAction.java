@@ -36,10 +36,10 @@ public class RecordRegisterAction extends FrontBaseAction {
     @Execute
     public HtmlResponse goBackIndex(RecordForm form) {
         validate(form, message -> {}, () -> {
-            return renderIndex(CategoryType.Spend);
+            return renderIndex(form.categoryType);
         });
 
-        return renderIndex(CategoryType.Spend);
+        return renderIndex(form.categoryType);
     }
 
     @Execute
@@ -88,8 +88,12 @@ public class RecordRegisterAction extends FrontBaseAction {
 
         return asHtml(path_Record_ConfirmHtml).renderWith(data -> {
             data.register("accountItemBean", accountItemBean);
-            data.register("withdrawalAccountBean", withdrawalAccountBean);
-            data.register("depositAccountBean", depositAccountBean);
+            if (form.categoryType == CategoryType.Spend || form.categoryType == CategoryType.Move) {
+                data.register("withdrawalAccountBean", withdrawalAccountBean);
+            }
+            if (form.categoryType == CategoryType.Income || form.categoryType == CategoryType.Move) {
+                data.register("depositAccountBean", depositAccountBean);
+            }
         });
     }
 
@@ -169,25 +173,37 @@ public class RecordRegisterAction extends FrontBaseAction {
             assetBeans.add(assetBean);
         }
 
+        AccountItem move = accountItemBhv.selectEntityWithDeletedCheck(cb -> {
+            cb.query().setMemberId_Equal(userId);
+            cb.query().setAccountTitle_Equal("振替");
+        });
+
+        AccountItemBean moveBean = new AccountItemBean();
+        moveBean.id = move.getAccountItemId();
+        moveBean.title = move.getAccountTitle();
+
         return asHtml(path_Record_RegisterHtml).renderWith(data -> {
             data.register("accountItemBeans", accountItemBeans);
             data.register("assetBeans", assetBeans);
+            data.register("moveBean", moveBean);
         });
+
     }
 
     private void moreValidate(RecordForm form, FrontMessages messages) {
         if (form.categoryType == CategoryType.Spend) {
-            if (form.depositAccountId == null) {
-                messages.addConstraintsRequiredMessage("depositAccountId");
-            }
-        } else if (form.categoryType == CategoryType.Income) {
             if (form.withdrawalAccountId == null) {
                 messages.addConstraintsRequiredMessage("withdrawalAccountId");
+            }
+        } else if (form.categoryType == CategoryType.Income) {
+            if (form.depositAccountId == null) {
+                messages.addConstraintsRequiredMessage("depositAccountId");
             }
         } else if (form.categoryType == CategoryType.Move) {
             if (form.depositAccountId == null) {
                 messages.addConstraintsRequiredMessage("depositAccountId");
-            } else if (form.withdrawalAccountId == null) {
+            }
+            if (form.withdrawalAccountId == null) {
                 messages.addConstraintsRequiredMessage("withdrawalAccountId");
             }
         }
