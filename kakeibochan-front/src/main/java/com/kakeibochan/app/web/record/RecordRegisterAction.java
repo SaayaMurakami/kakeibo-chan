@@ -74,12 +74,12 @@ public class RecordRegisterAction extends FrontBaseAction {
 
     @Execute
     public HtmlResponse doComplete(RecordForm form) {
-        validate(form, message -> {}, () -> {
-            return renderIndex(CategoryType.Spend);
+        validate(form, messages -> moreValidate(form, messages), () -> {
+            return renderIndex(form.categoryType);
         });
 
         verifyToken(() -> {
-            return renderIndex(CategoryType.Spend);
+            return renderIndex(form.categoryType);
         });
 
         FrontUserBean userBean = getUserBean().get();
@@ -171,13 +171,17 @@ public class RecordRegisterAction extends FrontBaseAction {
      * @param assetId 資産ID
      * @return HTML表示用Bean. 出金・支出の場合にはNotNull. 収入の場合にはNullが返却される。
      */
-    private AssetBean prepareWithdrawalAccountBean(CategoryType categoryType, long assetId) {
+    private AssetBean prepareWithdrawalAccountBean(CategoryType categoryType, Long assetId) {
+        if (assetId == null) {
+            return new AssetBean();
+        }
+
         switch (categoryType) {
         case Move:
         case Spend:
             return prepareAsssetBean(assetId);
         case Income:
-            return null;
+            return new AssetBean();
         default:
             throw new IllegalArgumentException("想定外のカテゴリー種別が指定されました。categoryType=" + categoryType.code());
         }
@@ -189,13 +193,16 @@ public class RecordRegisterAction extends FrontBaseAction {
      * @param assetId 資産ID
      * @return HTML表示用Bean. 出金・支出の場合にはNotNull. 収入の場合にはNullが返却される。
      */
-    private AssetBean prepareDepositAccountBean(CategoryType categoryType, long assetId) {
+    private AssetBean prepareDepositAccountBean(CategoryType categoryType, Long assetId) {
+        if (assetId == null) {
+            return new AssetBean();
+        }
         switch (categoryType) {
         case Move:
         case Income:
             return prepareAsssetBean(assetId);
         case Spend:
-            return null;
+            return new AssetBean();
         default:
             throw new IllegalArgumentException("想定外のカテゴリー種別が指定されました。categoryType=" + categoryType.code());
         }

@@ -40,7 +40,7 @@
 			
 		<form class="confirm-form" th:action="@{/record/register/goBackIndex}" action="#" method="post">		
 			<input type="hidden" name="date" th:value="${date}"/>
-			<input th:unless="${categoryType.code().equals('MOVE')}" type="hidden" name="accountItemId" th:value="${accountItemId}"/>
+			<input type="hidden" name="accountItemId" th:value="${accountItemId}"/>
 			<input type="hidden" name="amount" th:value="${amount}"/>
 			<input th:if="${categoryType.code().equals('SPEND') || categoryType.code().equals('MOVE')}" type="hidden" name="withdrawalAccountId" th:value="${withdrawalAccountId}"/>
 			<input th:if="${categoryType.code().equals('INCOME') || categoryType.code().equals('MOVE')}" type="hidden" name="depositAccountId" th:value="${depositAccountId}"/>
@@ -51,7 +51,7 @@
 		<form class="confirm-form" th:action="@{/record/register/doComplete}" action="#" method="post">
 			<input type="hidden" la:token="true"/>		
 			<input type="hidden" name="date" th:value="${date}"/>
-			<input th:unless="${categoryType.code().equals('MOVE')}" type="hidden" name="accountItemId" th:value="${accountItemId}"/>
+			<input type="hidden" name="accountItemId" th:value="${accountItemId}"/>
 			<input type="hidden" name="amount" th:value="${amount}"/>
 			<input th:if="${categoryType.code().equals('SPEND') || categoryType.code().equals('MOVE')}" type="hidden" name="withdrawalAccountId" th:value="${withdrawalAccountId}"/>
 			<input th:if="${categoryType.code().equals('INCOME') || categoryType.code().equals('MOVE')}" type="hidden" name="depositAccountId" th:value="${depositAccountId}"/>
