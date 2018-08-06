@@ -91,10 +91,10 @@ public class RecordRegisterAction extends FrontBaseAction {
         record.setAccountItemId(form.accountItemId);
         record.setAmount(form.amount);
         if (form.categoryType == CategoryType.Spend) {
-            record.setDepositAccountId(form.depositAccountId);
-        } else if (form.categoryType == CategoryType.Income) {
             record.setWithdrawalAccountId(form.withdrawalAccountId);
         } else if (form.categoryType == CategoryType.Income) {
+            record.setDepositAccountId(form.depositAccountId);
+        } else if (form.categoryType == CategoryType.Move) {
             record.setDepositAccountId(form.depositAccountId);
             record.setWithdrawalAccountId(form.withdrawalAccountId);
         }
