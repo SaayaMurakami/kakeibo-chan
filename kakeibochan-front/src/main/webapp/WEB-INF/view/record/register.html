@@ -15,17 +15,17 @@
         	<h1>家計簿をつける</h1>
         	
         	<div class="block">
-        		<a href="/front/record/register/?categoryType=spend" class="expend">
+        		<a th:classappend="${categoryType.code().equals('SPEND')}? 'selected'" href="/front/record/register/?categoryType=spend">
 	        		<div class="block_element">
 	        		支出
 	        		</div>
 	        	</a>
-        		<a href="/front/record/register/?categoryType=income">
+        		<a th:classappend="${categoryType.code().equals('INCOME')}? 'selected'" href="/front/record/register/?categoryType=income">
 	        		<div class="block_element">
 	        		収入
 	        		</div>
 	        	</a>
-        		<a href="/front/record/register/?categoryType=move">
+        		<a th:classappend="${categoryType.code().equals('MOVE')}? 'selected'" href="/front/record/register/?categoryType=move">
 	        		<div class="block_element">
 	        		振替
 	        		</div>
