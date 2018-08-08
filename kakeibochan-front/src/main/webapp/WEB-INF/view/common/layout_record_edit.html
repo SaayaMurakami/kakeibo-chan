@@ -10,14 +10,14 @@
         	<div class="form-element">
 	        	<span class="element-label">日付</span>
 	        	<div class="element-value">
-	        		<input type="date" name="date" th:value="${date}"></input>
+	        		<input type="date" name="date" id="record-edit-date"></input>
 		        	<span la:errors="date"/>
 	        	</div>
         	</div>
         	
         	<span class="element-label">カテゴリ</span>
         	<div class="element-value">
-	        	<select name="accountItemId" th:value="${accountItemId}">
+	        	<select name="accountItemId" id="record-edit-account-item">
         			<option value="">選択してください</option>
 	        	</select>
 	        	<span la:errors="accountItemId"/>
@@ -27,7 +27,7 @@
         	<div class="form-element">
 	        	<span class="element-label">金額</span>
 	        	<div class="element-value">
-	        		<input type="number" name="amount" th:value="${amount}">円</input>
+	        		<input type="number" name="amount" id="record-edit-amount">円</input>
 		        	<span la:errors="amount"/>
 	        	</div>
         	</div>
@@ -35,7 +35,7 @@
            	<div class="form-element">
 	        	<span class="element-label">支払元</span>
         		<div class="element-value">
-	        		<select name="withdrawalAccountId">
+	        		<select name="withdrawalAccountId" id="record-edit-withdrawal-account">
 	        			<option value="">選択してください</option>
 	        		</select>
 	        		<span la:errors="withdrawalAccountId"/>
@@ -45,7 +45,7 @@
          	<div class="form-element">
 	        	<span class="element-label">入金先</span>
         		<div class="element-value">
-	        		<select name="depositAccountId">
+	        		<select name="depositAccountId" id="record-edit-deposit-account">
 	        			<option value="">選択してください</option>
 	        		</select>
 	        		<span la:errors="depositAccountId"/>
@@ -55,7 +55,7 @@
         	<div class="form-element">
         	<span class="element-label">メモ</span>
         		<div class="element-value">
-        			<input type="text" name="memo" th:value="${memo}"></input>
+        			<input type="text" name="memo" id="record-edit-memo"></input>
 	        		<span la:errors="memo"/>
         		</div>
         	</div>

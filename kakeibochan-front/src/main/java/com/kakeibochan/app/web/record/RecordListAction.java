@@ -50,6 +50,7 @@ public class RecordListAction extends FrontBaseAction {
 
         for (Record record : records) {
             RecordBean recordBean = new RecordBean();
+            recordBean.id = record.getRecordId();
             recordBean.date = record.getDate();
             recordBean.categoryType = record.getAccountItem().get().getCategoryTypeAlias();
             recordBean.accountTitle = record.getAccountItem().get().getAccountTitle();

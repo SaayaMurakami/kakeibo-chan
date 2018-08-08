@@ -1,10 +1,11 @@
 package com.kakeibochan.app.web.record;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.lastaflute.web.validation.Required;
 
-public class RecordBean {
+public class RecordDetailBean {
 
     @Required
     public Long id;
@@ -13,18 +14,19 @@ public class RecordBean {
     public LocalDate date;
 
     @Required
-    public String categoryType;
+    public Long accountItemId;
 
-    @Required
-    public String accountTitle;
+    public Long depositAccountId;
 
-    public String depositAccount;
-
-    public String withdrawalAccount;
+    public Long withdrawalAccountId;
 
     @Required
     public Integer amount;
 
     public String memo;
+
+    public ArrayList<AccountItemBean> accountItemBeans;
+
+    public ArrayList<AssetBean> assetBeans;
 
 }
