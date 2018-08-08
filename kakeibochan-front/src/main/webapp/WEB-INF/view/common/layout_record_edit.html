@@ -1,0 +1,67 @@
+<html>
+<head>
+	<meta charset="UTF-8"></meta>
+</head>
+<body>
+	<div th:fragment="record-edit">
+        <form th:action="@{/record/register/confirm}" action="#" method="post">
+        	<h1>家計簿をつける</h1>
+        	        	
+        	<div class="form-element">
+	        	<span class="element-label">日付</span>
+	        	<div class="element-value">
+	        		<input type="date" name="date" th:value="${date}"></input>
+		        	<span la:errors="date"/>
+	        	</div>
+        	</div>
+        	
+        	<span class="element-label">カテゴリ</span>
+        	<div class="element-value">
+	        	<select name="accountItemId" th:value="${accountItemId}">
+        			<option value="">選択してください</option>
+	        	</select>
+	        	<span la:errors="accountItemId"/>
+        	</div>
+        	
+        	
+        	<div class="form-element">
+	        	<span class="element-label">金額</span>
+	        	<div class="element-value">
+	        		<input type="number" name="amount" th:value="${amount}">円</input>
+		        	<span la:errors="amount"/>
+	        	</div>
+        	</div>
+   
+           	<div class="form-element">
+	        	<span class="element-label">支払元</span>
+        		<div class="element-value">
+	        		<select name="withdrawalAccountId">
+	        			<option value="">選択してください</option>
+	        		</select>
+	        		<span la:errors="withdrawalAccountId"/>
+        		</div>
+        	</div>
+  
+         	<div class="form-element">
+	        	<span class="element-label">入金先</span>
+        		<div class="element-value">
+	        		<select name="depositAccountId">
+	        			<option value="">選択してください</option>
+	        		</select>
+	        		<span la:errors="depositAccountId"/>
+        		</div>
+        	</div>
+        	
+        	<div class="form-element">
+        	<span class="element-label">メモ</span>
+        		<div class="element-value">
+        			<input type="text" name="memo" th:value="${memo}"></input>
+	        		<span la:errors="memo"/>
+        		</div>
+        	</div>
+			<button type="submit" name="button">登録</button>
+        </form>
+    </div>
+
+</body>
+</html>
