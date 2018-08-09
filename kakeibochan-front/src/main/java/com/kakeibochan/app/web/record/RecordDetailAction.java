@@ -61,8 +61,10 @@ public class RecordDetailAction extends FrontBaseAction {
 
         RecordDetailBean bean = new RecordDetailBean();
         bean.id = record.getRecordId();
+        bean.categoryType = record.getAccountItem().get().getCategoryTypeAsCategoryType();
         bean.date = record.getDate();
         bean.accountItemId = record.getAccountItemId();
+        bean.depositAccountId = record.getDepositAccountId();
         bean.withdrawalAccountId = record.getWithdrawalAccountId();
         bean.amount = record.getAmount();
         bean.memo = record.getMemo();

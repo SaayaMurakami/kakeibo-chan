@@ -5,26 +5,27 @@
 <body>
 	<div th:fragment="record-edit">
         <form th:action="@{/record/register/confirm}" action="#" method="post">
-        	<h1>家計簿をつける</h1>
+        	<h1>明細編集</h1>
         	        	
-        	<div class="form-element">
+        	<div class="form-element" id="form-date">
 	        	<span class="element-label">日付</span>
 	        	<div class="element-value">
 	        		<input type="date" name="date" id="record-edit-date"></input>
 		        	<span la:errors="date"/>
 	        	</div>
         	</div>
-        	
-        	<span class="element-label">カテゴリ</span>
-        	<div class="element-value">
-	        	<select name="accountItemId" id="record-edit-account-item">
-        			<option value="">選択してください</option>
-	        	</select>
-	        	<span la:errors="accountItemId"/>
+ 
+         	<div class="form-element" id="form-category">
+	        	<span class="element-label">カテゴリ</span>
+	        	<div class="element-value">
+		        	<select name="accountItemId" id="record-edit-account-item">
+	        			<option value="">選択してください</option>
+		        	</select>
+		        	<span la:errors="accountItemId"/>
+	        	</div>
         	</div>
         	
-        	
-        	<div class="form-element">
+        	<div class="form-element" id="form-amount">
 	        	<span class="element-label">金額</span>
 	        	<div class="element-value">
 	        		<input type="number" name="amount" id="record-edit-amount">円</input>
@@ -32,7 +33,7 @@
 	        	</div>
         	</div>
    
-           	<div class="form-element">
+           	<div class="form-element" id="form-withdrawal-account">
 	        	<span class="element-label">支払元</span>
         		<div class="element-value">
 	        		<select name="withdrawalAccountId" id="record-edit-withdrawal-account">
@@ -42,7 +43,7 @@
         		</div>
         	</div>
   
-         	<div class="form-element">
+         	<div class="form-element" id="form-deposit-account">
 	        	<span class="element-label">入金先</span>
         		<div class="element-value">
 	        		<select name="depositAccountId" id="record-edit-deposit-account">
@@ -52,14 +53,16 @@
         		</div>
         	</div>
         	
-        	<div class="form-element">
-        	<span class="element-label">メモ</span>
+        	<div class="form-element" id="form-memo">
+	        	<span class="element-label">メモ</span>
         		<div class="element-value">
         			<input type="text" name="memo" id="record-edit-memo"></input>
 	        		<span la:errors="memo"/>
         		</div>
         	</div>
+        	
 			<button type="submit" name="button">登録</button>
+			
         </form>
     </div>
 
