@@ -38,4 +38,7 @@ public class RecordDetailBean {
     @Valid
     public ArrayList<AssetBean> assetBeans;
 
+    @Required
+    public Long versionNo;
+
 }

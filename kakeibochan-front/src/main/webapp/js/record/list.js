@@ -5,6 +5,7 @@ $(function(){
 	var recordId;
 	var categoryType;
 	var defaultAccountItemId;
+	var versionNo;
 	
 	pencil.click(function(){
 		jsiModalDialog.show();
@@ -19,6 +20,7 @@ $(function(){
 		.done(function(result){
 			categoryType = result.categoryType;
 			defaultAccountItemId = result.accountItemId;
+			versionNo = result.versionNo;
 			console.log(result);
 			$('#form-category').hide();
 			$('#form-withdrawal-account').hide();
@@ -26,6 +28,7 @@ $(function(){
 			
 			if (categoryType == "INCOME" || categoryType == "SPEND") {
 				var accountItemSelect = $('#record-edit-account-item');
+				accountItemSelect.empty();
 				for (var i = 0; i < result.accountItemBeans.length; i++) {
 				accountItemSelect.append('<option value="' + result.accountItemBeans[i].id + '">' + result.accountItemBeans[i].title + '</option>');
 				}
@@ -34,6 +37,7 @@ $(function(){
 			
 			if (categoryType == "INCOME" || categoryType == "MOVE") {
 				var depositAccountSelect = $('#record-edit-deposit-account');
+				depositAccountSelect.empty();
 				for (var i = 0; i < result.assetBeans.length; i++) {
 				depositAccountSelect.append('<option value="' + result.assetBeans[i].id + '">' + result.assetBeans[i].name + '</option>');
 				}
@@ -42,6 +46,7 @@ $(function(){
 
 			if (categoryType == "SPEND" || categoryType == "MOVE") {
 				var withdrawalAccountSelect = $('#record-edit-withdrawal-account');
+				withdrawalAccountSelect.empty();
 				for (var i = 0; i < result.assetBeans.length; i++) {
 				withdrawalAccountSelect.append('<option value="' + result.assetBeans[i].id + '">' + result.assetBeans[i].name + '</option>');
 				}
@@ -75,8 +80,6 @@ $(function(){
 			accountItemId = $("#record-edit-account-item").val();
 		}
 		
-		console.log(date);	
-		
 		$.ajax({
 			url:'/front/record/update',
 			type:'POST',
@@ -88,9 +91,30 @@ $(function(){
 				'amount' : amount,
 				'withdrawalAcountId' : withdrawalAcountId,
 				'depositAccountId' : depositAccountId,
-				'memo' : memo
+				'memo' : memo,
+				'versionNo' : versionNo
 				},
-		})
+		}).done(function(result){
+			jsiModalDialog.hide();
+			
+			$("#record-list-date").text(result.date);
+			$("#record-list-categoryType").text(result.categoryTypeAlias);
+			$("#record-list-accountTitle").text(result.accountTitle);
+			$("#record-list-amount").text(result.amount);
+			$("#record-list-memo").text(result.memo);
+			$("#record-list-depositAccount").text("");
+			$("#record-list-withdrawalAccount").text("");		
+
+	        if (result.categoryType == "SPEND" || result.categoryType == "MOVE") {
+				$("#record-list-withdrawalAccount").text(result.withdrawalAccount);
+	        }
+	        if (result.categoryType == "INCOME" || result.categoryType == "MOVE") {
+				$("#record-list-depositAccount").text(result.depositAccount);
+				
+	        }
+			
+			
+		});
 	});
 	
 	

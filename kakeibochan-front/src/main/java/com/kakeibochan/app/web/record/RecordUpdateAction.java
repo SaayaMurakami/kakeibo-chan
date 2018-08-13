@@ -31,6 +31,7 @@ public class RecordUpdateAction extends FrontBaseAction {
             cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
             cb.query().setRecordId_Equal(form.id);
             cb.query().setDelFlg_Equal_False();
+            cb.query().setVersionNo_Equal(form.versionNo);
         });
 
         updateRecord.setDate(form.date);
@@ -54,33 +55,32 @@ public class RecordUpdateAction extends FrontBaseAction {
             cb.query().setDelFlg_Equal_False();
         });
 
-        Asset withdrawalAcount = assetBhv.selectEntityWithDeletedCheck(cb -> {
-            cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
-            cb.query().setAssetId_Equal(form.withdrawalAcountId);
-            cb.query().setDelFlg_Equal_False();
-        });
-
-        Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
-            cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
-            cb.query().setAssetId_Equal(form.depositAccountId);
-            cb.query().setDelFlg_Equal_False();
-        });
-
         RecordBean recordBean = new RecordBean();
+
+        if (form.categoryType == CategoryType.Spend || form.categoryType == CategoryType.Move) {
+            Asset withdrawalAcount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
+                cb.query().setAssetId_Equal(form.withdrawalAcountId);
+                cb.query().setDelFlg_Equal_False();
+            });
+            recordBean.withdrawalAccount = withdrawalAcount.getAssetName();
+        }
+        if (form.categoryType == CategoryType.Income || form.categoryType == CategoryType.Move) {
+            Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
+                cb.query().setAssetId_Equal(form.depositAccountId);
+                cb.query().setDelFlg_Equal_False();
+            });
+            recordBean.depositAccount = depositAccount.getAssetName();
+        }
+
         recordBean.id = form.id;
         recordBean.date = form.date;
         recordBean.categoryType = form.categoryType;
+        recordBean.categoryTypeAlias = form.categoryType.alias();
         recordBean.accountTitle = accountItem.getAccountTitle();
-        if (form.categoryType == CategoryType.Spend) {
-            recordBean.withdrawalAccount = withdrawalAcount.getAssetName();
-        } else if (form.categoryType == CategoryType.Income) {
-            recordBean.depositAccount = depositAccount.getAssetName();
-        } else if (form.categoryType == CategoryType.Move) {
-            recordBean.withdrawalAccount = withdrawalAcount.getAssetName();
-            recordBean.depositAccount = depositAccount.getAssetName();
-        }
-        recordBean.amount = form.amount;
         recordBean.memo = form.memo;
+        recordBean.amount = form.amount;
 
         return asJson(recordBean);
     }

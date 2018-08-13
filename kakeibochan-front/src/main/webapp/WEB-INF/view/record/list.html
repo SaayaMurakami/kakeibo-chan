@@ -35,13 +35,13 @@
 				</tr>
 				<tr th:each="recordBean:${recordBeans}">
 					<td><img class="pencil" src="../../../img/pencil.png" th:src="@{/img/pencil.png}" alt="鉛筆のイラスト" th:attr="data-record-id=${recordBean.id}"/></td>
-					<td th:text="${recordBean.date}"></td>
-					<td th:text="${recordBean.categoryType.alias()}"></td>
-					<td th:text="${recordBean.accountTitle}"></td>
-					<td th:text="${recordBean.withdrawalAccount}"></td>
-					<td th:text="${recordBean.depositAccount}"></td>
-					<td th:text="${recordBean.amount}"></td>
-					<td th:text="${recordBean.memo}"></td>
+					<td th:text="${recordBean.date}" id="record-list-date"></td>
+					<td th:text="${recordBean.categoryTypeAlias}" id="record-list-categoryType"></td>
+					<td th:text="${recordBean.accountTitle}" id="record-list-accountTitle"></td>
+					<td th:text="${recordBean.withdrawalAccount}" id="record-list-withdrawalAccount"></td>
+					<td th:text="${recordBean.depositAccount}" id="record-list-depositAccount"></td>
+					<td th:text="${recordBean.amount}" id="record-list-amount"></td>
+					<td th:text="${recordBean.memo}" id="record-list-memo"></td>
 				</tr>
 			</table>
 			<div class="paging-area">

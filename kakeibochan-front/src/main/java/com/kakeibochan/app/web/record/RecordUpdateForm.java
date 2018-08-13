@@ -29,4 +29,7 @@ public class RecordUpdateForm {
 
     public String memo;
 
+    @Required
+    public Long versionNo;
+
 }

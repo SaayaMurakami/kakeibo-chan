@@ -70,6 +70,7 @@ public class RecordDetailAction extends FrontBaseAction {
         bean.memo = record.getMemo();
         bean.accountItemBeans = accountItemBeans;
         bean.assetBeans = assetBeans;
+        bean.versionNo = record.getVersionNo();
 
         return asJson(bean);
     }

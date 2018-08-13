@@ -18,6 +18,9 @@ public class RecordBean {
     public CategoryType categoryType;
 
     @Required
+    public String categoryTypeAlias;
+
+    @Required
     public String accountTitle;
 
     public String depositAccount;
