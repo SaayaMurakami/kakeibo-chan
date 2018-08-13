@@ -6,7 +6,7 @@ import org.lastaflute.web.validation.Required;
 
 import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
 
-public class RecordBean {
+public class RecordUpdateForm {
 
     @Required
     public Long id;
@@ -18,11 +18,11 @@ public class RecordBean {
     public CategoryType categoryType;
 
     @Required
-    public String accountTitle;
+    public Long accountItemId;
 
-    public String depositAccount;
+    public Long depositAccountId;
 
-    public String withdrawalAccount;
+    public Long withdrawalAcountId;
 
     @Required
     public Integer amount;

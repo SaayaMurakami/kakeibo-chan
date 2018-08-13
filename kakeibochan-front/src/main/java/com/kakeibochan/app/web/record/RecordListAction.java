@@ -52,7 +52,7 @@ public class RecordListAction extends FrontBaseAction {
             RecordBean recordBean = new RecordBean();
             recordBean.id = record.getRecordId();
             recordBean.date = record.getDate();
-            recordBean.categoryType = record.getAccountItem().get().getCategoryTypeAlias();
+            recordBean.categoryType = record.getAccountItem().get().getCategoryTypeAsCategoryType();
             recordBean.accountTitle = record.getAccountItem().get().getAccountTitle();
             recordBean.depositAccount = record.getAssetByDepositAccountId().map(asset -> asset.getAssetName()).orElse(null);
             recordBean.withdrawalAccount = record.getAssetByWithdrawalAccountId().map(asset -> asset.getAssetName()).orElse(null);

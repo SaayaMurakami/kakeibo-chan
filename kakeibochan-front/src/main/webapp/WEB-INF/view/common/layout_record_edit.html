@@ -4,7 +4,7 @@
 </head>
 <body>
 	<div th:fragment="record-edit">
-        <form th:action="@{/record/register/confirm}" action="#" method="post">
+        <form th:action="@{/record/register/confirm}" action="#" method="post" id="edit-form">
         	<h1>明細編集</h1>
         	        	
         	<div class="form-element" id="form-date">
@@ -61,7 +61,7 @@
         		</div>
         	</div>
         	
-			<button type="submit" name="button">登録</button>
+			<button type="button" name="button" id="register-button">登録</button>
 			
         </form>
     </div>

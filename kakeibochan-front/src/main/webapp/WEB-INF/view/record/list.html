@@ -36,7 +36,7 @@
 				<tr th:each="recordBean:${recordBeans}">
 					<td><img class="pencil" src="../../../img/pencil.png" th:src="@{/img/pencil.png}" alt="鉛筆のイラスト" th:attr="data-record-id=${recordBean.id}"/></td>
 					<td th:text="${recordBean.date}"></td>
-					<td th:text="${recordBean.categoryType}"></td>
+					<td th:text="${recordBean.categoryType.alias()}"></td>
 					<td th:text="${recordBean.accountTitle}"></td>
 					<td th:text="${recordBean.withdrawalAccount}"></td>
 					<td th:text="${recordBean.depositAccount}"></td>
