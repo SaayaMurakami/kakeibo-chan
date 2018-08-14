@@ -24,63 +24,63 @@ public class RecordUpdateAction extends FrontBaseAction {
     private AssetBhv assetBhv;
 
     @Execute
-    public JsonResponse<RecordBean> index(RecordUpdateForm form) {
-        validateApi(form, messages -> {});
+    public JsonResponse<RecordBean> index(RecordUpdateBody body) {
+        validateApi(body, messages -> {});
 
         Record updateRecord = recordBhv.selectEntityWithDeletedCheck(cb -> {
             cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
-            cb.query().setRecordId_Equal(form.id);
+            cb.query().setRecordId_Equal(body.id);
             cb.query().setDelFlg_Equal_False();
-            cb.query().setVersionNo_Equal(form.versionNo);
+            cb.query().setVersionNo_Equal(body.versionNo);
         });
 
-        updateRecord.setDate(form.date);
-        updateRecord.setAccountItemId(form.accountItemId);
-        updateRecord.setAmount(form.amount);
-        updateRecord.setMemo(form.memo);
-        if (form.categoryType == CategoryType.Spend) {
-            updateRecord.setWithdrawalAccountId(form.withdrawalAcountId);
-        } else if (form.categoryType == CategoryType.Income) {
-            updateRecord.setDepositAccountId(form.depositAccountId);
-        } else if (form.categoryType == CategoryType.Move) {
-            updateRecord.setWithdrawalAccountId(form.withdrawalAcountId);
-            updateRecord.setDepositAccountId(form.depositAccountId);
+        updateRecord.setDate(body.date);
+        updateRecord.setAccountItemId(body.accountItemId);
+        updateRecord.setAmount(body.amount);
+        updateRecord.setMemo(body.memo);
+        if (body.categoryType == CategoryType.Spend) {
+            updateRecord.setWithdrawalAccountId(body.withdrawalAcountId);
+        } else if (body.categoryType == CategoryType.Income) {
+            updateRecord.setDepositAccountId(body.depositAccountId);
+        } else if (body.categoryType == CategoryType.Move) {
+            updateRecord.setWithdrawalAccountId(body.withdrawalAcountId);
+            updateRecord.setDepositAccountId(body.depositAccountId);
         }
 
         recordBhv.update(updateRecord);
 
         AccountItem accountItem = accountItemBhv.selectEntityWithDeletedCheck(cb -> {
             cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
-            cb.query().setAccountItemId_Equal(form.accountItemId);
+            cb.query().setAccountItemId_Equal(body.accountItemId);
             cb.query().setDelFlg_Equal_False();
         });
 
         RecordBean recordBean = new RecordBean();
 
-        if (form.categoryType == CategoryType.Spend || form.categoryType == CategoryType.Move) {
+        if (body.categoryType == CategoryType.Spend || body.categoryType == CategoryType.Move) {
             Asset withdrawalAcount = assetBhv.selectEntityWithDeletedCheck(cb -> {
                 cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
-                cb.query().setAssetId_Equal(form.withdrawalAcountId);
+                cb.query().setAssetId_Equal(body.withdrawalAcountId);
                 cb.query().setDelFlg_Equal_False();
             });
             recordBean.withdrawalAccount = withdrawalAcount.getAssetName();
         }
-        if (form.categoryType == CategoryType.Income || form.categoryType == CategoryType.Move) {
+        if (body.categoryType == CategoryType.Income || body.categoryType == CategoryType.Move) {
             Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
                 cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
-                cb.query().setAssetId_Equal(form.depositAccountId);
+                cb.query().setAssetId_Equal(body.depositAccountId);
                 cb.query().setDelFlg_Equal_False();
             });
             recordBean.depositAccount = depositAccount.getAssetName();
         }
 
-        recordBean.id = form.id;
-        recordBean.date = form.date;
-        recordBean.categoryType = form.categoryType;
-        recordBean.categoryTypeAlias = form.categoryType.alias();
+        recordBean.id = body.id;
+        recordBean.date = body.date;
+        recordBean.categoryType = body.categoryType;
+        recordBean.categoryTypeAlias = body.categoryType.alias();
         recordBean.accountTitle = accountItem.getAccountTitle();
-        recordBean.memo = form.memo;
-        recordBean.amount = form.amount;
+        recordBean.memo = body.memo;
+        recordBean.amount = body.amount;
 
         return asJson(recordBean);
     }

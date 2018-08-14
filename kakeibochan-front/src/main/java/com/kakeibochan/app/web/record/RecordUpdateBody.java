@@ -6,7 +6,7 @@ import org.lastaflute.web.validation.Required;
 
 import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
 
-public class RecordUpdateForm {
+public class RecordUpdateBody {
 
     @Required
     public Long id;

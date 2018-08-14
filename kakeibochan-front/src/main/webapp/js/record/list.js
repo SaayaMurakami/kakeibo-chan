@@ -82,7 +82,9 @@ $(function(){
 		$.ajax({
 			url:'/front/record/update',
 			type:'POST',
-			data: {
+			dataType: 'json',
+			contentType: 'application/json',
+			data: JSON.stringify({
 				'categoryType' : categoryType,
 				'id' : recordId,
 				'date' : date,
@@ -92,7 +94,7 @@ $(function(){
 				'depositAccountId' : depositAccountId,
 				'memo' : memo,
 				'versionNo' : versionNo
-				},
+				}),
 		}).done(function(result){
 			jsiModalDialog.hide();
 			
