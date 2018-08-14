@@ -21,7 +21,6 @@ $(function(){
 			categoryType = result.categoryType;
 			defaultAccountItemId = result.accountItemId;
 			versionNo = result.versionNo;
-			console.log(result);
 			$('#form-category').hide();
 			$('#form-withdrawal-account').hide();
 			$('#form-deposit-account').hide();
@@ -97,23 +96,20 @@ $(function(){
 		}).done(function(result){
 			jsiModalDialog.hide();
 			
-			$("#record-list-date").text(result.date);
-			$("#record-list-categoryType").text(result.categoryTypeAlias);
-			$("#record-list-accountTitle").text(result.accountTitle);
-			$("#record-list-amount").text(result.amount);
-			$("#record-list-memo").text(result.memo);
-			$("#record-list-depositAccount").text("");
-			$("#record-list-withdrawalAccount").text("");		
+			$("#record-list-date-" + result.id).text(result.date);
+			$("#record-list-categoryType-" + result.id).text(result.categoryTypeAlias);
+			$("#record-list-accountTitle-" + result.id).text(result.accountTitle);
+			$("#record-list-amount-" + result.id).text(result.amount);
+			$("#record-list-memo-" + result.id).text(result.memo);
+			$("#record-list-depositAccount-" + result.id).text("");
+			$("#record-list-withdrawalAccount-" + result.id).text("");		
 
 	        if (result.categoryType == "SPEND" || result.categoryType == "MOVE") {
-				$("#record-list-withdrawalAccount").text(result.withdrawalAccount);
+				$("#record-list-withdrawalAccount-" + result.id).text(result.withdrawalAccount);
 	        }
 	        if (result.categoryType == "INCOME" || result.categoryType == "MOVE") {
-				$("#record-list-depositAccount").text(result.depositAccount);
-				
+				$("#record-list-depositAccount-" + result.id).text(result.depositAccount);
 	        }
-			
-			
 		});
 	});
 	
