@@ -25,32 +25,33 @@ $(function(){
 			$('#form-withdrawal-account').hide();
 			$('#form-deposit-account').hide();
 			
-			if (categoryType == "INCOME" || categoryType == "SPEND") {
-				var accountItemSelect = $('#record-edit-account-item');
-				accountItemSelect.empty();
-				for (var i = 0; i < result.accountItemBeans.length; i++) {
-				accountItemSelect.append('<option value="' + result.accountItemBeans[i].id + '">' + result.accountItemBeans[i].title + '</option>');
-				}
-				$('#form-category').show();
+			var accountItemSelect = $('#record-edit-account-item');
+			accountItemSelect.empty();
+			for (var i = 0; i < result.accountItemBeans.length; i++) {
+			accountItemSelect.append('<option value="' + result.accountItemBeans[i].id + '">' + result.accountItemBeans[i].title + '</option>');
 			}
 			
-			if (categoryType == "INCOME" || categoryType == "MOVE") {
-				var depositAccountSelect = $('#record-edit-deposit-account');
-				depositAccountSelect.empty();
-				for (var i = 0; i < result.assetBeans.length; i++) {
-				depositAccountSelect.append('<option value="' + result.assetBeans[i].id + '">' + result.assetBeans[i].name + '</option>');
-				}
-				$('#form-deposit-account').show();
+			var depositAccountSelect = $('#record-edit-deposit-account');
+			depositAccountSelect.empty();
+			for (var i = 0; i < result.assetBeans.length; i++) {
+			depositAccountSelect.append('<option value="' + result.assetBeans[i].id + '">' + result.assetBeans[i].name + '</option>');
 			}
 
+			var withdrawalAccountSelect = $('#record-edit-withdrawal-account');
+			withdrawalAccountSelect.empty();
+			for (var i = 0; i < result.assetBeans.length; i++) {
+			withdrawalAccountSelect.append('<option value="' + result.assetBeans[i].id + '">' + result.assetBeans[i].name + '</option>');
+			}
+			
+			if (categoryType == "INCOME" || categoryType == "SPEND") {
+				$('#form-category').show();
+			}
+			if (categoryType == "INCOME" || categoryType == "MOVE") {
+				$('#form-deposit-account').show();
+			}
 			if (categoryType == "SPEND" || categoryType == "MOVE") {
-				var withdrawalAccountSelect = $('#record-edit-withdrawal-account');
-				withdrawalAccountSelect.empty();
-				for (var i = 0; i < result.assetBeans.length; i++) {
-				withdrawalAccountSelect.append('<option value="' + result.assetBeans[i].id + '">' + result.assetBeans[i].name + '</option>');
-				}
 				$('#form-withdrawal-account').show();
-			}		
+			}
 				
 			$('#record-edit-date').val(result.date);
 			$('#record-edit-account-item').val(result.accountItemId);
