@@ -41,7 +41,7 @@
 	<modules>
 		<module>../kakeibochan-common</module>
 		<module>../kakeibochan-front</module>
-		<module>../kakeibochan-batch</module>
+		<!--<module>../kakeibochan-batch</module>-->
 	</modules>
 
 	<licenses>
