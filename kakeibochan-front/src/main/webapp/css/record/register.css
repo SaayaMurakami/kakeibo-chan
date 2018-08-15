@@ -56,18 +56,19 @@ select {
 	display: table-cell;
     border: 1.4px solid rgba(125, 123, 123, 0.61);
 }
-.expend {
-	background: #F4C091;;
-}
 .block a:hover {
-	background: #F4C091;;
+	background: #F4C091;
+}
+.selected {
+	background: #F4C091;
+}
+.block a:visited {
+	background: #F4C091;
 }
 .block_element {
 	width: 180px;
 }
-.block_element_expend {
-	width: 180px;
-}
+
 .errors {
     display: block;
     margin-top: 2px;

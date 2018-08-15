@@ -2,32 +2,34 @@ package com.kakeibochan.app.web.record;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.Min;
-
-import org.hibernate.validator.constraints.Length;
 import org.lastaflute.web.validation.Required;
 
 import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
 
-public class RecordForm {
+public class RecordUpdateBody {
 
     @Required
-    public CategoryType categoryType;
+    public Long id;
 
     @Required
     public LocalDate date;
 
     @Required
-    public Long accountItemId;
+    public CategoryType categoryType;
 
     @Required
-    @Min(0)
-    public Integer amount;
+    public Long accountItemId;
 
     public Long depositAccountId;
 
-    public Long withdrawalAccountId;
+    public Long withdrawalAcountId;
 
-    @Length(max = 200)
+    @Required
+    public Integer amount;
+
     public String memo;
+
+    @Required
+    public Long versionNo;
+
 }

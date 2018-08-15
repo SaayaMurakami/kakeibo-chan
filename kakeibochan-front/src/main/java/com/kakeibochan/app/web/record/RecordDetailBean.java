@@ -1,15 +1,18 @@
 package com.kakeibochan.app.web.record;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-import javax.validation.constraints.Min;
+import javax.validation.Valid;
 
-import org.hibernate.validator.constraints.Length;
 import org.lastaflute.web.validation.Required;
 
 import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
 
-public class RecordForm {
+public class RecordDetailBean {
+
+    @Required
+    public Long id;
 
     @Required
     public CategoryType categoryType;
@@ -20,14 +23,22 @@ public class RecordForm {
     @Required
     public Long accountItemId;
 
-    @Required
-    @Min(0)
-    public Integer amount;
-
     public Long depositAccountId;
 
     public Long withdrawalAccountId;
 
-    @Length(max = 200)
+    @Required
+    public Integer amount;
+
     public String memo;
+
+    @Valid
+    public ArrayList<AccountItemBean> accountItemBeans;
+
+    @Valid
+    public ArrayList<AssetBean> assetBeans;
+
+    @Required
+    public Long versionNo;
+
 }

@@ -15,17 +15,17 @@
         	<h1>家計簿をつける</h1>
         	
         	<div class="block">
-        		<a href="#expend" class="expend">
+        		<a th:classappend="${categoryType.code().equals('SPEND')}? 'selected'" href="/front/record/register/?categoryType=spend">
 	        		<div class="block_element">
 	        		支出
 	        		</div>
 	        	</a>
-        		<a href="#income">
+        		<a th:classappend="${categoryType.code().equals('INCOME')}? 'selected'" href="/front/record/register/?categoryType=income">
 	        		<div class="block_element">
 	        		収入
 	        		</div>
 	        	</a>
-        		<a href="#move">
+        		<a th:classappend="${categoryType.code().equals('MOVE')}? 'selected'" href="/front/record/register/?categoryType=move">
 	        		<div class="block_element">
 	        		振替
 	        		</div>
@@ -40,7 +40,7 @@
 	        	</div>
         	</div>
         	
-        	<div class="form-element">
+        	<div th:unless="${categoryType.code().equals('MOVE')}" class="form-element">
 	        	<span class="element-label">カテゴリ</span>
 	        	<div class="element-value">
 		        	<select name="accountItemId" th:value="${accountItemId}">
@@ -51,6 +51,8 @@
 	        	</div>
         	</div>
         	
+			<input type="hidden" th:if="${categoryType.code().equals('MOVE')}" name="accountItemId" th:value="${moveBean.id}"></input>
+        	
         	<div class="form-element">
 	        	<span class="element-label">金額</span>
 	        	<div class="element-value">
@@ -59,14 +61,25 @@
 	        	</div>
         	</div>
         	
-        	<div class="form-element">
-        	<span class="element-label">支払い元</span>
+        	<div th:if="${categoryType.code().equals('SPEND') || categoryType.code().equals('MOVE')}" class="form-element">
+        	<span class="element-label">支払元</span>
         		<div class="element-value">
-	        		<select name="assetId">
+	        		<select name="withdrawalAccountId">
 	        			<option value="">選択してください</option>
-	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == assetId}"></option>
+	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == withdrawalAccountId}"></option>
 	        		</select>
-	        		<span la:errors="assetId"/>
+	        		<span la:errors="withdrawalAccountId"/>
+        		</div>
+        	</div>
+        	
+        	<div th:if="${categoryType.code().equals('INCOME') || categoryType.code().equals('MOVE')}" class="form-element">
+        	<span class="element-label">入金先</span>
+        		<div class="element-value">
+	        		<select name="depositAccountId">
+	        			<option value="">選択してください</option>
+	        			<option th:each="assetBean:${assetBeans}" th:text="${assetBean.name}" th:value="${assetBean.id}" th:selected="${assetBean.id == depositAccountId}"></option>
+	        		</select>
+	        		<span la:errors="depositAccountId"/>
         		</div>
         	</div>
         	
@@ -77,6 +90,8 @@
 	        		<span la:errors="memo"/>
         		</div>
         	</div>
+
+			<input type="hidden" name="categoryType" th:value="${categoryType}"></input>
         	
 			<button type="submit" name="button">登録</button>
         	

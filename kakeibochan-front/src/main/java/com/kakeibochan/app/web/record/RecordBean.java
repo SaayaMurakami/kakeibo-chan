@@ -4,13 +4,21 @@ import java.time.LocalDate;
 
 import org.lastaflute.web.validation.Required;
 
+import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
+
 public class RecordBean {
+
+    @Required
+    public Long id;
 
     @Required
     public LocalDate date;
 
     @Required
-    public String categoryType;
+    public CategoryType categoryType;
+
+    @Required
+    public String categoryTypeAlias;
 
     @Required
     public String accountTitle;
