@@ -1,6 +1,7 @@
 package com.kakeibochan.app.web.record;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -9,6 +10,7 @@ import org.lastaflute.web.Execute;
 import org.lastaflute.web.response.JsonResponse;
 
 import com.kakeibochan.app.web.base.FrontBaseAction;
+import com.kakeibochan.dbflute.allcommon.CDef.CategoryType;
 import com.kakeibochan.dbflute.exbhv.AccountItemBhv;
 import com.kakeibochan.dbflute.exbhv.AssetBhv;
 import com.kakeibochan.dbflute.exbhv.RecordBhv;
@@ -33,10 +35,28 @@ public class RecordDetailAction extends FrontBaseAction {
             cb.setupSelect_AssetByWithdrawalAccountId();
         });
 
-        ListResultBean<AccountItem> accountItemList = accountItemBhv.selectList(cb -> {
-            cb.query().setMemberId_Equal(getUserBean().get().getUserId());
-            cb.query().addOrderBy_AccountItemId_Asc();
-        });
+        List<AccountItem> accountItemList = new ArrayList<AccountItem>();
+
+        if (record.getAccountItem().get().getCategoryTypeAsCategoryType() == CategoryType.Spend) {
+            accountItemList = accountItemBhv.selectList(cb -> {
+                cb.query().setMemberId_Equal(getUserBean().get().getUserId());
+                cb.query().setCategoryType_Equal_Spend();
+                cb.query().addOrderBy_AccountItemId_Asc();
+            });
+
+        } else if (record.getAccountItem().get().getCategoryTypeAsCategoryType() == CategoryType.Income) {
+            accountItemList = accountItemBhv.selectList(cb -> {
+                cb.query().setMemberId_Equal(getUserBean().get().getUserId());
+                cb.query().setCategoryType_Equal_Income();
+                cb.query().addOrderBy_AccountItemId_Asc();
+            });
+        } else if (record.getAccountItem().get().getCategoryTypeAsCategoryType() == CategoryType.Move) {
+            accountItemList = accountItemBhv.selectList(cb -> {
+                cb.query().setMemberId_Equal(getUserBean().get().getUserId());
+                cb.query().setCategoryType_Equal_Move();
+                cb.query().addOrderBy_AccountItemId_Asc();
+            });
+        }
 
         ArrayList<AccountItemBean> accountItemBeans = new ArrayList<>();
         for (AccountItem accountItem : accountItemList) {
