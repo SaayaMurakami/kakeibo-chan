@@ -11,9 +11,9 @@
 <body>
 	<header th:include="/common/layout_after_login.html :: header"></header>
     <div class="main">
-        <form class="button" th:action="@{/record/register/}" action="#" method="post">
-        <button type="submit" name="家計簿をつける">家計簿をつける</button>
-        </form>
+        <div class="button-wrapper">
+        <a class="button" th:href="@{/record/register/}">家計簿をつける</a>
+        </div>
     </div>
 </body>
 

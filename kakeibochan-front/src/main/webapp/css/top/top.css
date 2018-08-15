@@ -1,11 +1,11 @@
-.button {
+.button-wrapper {
     width: 100%;
     position: absolute;
     bottom: 40%;
     text-align: center;
     min-width: 987px;
 }
-button {
+.button {
     width: 400px;
     font-family: KTEGAKI;
     font-size: 30px;
@@ -17,12 +17,14 @@ button {
     text-shadow: 0 2px 0px rgba(0, 0, 0, .3);
     outline: none;
     cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
 }
-button:hover {
+.button:hover {
   border:2px solid #C08F63;
   background-color: #e3b286;
 }
-button:active {
+.button:active {
   background: #ddac7f;
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, .2);
   color: #c19063;
