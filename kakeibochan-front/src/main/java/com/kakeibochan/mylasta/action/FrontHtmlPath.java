@@ -23,8 +23,8 @@ import org.lastaflute.web.response.next.HtmlNext;
  */
 public interface FrontHtmlPath {
 
-    /** The path of the HTML: /common_defualt/layout.html */
-    HtmlNext path_CommonDefualt_LayoutHtml = new HtmlNext("/common_defualt/layout.html");
+    /** The path of the HTML: /common_default/layout.html */
+    HtmlNext path_CommonDefault_LayoutHtml = new HtmlNext("/common_default/layout.html");
 
     /** The path of the HTML: /error/show_errors.html */
     HtmlNext path_Error_ShowErrorsHtml = new HtmlNext("/error/show_errors.html");
