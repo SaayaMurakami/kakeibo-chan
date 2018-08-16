@@ -91,9 +91,9 @@ public class RecordDbm extends AbstractDBMeta {
     @SuppressWarnings("unchecked")
     protected void xsetupEfpg() {
         setupEfpg(_efpgMap, et -> ((Record)et).getAccountItem(), (et, vl) -> ((Record)et).setAccountItem((OptionalEntity<AccountItem>)vl), "accountItem");
-        setupEfpg(_efpgMap, et -> ((Record)et).getAssetByDepositAccountId(), (et, vl) -> ((Record)et).setAssetByDepositAccountId((OptionalEntity<Asset>)vl), "assetByDepositAccountId");
-        setupEfpg(_efpgMap, et -> ((Record)et).getMember(), (et, vl) -> ((Record)et).setMember((OptionalEntity<Member>)vl), "member");
         setupEfpg(_efpgMap, et -> ((Record)et).getAssetByWithdrawalAccountId(), (et, vl) -> ((Record)et).setAssetByWithdrawalAccountId((OptionalEntity<Asset>)vl), "assetByWithdrawalAccountId");
+        setupEfpg(_efpgMap, et -> ((Record)et).getMember(), (et, vl) -> ((Record)et).setMember((OptionalEntity<Member>)vl), "member");
+        setupEfpg(_efpgMap, et -> ((Record)et).getAssetByDepositAccountId(), (et, vl) -> ((Record)et).setAssetByDepositAccountId((OptionalEntity<Asset>)vl), "assetByDepositAccountId");
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -250,12 +250,12 @@ public class RecordDbm extends AbstractDBMeta {
         return cfi("record_ibfk_1", "accountItem", this, AccountItemDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "recordList", false);
     }
     /**
-     * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
+     * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
      * @return The information object of foreign property. (NotNull)
      */
-    public ForeignInfo foreignAssetByDepositAccountId() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnDepositAccountId(), AssetDbm.getInstance().columnAssetId());
-        return cfi("record_ibfk_2", "assetByDepositAccountId", this, AssetDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "recordByDepositAccountIdList", false);
+    public ForeignInfo foreignAssetByWithdrawalAccountId() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnWithdrawalAccountId(), AssetDbm.getInstance().columnAssetId());
+        return cfi("record_ibfk_2", "assetByWithdrawalAccountId", this, AssetDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "recordByWithdrawalAccountIdList", false);
     }
     /**
      * (会員)MEMBER by my MEMBER_ID, named 'member'.
@@ -266,12 +266,12 @@ public class RecordDbm extends AbstractDBMeta {
         return cfi("record_ibfk_4", "member", this, MemberDbm.getInstance(), mp, 2, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "recordList", false);
     }
     /**
-     * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
+     * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
      * @return The information object of foreign property. (NotNull)
      */
-    public ForeignInfo foreignAssetByWithdrawalAccountId() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnWithdrawalAccountId(), AssetDbm.getInstance().columnAssetId());
-        return cfi("record_ibfk_3", "assetByWithdrawalAccountId", this, AssetDbm.getInstance(), mp, 3, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "recordByWithdrawalAccountIdList", false);
+    public ForeignInfo foreignAssetByDepositAccountId() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnDepositAccountId(), AssetDbm.getInstance().columnAssetId());
+        return cfi("record_ibfk_3", "assetByDepositAccountId", this, AssetDbm.getInstance(), mp, 3, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "recordByDepositAccountIdList", false);
     }
 
     // -----------------------------------------------------

@@ -41,7 +41,7 @@ import com.kakeibochan.dbflute.cbean.*;
  *     ASSET_ID
  *
  * [column]
- *     ASSET_ID, MEMBER_ID, ASSET_NAME, DEL_FLG, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     ASSET_ID, MEMBER_ID, ASSET_NAME, BALANCE, DEL_FLG, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -62,7 +62,7 @@ import com.kakeibochan.dbflute.cbean.*;
  *     member
  *
  * [referrer property]
- *     recordByDepositAccountIdList, recordByWithdrawalAccountIdList
+ *     recordByWithdrawalAccountIdList, recordByDepositAccountIdList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -375,70 +375,6 @@ public abstract class BsAssetBhv extends AbstractBehaviorWritable<Asset, AssetCB
     }
 
     /**
-     * Load referrer of recordByDepositAccountIdList by the set-upper of referrer. <br>
-     * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
-     * <pre>
-     * <span style="color: #0000C0">assetBhv</span>.<span style="color: #CC4747">loadRecordByDepositAccountId</span>(<span style="color: #553000">assetList</span>, <span style="color: #553000">recordCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">recordCB</span>.setupSelect...
-     *     <span style="color: #553000">recordCB</span>.query().set...
-     *     <span style="color: #553000">recordCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Asset asset : <span style="color: #553000">assetList</span>) {
-     *     ... = asset.<span style="color: #CC4747">getRecordByDepositAccountIdList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setDepositAccountId_InScope(pkList);
-     * cb.query().addOrderBy_DepositAccountId_Asc();
-     * </pre>
-     * @param assetList The entity list of asset. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Record> loadRecordByDepositAccountId(List<Asset> assetList, ReferrerConditionSetupper<RecordCB> refCBLambda) {
-        xassLRArg(assetList, refCBLambda);
-        return doLoadRecordByDepositAccountId(assetList, new LoadReferrerOption<RecordCB, Record>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of recordByDepositAccountIdList by the set-upper of referrer. <br>
-     * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
-     * <pre>
-     * <span style="color: #0000C0">assetBhv</span>.<span style="color: #CC4747">loadRecordByDepositAccountId</span>(<span style="color: #553000">asset</span>, <span style="color: #553000">recordCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">recordCB</span>.setupSelect...
-     *     <span style="color: #553000">recordCB</span>.query().set...
-     *     <span style="color: #553000">recordCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">asset</span>.<span style="color: #CC4747">getRecordByDepositAccountIdList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setDepositAccountId_InScope(pkList);
-     * cb.query().addOrderBy_DepositAccountId_Asc();
-     * </pre>
-     * @param asset The entity of asset. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Record> loadRecordByDepositAccountId(Asset asset, ReferrerConditionSetupper<RecordCB> refCBLambda) {
-        xassLRArg(asset, refCBLambda);
-        return doLoadRecordByDepositAccountId(xnewLRLs(asset), new LoadReferrerOption<RecordCB, Record>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<Record> doLoadRecordByDepositAccountId(List<Asset> assetList, LoadReferrerOption<RecordCB, Record> option) {
-        return helpLoadReferrerInternally(assetList, option, "recordByDepositAccountIdList");
-    }
-
-    /**
      * Load referrer of recordByWithdrawalAccountIdList by the set-upper of referrer. <br>
      * (明細)RECORD by WITHDRAWAL_ACCOUNT_ID, named 'recordByWithdrawalAccountIdList'.
      * <pre>
@@ -500,6 +436,70 @@ public abstract class BsAssetBhv extends AbstractBehaviorWritable<Asset, AssetCB
 
     protected NestedReferrerListGateway<Record> doLoadRecordByWithdrawalAccountId(List<Asset> assetList, LoadReferrerOption<RecordCB, Record> option) {
         return helpLoadReferrerInternally(assetList, option, "recordByWithdrawalAccountIdList");
+    }
+
+    /**
+     * Load referrer of recordByDepositAccountIdList by the set-upper of referrer. <br>
+     * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
+     * <pre>
+     * <span style="color: #0000C0">assetBhv</span>.<span style="color: #CC4747">loadRecordByDepositAccountId</span>(<span style="color: #553000">assetList</span>, <span style="color: #553000">recordCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">recordCB</span>.setupSelect...
+     *     <span style="color: #553000">recordCB</span>.query().set...
+     *     <span style="color: #553000">recordCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (Asset asset : <span style="color: #553000">assetList</span>) {
+     *     ... = asset.<span style="color: #CC4747">getRecordByDepositAccountIdList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setDepositAccountId_InScope(pkList);
+     * cb.query().addOrderBy_DepositAccountId_Asc();
+     * </pre>
+     * @param assetList The entity list of asset. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Record> loadRecordByDepositAccountId(List<Asset> assetList, ReferrerConditionSetupper<RecordCB> refCBLambda) {
+        xassLRArg(assetList, refCBLambda);
+        return doLoadRecordByDepositAccountId(assetList, new LoadReferrerOption<RecordCB, Record>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of recordByDepositAccountIdList by the set-upper of referrer. <br>
+     * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
+     * <pre>
+     * <span style="color: #0000C0">assetBhv</span>.<span style="color: #CC4747">loadRecordByDepositAccountId</span>(<span style="color: #553000">asset</span>, <span style="color: #553000">recordCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">recordCB</span>.setupSelect...
+     *     <span style="color: #553000">recordCB</span>.query().set...
+     *     <span style="color: #553000">recordCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">asset</span>.<span style="color: #CC4747">getRecordByDepositAccountIdList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setDepositAccountId_InScope(pkList);
+     * cb.query().addOrderBy_DepositAccountId_Asc();
+     * </pre>
+     * @param asset The entity of asset. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Record> loadRecordByDepositAccountId(Asset asset, ReferrerConditionSetupper<RecordCB> refCBLambda) {
+        xassLRArg(asset, refCBLambda);
+        return doLoadRecordByDepositAccountId(xnewLRLs(asset), new LoadReferrerOption<RecordCB, Record>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<Record> doLoadRecordByDepositAccountId(List<Asset> assetList, LoadReferrerOption<RecordCB, Record> option) {
+        return helpLoadReferrerInternally(assetList, option, "recordByDepositAccountIdList");
     }
 
     // ===================================================================================

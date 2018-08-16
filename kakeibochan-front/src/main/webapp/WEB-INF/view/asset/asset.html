@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8"></meta>
+    <title>口座｜家計簿ちゃん</title>
+	<link href="/css/common/reset.css" th:href="@{/css/common/reset.css}" rel="stylesheet"></link>
+	<link href="/css/common/layout_after_login.css" th:href="@{/css/common/layout_after_login.css}" rel="stylesheet"></link>
+	<link href="/css/top/top.css" th:href="@{/css/asset/asset.css}" rel="stylesheet"></link>
+</head>
+
+<body>
+	<header th:include="/common/layout_after_login.html :: header"></header>
+    <div class="main">
+		<table>
+			<tr>
+				<td>名称</td>
+				<td>残高</td>
+			</tr>
+			<tr th:each="assetBean:${assetBeans}">
+				<td th:text="${assetBean.name}"></td>
+				<td th:text="${assetBean.balance}"></td>
+			</tr>
+		</table>
+    </div>
+</body>
+
+</html>

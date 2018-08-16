@@ -102,6 +102,26 @@ public class RecordRegisterAction extends FrontBaseAction {
         record.setDelFlg_False();
         recordBhv.insert(record);
 
+        if (form.categoryType == CategoryType.Spend || form.categoryType == CategoryType.Move) {
+            Asset withdrawalAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setMemberId_Equal(userId);
+                cb.query().setAssetId_Equal(form.withdrawalAccountId);
+                cb.query().setDelFlg_Equal_False();
+            });
+            withdrawalAccount.setBalance(withdrawalAccount.getBalance() - form.amount);
+            assetBhv.update(withdrawalAccount);
+        }
+
+        if (form.categoryType == CategoryType.Income || form.categoryType == CategoryType.Move) {
+            Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setMemberId_Equal(userId);
+                cb.query().setAssetId_Equal(form.depositAccountId);
+                cb.query().setDelFlg_Equal_False();
+            });
+            depositAccount.setBalance(depositAccount.getBalance() + form.amount);
+            assetBhv.update(depositAccount);
+        }
+
         return redirectWith(RecordRegisterAction.class, moreUrl("complete"));
     }
 
@@ -116,6 +136,7 @@ public class RecordRegisterAction extends FrontBaseAction {
 
         ListResultBean<AccountItem> accountItemList = accountItemBhv.selectList(cb -> {
             cb.query().setMemberId_Equal(userId);
+            cb.query().setDelFlg_Equal_False();
 
             if (CategoryType.Spend == categoryType) {
                 cb.query().setCategoryType_Equal_Spend();
@@ -124,6 +145,8 @@ public class RecordRegisterAction extends FrontBaseAction {
             } else if (CategoryType.Move == categoryType) {
                 cb.query().setCategoryType_Equal_Move();
             }
+
+            cb.query().addOrderBy_AccountItemId_Asc();
         });
 
         ArrayList<AccountItemBean> accountItemBeans = new ArrayList<>();
@@ -137,6 +160,8 @@ public class RecordRegisterAction extends FrontBaseAction {
 
         ListResultBean<Asset> assetList = assetBhv.selectList(cb -> {
             cb.query().setMemberId_Equal(userId);
+            cb.query().setDelFlg_Equal_False();
+            cb.query().addOrderBy_AssetId_Asc();
         });
 
         ArrayList<AssetBean> assetBeans = new ArrayList<>();

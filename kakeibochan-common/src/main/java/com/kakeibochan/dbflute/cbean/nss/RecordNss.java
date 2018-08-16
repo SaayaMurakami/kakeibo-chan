@@ -44,12 +44,12 @@ public class RecordNss {
     }
     /**
      * With nested relation columns to select clause. <br>
-     * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
+     * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
-    public AssetNss withAssetByDepositAccountId() {
-        _query.xdoNss(() -> _query.queryAssetByDepositAccountId());
-        return new AssetNss(_query.queryAssetByDepositAccountId());
+    public AssetNss withAssetByWithdrawalAccountId() {
+        _query.xdoNss(() -> _query.queryAssetByWithdrawalAccountId());
+        return new AssetNss(_query.queryAssetByWithdrawalAccountId());
     }
     /**
      * With nested relation columns to select clause. <br>
@@ -62,11 +62,11 @@ public class RecordNss {
     }
     /**
      * With nested relation columns to select clause. <br>
-     * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
+     * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
-    public AssetNss withAssetByWithdrawalAccountId() {
-        _query.xdoNss(() -> _query.queryAssetByWithdrawalAccountId());
-        return new AssetNss(_query.queryAssetByWithdrawalAccountId());
+    public AssetNss withAssetByDepositAccountId() {
+        _query.xdoNss(() -> _query.queryAssetByDepositAccountId());
+        return new AssetNss(_query.queryAssetByDepositAccountId());
     }
 }

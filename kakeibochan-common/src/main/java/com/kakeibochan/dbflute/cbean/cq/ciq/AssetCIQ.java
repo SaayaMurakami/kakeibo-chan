@@ -77,28 +77,29 @@ public class AssetCIQ extends AbstractBsAssetCQ {
     //                                                                Override about Query
     //                                                                ====================
     protected ConditionValue xgetCValueAssetId() { return _myCQ.xdfgetAssetId(); }
-    public String keepAssetId_ExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq)
-    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepAssetId_ExistsReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepAssetId_NotExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq)
-    { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepAssetId_ExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepAssetId_NotExistsReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq)
-    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepAssetId_NotExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepAssetId_SpecifyDerivedReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq)
-    { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter(Object vl)
-    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepAssetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepAssetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueMemberId() { return _myCQ.xdfgetMemberId(); }
     protected ConditionValue xgetCValueAssetName() { return _myCQ.xdfgetAssetName(); }
+    protected ConditionValue xgetCValueBalance() { return _myCQ.xdfgetBalance(); }
     protected ConditionValue xgetCValueDelFlg() { return _myCQ.xdfgetDelFlg(); }
     protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
     protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }

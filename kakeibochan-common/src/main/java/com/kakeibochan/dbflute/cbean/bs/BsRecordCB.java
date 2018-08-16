@@ -283,33 +283,33 @@ public class BsRecordCB extends AbstractConditionBean {
         return _nssAccountItem;
     }
 
-    protected AssetNss _nssAssetByDepositAccountId;
-    public AssetNss xdfgetNssAssetByDepositAccountId() {
-        if (_nssAssetByDepositAccountId == null) { _nssAssetByDepositAccountId = new AssetNss(null); }
-        return _nssAssetByDepositAccountId;
+    protected AssetNss _nssAssetByWithdrawalAccountId;
+    public AssetNss xdfgetNssAssetByWithdrawalAccountId() {
+        if (_nssAssetByWithdrawalAccountId == null) { _nssAssetByWithdrawalAccountId = new AssetNss(null); }
+        return _nssAssetByWithdrawalAccountId;
     }
     /**
      * Set up relation columns to select clause. <br>
-     * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
+     * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
      * <pre>
      * <span style="color: #0000C0">recordBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_AssetByDepositAccountId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_AssetByWithdrawalAccountId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * }).alwaysPresent(<span style="color: #553000">record</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">record</span>.<span style="color: #CC4747">getAssetByDepositAccountId()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     *     ... = <span style="color: #553000">record</span>.<span style="color: #CC4747">getAssetByWithdrawalAccountId()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * });
      * </pre>
      * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public AssetNss setupSelect_AssetByDepositAccountId() {
-        assertSetupSelectPurpose("assetByDepositAccountId");
+    public AssetNss setupSelect_AssetByWithdrawalAccountId() {
+        assertSetupSelectPurpose("assetByWithdrawalAccountId");
         if (hasSpecifiedLocalColumn()) {
-            specify().columnDepositAccountId();
+            specify().columnWithdrawalAccountId();
         }
-        doSetupSelect(() -> query().queryAssetByDepositAccountId());
-        if (_nssAssetByDepositAccountId == null || !_nssAssetByDepositAccountId.hasConditionQuery())
-        { _nssAssetByDepositAccountId = new AssetNss(query().queryAssetByDepositAccountId()); }
-        return _nssAssetByDepositAccountId;
+        doSetupSelect(() -> query().queryAssetByWithdrawalAccountId());
+        if (_nssAssetByWithdrawalAccountId == null || !_nssAssetByWithdrawalAccountId.hasConditionQuery())
+        { _nssAssetByWithdrawalAccountId = new AssetNss(query().queryAssetByWithdrawalAccountId()); }
+        return _nssAssetByWithdrawalAccountId;
     }
 
     protected MemberNss _nssMember;
@@ -341,33 +341,33 @@ public class BsRecordCB extends AbstractConditionBean {
         return _nssMember;
     }
 
-    protected AssetNss _nssAssetByWithdrawalAccountId;
-    public AssetNss xdfgetNssAssetByWithdrawalAccountId() {
-        if (_nssAssetByWithdrawalAccountId == null) { _nssAssetByWithdrawalAccountId = new AssetNss(null); }
-        return _nssAssetByWithdrawalAccountId;
+    protected AssetNss _nssAssetByDepositAccountId;
+    public AssetNss xdfgetNssAssetByDepositAccountId() {
+        if (_nssAssetByDepositAccountId == null) { _nssAssetByDepositAccountId = new AssetNss(null); }
+        return _nssAssetByDepositAccountId;
     }
     /**
      * Set up relation columns to select clause. <br>
-     * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
+     * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
      * <pre>
      * <span style="color: #0000C0">recordBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_AssetByWithdrawalAccountId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_AssetByDepositAccountId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * }).alwaysPresent(<span style="color: #553000">record</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">record</span>.<span style="color: #CC4747">getAssetByWithdrawalAccountId()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     *     ... = <span style="color: #553000">record</span>.<span style="color: #CC4747">getAssetByDepositAccountId()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * });
      * </pre>
      * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public AssetNss setupSelect_AssetByWithdrawalAccountId() {
-        assertSetupSelectPurpose("assetByWithdrawalAccountId");
+    public AssetNss setupSelect_AssetByDepositAccountId() {
+        assertSetupSelectPurpose("assetByDepositAccountId");
         if (hasSpecifiedLocalColumn()) {
-            specify().columnWithdrawalAccountId();
+            specify().columnDepositAccountId();
         }
-        doSetupSelect(() -> query().queryAssetByWithdrawalAccountId());
-        if (_nssAssetByWithdrawalAccountId == null || !_nssAssetByWithdrawalAccountId.hasConditionQuery())
-        { _nssAssetByWithdrawalAccountId = new AssetNss(query().queryAssetByWithdrawalAccountId()); }
-        return _nssAssetByWithdrawalAccountId;
+        doSetupSelect(() -> query().queryAssetByDepositAccountId());
+        if (_nssAssetByDepositAccountId == null || !_nssAssetByDepositAccountId.hasConditionQuery())
+        { _nssAssetByDepositAccountId = new AssetNss(query().queryAssetByDepositAccountId()); }
+        return _nssAssetByDepositAccountId;
     }
 
     // [DBFlute-0.7.4]
@@ -412,9 +412,9 @@ public class BsRecordCB extends AbstractConditionBean {
 
     public static class HpSpecification extends HpAbstractSpecification<RecordCQ> {
         protected AccountItemCB.HpSpecification _accountItem;
-        protected AssetCB.HpSpecification _assetByDepositAccountId;
-        protected MemberCB.HpSpecification _member;
         protected AssetCB.HpSpecification _assetByWithdrawalAccountId;
+        protected MemberCB.HpSpecification _member;
+        protected AssetCB.HpSpecification _assetByDepositAccountId;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<RecordCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
@@ -498,17 +498,17 @@ public class BsRecordCB extends AbstractConditionBean {
                     || qyCall().qy().xgetReferrerQuery() instanceof AccountItemCQ) {
                 columnAccountItemId(); // FK or one-to-one referrer
             }
-            if (qyCall().qy().hasConditionQueryAssetByDepositAccountId()
+            if (qyCall().qy().hasConditionQueryAssetByWithdrawalAccountId()
                     || qyCall().qy().xgetReferrerQuery() instanceof AssetCQ) {
-                columnDepositAccountId(); // FK or one-to-one referrer
+                columnWithdrawalAccountId(); // FK or one-to-one referrer
             }
             if (qyCall().qy().hasConditionQueryMember()
                     || qyCall().qy().xgetReferrerQuery() instanceof MemberCQ) {
                 columnMemberId(); // FK or one-to-one referrer
             }
-            if (qyCall().qy().hasConditionQueryAssetByWithdrawalAccountId()
+            if (qyCall().qy().hasConditionQueryAssetByDepositAccountId()
                     || qyCall().qy().xgetReferrerQuery() instanceof AssetCQ) {
-                columnWithdrawalAccountId(); // FK or one-to-one referrer
+                columnDepositAccountId(); // FK or one-to-one referrer
             }
         }
         @Override
@@ -535,23 +535,23 @@ public class BsRecordCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
+         * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public AssetCB.HpSpecification specifyAssetByDepositAccountId() {
-            assertRelation("assetByDepositAccountId");
-            if (_assetByDepositAccountId == null) {
-                _assetByDepositAccountId = new AssetCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryAssetByDepositAccountId()
-                                    , () -> _qyCall.qy().queryAssetByDepositAccountId())
+        public AssetCB.HpSpecification specifyAssetByWithdrawalAccountId() {
+            assertRelation("assetByWithdrawalAccountId");
+            if (_assetByWithdrawalAccountId == null) {
+                _assetByWithdrawalAccountId = new AssetCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryAssetByWithdrawalAccountId()
+                                    , () -> _qyCall.qy().queryAssetByWithdrawalAccountId())
                     , _purpose, _dbmetaProvider, xgetSDRFnFc());
                 if (xhasSyncQyCall()) { // inherits it
-                    _assetByDepositAccountId.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryAssetByDepositAccountId()
-                      , () -> xsyncQyCall().qy().queryAssetByDepositAccountId()));
+                    _assetByWithdrawalAccountId.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryAssetByWithdrawalAccountId()
+                      , () -> xsyncQyCall().qy().queryAssetByWithdrawalAccountId()));
                 }
             }
-            return _assetByDepositAccountId;
+            return _assetByWithdrawalAccountId;
         }
         /**
          * Prepare to specify functions about relation table. <br>
@@ -575,23 +575,23 @@ public class BsRecordCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
+         * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public AssetCB.HpSpecification specifyAssetByWithdrawalAccountId() {
-            assertRelation("assetByWithdrawalAccountId");
-            if (_assetByWithdrawalAccountId == null) {
-                _assetByWithdrawalAccountId = new AssetCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryAssetByWithdrawalAccountId()
-                                    , () -> _qyCall.qy().queryAssetByWithdrawalAccountId())
+        public AssetCB.HpSpecification specifyAssetByDepositAccountId() {
+            assertRelation("assetByDepositAccountId");
+            if (_assetByDepositAccountId == null) {
+                _assetByDepositAccountId = new AssetCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryAssetByDepositAccountId()
+                                    , () -> _qyCall.qy().queryAssetByDepositAccountId())
                     , _purpose, _dbmetaProvider, xgetSDRFnFc());
                 if (xhasSyncQyCall()) { // inherits it
-                    _assetByWithdrawalAccountId.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryAssetByWithdrawalAccountId()
-                      , () -> xsyncQyCall().qy().queryAssetByWithdrawalAccountId()));
+                    _assetByDepositAccountId.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryAssetByDepositAccountId()
+                      , () -> xsyncQyCall().qy().queryAssetByDepositAccountId()));
                 }
             }
-            return _assetByWithdrawalAccountId;
+            return _assetByDepositAccountId;
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

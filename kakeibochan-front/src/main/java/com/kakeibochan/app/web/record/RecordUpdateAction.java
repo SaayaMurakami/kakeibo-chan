@@ -34,6 +34,8 @@ public class RecordUpdateAction extends FrontBaseAction {
             cb.query().setVersionNo_Equal(body.versionNo);
         });
 
+        int diffAmount = updateRecord.getAmount() - body.amount;
+
         updateRecord.setDate(body.date);
         updateRecord.setAccountItemId(body.accountItemId);
         updateRecord.setAmount(body.amount);
@@ -48,6 +50,26 @@ public class RecordUpdateAction extends FrontBaseAction {
         }
 
         recordBhv.update(updateRecord);
+
+        if (body.categoryType == CategoryType.Spend || body.categoryType == CategoryType.Move) {
+            Asset withdrawalAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
+                cb.query().setAssetId_Equal(body.withdrawalAcountId);
+                cb.query().setDelFlg_Equal_False();
+            });
+            withdrawalAccount.setBalance(withdrawalAccount.getBalance() + diffAmount);
+            assetBhv.update(withdrawalAccount);
+        }
+
+        if (body.categoryType == CategoryType.Income || body.categoryType == CategoryType.Move) {
+            Asset depositAccount = assetBhv.selectEntityWithDeletedCheck(cb -> {
+                cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
+                cb.query().setAssetId_Equal(body.depositAccountId);
+                cb.query().setDelFlg_Equal_False();
+            });
+            depositAccount.setBalance(depositAccount.getBalance() - diffAmount);
+            assetBhv.update(depositAccount);
+        }
 
         AccountItem accountItem = accountItemBhv.selectEntityWithDeletedCheck(cb -> {
             cb.query().setMemberId_Equal(getUserBean().get().getMemberId());

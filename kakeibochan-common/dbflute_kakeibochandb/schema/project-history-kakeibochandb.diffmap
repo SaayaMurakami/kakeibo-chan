@@ -1,4 +1,56 @@
 map:{
+    ; 2018/08/16 11:56:02 = map:{
+        ; diffDate = 2018/08/16 11:56:02
+        ; diffAuthor = s-murakami
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; ASSET = map:{
+                ; tableName = ASSET
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; BALANCE = map:{
+                        ; columnName = BALANCE
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; MEMBER = map:{
+                ; tableName = MEMBER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MAIL_ADDRESS = map:{
+                        ; columnName = MAIL_ADDRESS
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 200
+                            ; previous = 170
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/08/16 11:24:46 = map:{
+        ; diffDate = 2018/08/16 11:24:46
+        ; diffAuthor = s-murakami
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; MEMBER = map:{
+                ; tableName = MEMBER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MAIL_ADDRESS = map:{
+                        ; columnName = MAIL_ADDRESS
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 170
+                            ; previous = 200
+                        }
+                    }
+                }
+            }
+        }
+    }
     ; 2018/07/12 14:56:42 = map:{
         ; diffDate = 2018/07/12 14:56:42
         ; diffAuthor = s-murakami

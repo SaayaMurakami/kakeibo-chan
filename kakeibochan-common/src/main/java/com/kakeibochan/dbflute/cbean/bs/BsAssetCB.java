@@ -345,6 +345,11 @@ public class BsAssetCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnAssetName() { return doColumn("ASSET_NAME"); }
         /**
+         * (残高)BALANCE: {NotNull, INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnBalance() { return doColumn("BALANCE"); }
+        /**
          * (削除フラグ)DEL_FLG: {NotNull, CHAR(1), classification=Flg}
          * @return The information object of specified column. (NotNull)
          */
@@ -409,23 +414,6 @@ public class BsAssetCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
          * {select max(FOO) from RECORD where ...) as FOO_MAX} <br>
-         * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     recordCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     recordCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, Record.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<RecordCB, AssetCQ> derivedRecordByDepositAccountId() {
-            assertDerived("recordByDepositAccountIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<RecordCB> sq, AssetCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveRecordByDepositAccountIdList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from RECORD where ...) as FOO_MAX} <br>
          * (明細)RECORD by WITHDRAWAL_ACCOUNT_ID, named 'recordByWithdrawalAccountIdList'.
          * <pre>
          * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -439,6 +427,23 @@ public class BsAssetCB extends AbstractConditionBean {
             assertDerived("recordByWithdrawalAccountIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
             return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<RecordCB> sq, AssetCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsderiveRecordByWithdrawalAccountIdList(fn, sq, al, op), _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from RECORD where ...) as FOO_MAX} <br>
+         * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     recordCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     recordCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, Record.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<RecordCB, AssetCQ> derivedRecordByDepositAccountId() {
+            assertDerived("recordByDepositAccountIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<RecordCB> sq, AssetCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveRecordByDepositAccountIdList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

@@ -53,7 +53,7 @@ import com.kakeibochan.dbflute.exentity.*;
  *     
  *
  * [foreign property]
- *     accountItem, assetByDepositAccountId, member, assetByWithdrawalAccountId
+ *     accountItem, assetByWithdrawalAccountId, member, assetByDepositAccountId
  *
  * [referrer property]
  *     
@@ -290,25 +290,25 @@ public abstract class BsRecord extends AbstractEntity implements DomainEntity, E
         _accountItem = accountItem;
     }
 
-    /** (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'. */
-    protected OptionalEntity<Asset> _assetByDepositAccountId;
+    /** (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'. */
+    protected OptionalEntity<Asset> _assetByWithdrawalAccountId;
 
     /**
-     * [get] (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'. <br>
+     * [get] (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
-     * @return The entity of foreign property 'assetByDepositAccountId'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
+     * @return The entity of foreign property 'assetByWithdrawalAccountId'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
-    public OptionalEntity<Asset> getAssetByDepositAccountId() {
-        if (_assetByDepositAccountId == null) { _assetByDepositAccountId = OptionalEntity.relationEmpty(this, "assetByDepositAccountId"); }
-        return _assetByDepositAccountId;
+    public OptionalEntity<Asset> getAssetByWithdrawalAccountId() {
+        if (_assetByWithdrawalAccountId == null) { _assetByWithdrawalAccountId = OptionalEntity.relationEmpty(this, "assetByWithdrawalAccountId"); }
+        return _assetByWithdrawalAccountId;
     }
 
     /**
-     * [set] (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
-     * @param assetByDepositAccountId The entity of foreign property 'assetByDepositAccountId'. (NullAllowed)
+     * [set] (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
+     * @param assetByWithdrawalAccountId The entity of foreign property 'assetByWithdrawalAccountId'. (NullAllowed)
      */
-    public void setAssetByDepositAccountId(OptionalEntity<Asset> assetByDepositAccountId) {
-        _assetByDepositAccountId = assetByDepositAccountId;
+    public void setAssetByWithdrawalAccountId(OptionalEntity<Asset> assetByWithdrawalAccountId) {
+        _assetByWithdrawalAccountId = assetByWithdrawalAccountId;
     }
 
     /** (会員)MEMBER by my MEMBER_ID, named 'member'. */
@@ -332,25 +332,25 @@ public abstract class BsRecord extends AbstractEntity implements DomainEntity, E
         _member = member;
     }
 
-    /** (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'. */
-    protected OptionalEntity<Asset> _assetByWithdrawalAccountId;
+    /** (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'. */
+    protected OptionalEntity<Asset> _assetByDepositAccountId;
 
     /**
-     * [get] (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'. <br>
+     * [get] (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
-     * @return The entity of foreign property 'assetByWithdrawalAccountId'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
+     * @return The entity of foreign property 'assetByDepositAccountId'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
-    public OptionalEntity<Asset> getAssetByWithdrawalAccountId() {
-        if (_assetByWithdrawalAccountId == null) { _assetByWithdrawalAccountId = OptionalEntity.relationEmpty(this, "assetByWithdrawalAccountId"); }
-        return _assetByWithdrawalAccountId;
+    public OptionalEntity<Asset> getAssetByDepositAccountId() {
+        if (_assetByDepositAccountId == null) { _assetByDepositAccountId = OptionalEntity.relationEmpty(this, "assetByDepositAccountId"); }
+        return _assetByDepositAccountId;
     }
 
     /**
-     * [set] (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
-     * @param assetByWithdrawalAccountId The entity of foreign property 'assetByWithdrawalAccountId'. (NullAllowed)
+     * [set] (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
+     * @param assetByDepositAccountId The entity of foreign property 'assetByDepositAccountId'. (NullAllowed)
      */
-    public void setAssetByWithdrawalAccountId(OptionalEntity<Asset> assetByWithdrawalAccountId) {
-        _assetByWithdrawalAccountId = assetByWithdrawalAccountId;
+    public void setAssetByDepositAccountId(OptionalEntity<Asset> assetByDepositAccountId) {
+        _assetByDepositAccountId = assetByDepositAccountId;
     }
 
     // ===================================================================================
@@ -387,12 +387,12 @@ public abstract class BsRecord extends AbstractEntity implements DomainEntity, E
         StringBuilder sb = new StringBuilder();
         if (_accountItem != null && _accountItem.isPresent())
         { sb.append(li).append(xbRDS(_accountItem, "accountItem")); }
-        if (_assetByDepositAccountId != null && _assetByDepositAccountId.isPresent())
-        { sb.append(li).append(xbRDS(_assetByDepositAccountId, "assetByDepositAccountId")); }
-        if (_member != null && _member.isPresent())
-        { sb.append(li).append(xbRDS(_member, "member")); }
         if (_assetByWithdrawalAccountId != null && _assetByWithdrawalAccountId.isPresent())
         { sb.append(li).append(xbRDS(_assetByWithdrawalAccountId, "assetByWithdrawalAccountId")); }
+        if (_member != null && _member.isPresent())
+        { sb.append(li).append(xbRDS(_member, "member")); }
+        if (_assetByDepositAccountId != null && _assetByDepositAccountId.isPresent())
+        { sb.append(li).append(xbRDS(_assetByDepositAccountId, "assetByDepositAccountId")); }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -428,12 +428,12 @@ public abstract class BsRecord extends AbstractEntity implements DomainEntity, E
         StringBuilder sb = new StringBuilder();
         if (_accountItem != null && _accountItem.isPresent())
         { sb.append(dm).append("accountItem"); }
-        if (_assetByDepositAccountId != null && _assetByDepositAccountId.isPresent())
-        { sb.append(dm).append("assetByDepositAccountId"); }
-        if (_member != null && _member.isPresent())
-        { sb.append(dm).append("member"); }
         if (_assetByWithdrawalAccountId != null && _assetByWithdrawalAccountId.isPresent())
         { sb.append(dm).append("assetByWithdrawalAccountId"); }
+        if (_member != null && _member.isPresent())
+        { sb.append(dm).append("member"); }
+        if (_assetByDepositAccountId != null && _assetByDepositAccountId.isPresent())
+        { sb.append(dm).append("assetByDepositAccountId"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }

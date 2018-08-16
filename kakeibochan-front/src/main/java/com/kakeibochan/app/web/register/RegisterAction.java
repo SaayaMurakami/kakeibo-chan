@@ -98,7 +98,7 @@ public class RegisterAction extends FrontBaseAction {
         transportationExpenses.setMemberId(member.getMemberId());
         transportationExpenses.setCategoryType_Spend();
         transportationExpenses.setAccountTitle("交通費");
-        transportationExpenses.setDelFlg_True();
+        transportationExpenses.setDelFlg_False();
         accountItemBhv.insert(transportationExpenses);
 
         AccountItem communicationCost = new AccountItem();
@@ -147,12 +147,14 @@ public class RegisterAction extends FrontBaseAction {
         bankAccount.setMemberId(member.getMemberId());
         bankAccount.setAssetName("銀行口座");
         bankAccount.setDelFlg_False();
+        bankAccount.setBalance(0);
         assetBhv.insert(bankAccount);
 
         Asset wallet = new Asset();
         wallet.setMemberId(member.getMemberId());
         wallet.setAssetName("財布");
         wallet.setDelFlg_False();
+        wallet.setBalance(0);
         assetBhv.insert(wallet);
 
         //ログインする

@@ -46,7 +46,7 @@ import com.kakeibochan.dbflute.exentity.*;
  *     
  *
  * [foreign property]
- *     accountItem, assetByDepositAccountId, member, assetByWithdrawalAccountId
+ *     accountItem, assetByWithdrawalAccountId, member, assetByDepositAccountId
  *
  * [referrer property]
  *     
@@ -81,11 +81,11 @@ public class LoaderOfRecord {
         return _foreignAccountItemLoader;
     }
 
-    protected LoaderOfAsset _foreignAssetByDepositAccountIdLoader;
-    public LoaderOfAsset pulloutAssetByDepositAccountId() {
-        if (_foreignAssetByDepositAccountIdLoader == null)
-        { _foreignAssetByDepositAccountIdLoader = new LoaderOfAsset().ready(myBhv().pulloutAssetByDepositAccountId(_selectedList), _selector); }
-        return _foreignAssetByDepositAccountIdLoader;
+    protected LoaderOfAsset _foreignAssetByWithdrawalAccountIdLoader;
+    public LoaderOfAsset pulloutAssetByWithdrawalAccountId() {
+        if (_foreignAssetByWithdrawalAccountIdLoader == null)
+        { _foreignAssetByWithdrawalAccountIdLoader = new LoaderOfAsset().ready(myBhv().pulloutAssetByWithdrawalAccountId(_selectedList), _selector); }
+        return _foreignAssetByWithdrawalAccountIdLoader;
     }
 
     protected LoaderOfMember _foreignMemberLoader;
@@ -95,11 +95,11 @@ public class LoaderOfRecord {
         return _foreignMemberLoader;
     }
 
-    protected LoaderOfAsset _foreignAssetByWithdrawalAccountIdLoader;
-    public LoaderOfAsset pulloutAssetByWithdrawalAccountId() {
-        if (_foreignAssetByWithdrawalAccountIdLoader == null)
-        { _foreignAssetByWithdrawalAccountIdLoader = new LoaderOfAsset().ready(myBhv().pulloutAssetByWithdrawalAccountId(_selectedList), _selector); }
-        return _foreignAssetByWithdrawalAccountIdLoader;
+    protected LoaderOfAsset _foreignAssetByDepositAccountIdLoader;
+    public LoaderOfAsset pulloutAssetByDepositAccountId() {
+        if (_foreignAssetByDepositAccountIdLoader == null)
+        { _foreignAssetByDepositAccountIdLoader = new LoaderOfAsset().ready(myBhv().pulloutAssetByDepositAccountId(_selectedList), _selector); }
+        return _foreignAssetByDepositAccountIdLoader;
     }
 
     // ===================================================================================

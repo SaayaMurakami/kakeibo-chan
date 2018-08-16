@@ -23,6 +23,9 @@ import org.lastaflute.web.response.next.HtmlNext;
  */
 public interface FrontHtmlPath {
 
+    /** The path of the HTML: /asset/asset.html */
+    HtmlNext path_Asset_AssetHtml = new HtmlNext("/asset/asset.html");
+
     /** The path of the HTML: /common_default/layout.html */
     HtmlNext path_CommonDefault_LayoutHtml = new HtmlNext("/common_default/layout.html");
 

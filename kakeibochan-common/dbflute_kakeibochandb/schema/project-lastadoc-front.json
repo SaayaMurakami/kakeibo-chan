@@ -514,8 +514,8 @@
           }
         ]
       },
-      "fileLineCount": 59,
-      "methodLineCount": 49
+      "fileLineCount": 81,
+      "methodLineCount": 71
     },
     {
       "url": "/record/list/{pageNo}",
@@ -620,8 +620,8 @@
         "annotationList": [],
         "nestTypeDocMetaList": []
       },
-      "fileLineCount": 51,
-      "methodLineCount": 36
+      "fileLineCount": 52,
+      "methodLineCount": 37
     },
     {
       "url": "/record/register/",
@@ -704,7 +704,7 @@
         "annotationList": [],
         "nestTypeDocMetaList": []
       },
-      "fileLineCount": 224,
+      "fileLineCount": 229,
       "methodLineCount": 3
     },
     {
@@ -859,7 +859,7 @@
         "annotationList": [],
         "nestTypeDocMetaList": []
       },
-      "fileLineCount": 224,
+      "fileLineCount": 229,
       "methodLineCount": 7
     },
     {
@@ -1014,7 +1014,7 @@
         "annotationList": [],
         "nestTypeDocMetaList": []
       },
-      "fileLineCount": 224,
+      "fileLineCount": 229,
       "methodLineCount": 28
     },
     {
@@ -1169,7 +1169,7 @@
         "annotationList": [],
         "nestTypeDocMetaList": []
       },
-      "fileLineCount": 224,
+      "fileLineCount": 229,
       "methodLineCount": 31
     },
     {
@@ -1233,7 +1233,7 @@
         "annotationList": [],
         "nestTypeDocMetaList": []
       },
-      "fileLineCount": 224,
+      "fileLineCount": 229,
       "methodLineCount": 3
     },
     {

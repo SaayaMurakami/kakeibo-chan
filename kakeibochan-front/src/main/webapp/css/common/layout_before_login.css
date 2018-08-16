@@ -89,7 +89,7 @@ nav {
     background-image: url(../../img/mainvisual.png);
     max-width: 100%;
     min-height: 530px;
-    height: calc(100vh - 123px);
+    height: 100vh;
     background-repeat: repeat-x;
     background-position: bottom;
 }

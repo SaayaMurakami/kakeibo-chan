@@ -59,7 +59,7 @@ import com.kakeibochan.dbflute.cbean.*;
  *     
  *
  * [foreign property]
- *     accountItem, assetByDepositAccountId, member, assetByWithdrawalAccountId
+ *     accountItem, assetByWithdrawalAccountId, member, assetByDepositAccountId
  *
  * [referrer property]
  *     
@@ -390,8 +390,8 @@ public abstract class BsRecordBhv extends AbstractBehaviorWritable<Record, Recor
      * @param recordList The list of record. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Asset> pulloutAssetByDepositAccountId(List<Record> recordList)
-    { return helpPulloutInternally(recordList, "assetByDepositAccountId"); }
+    public List<Asset> pulloutAssetByWithdrawalAccountId(List<Record> recordList)
+    { return helpPulloutInternally(recordList, "assetByWithdrawalAccountId"); }
 
     /**
      * Pull out the list of foreign table 'Member'.
@@ -406,8 +406,8 @@ public abstract class BsRecordBhv extends AbstractBehaviorWritable<Record, Recor
      * @param recordList The list of record. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Asset> pulloutAssetByWithdrawalAccountId(List<Record> recordList)
-    { return helpPulloutInternally(recordList, "assetByWithdrawalAccountId"); }
+    public List<Asset> pulloutAssetByDepositAccountId(List<Record> recordList)
+    { return helpPulloutInternally(recordList, "assetByDepositAccountId"); }
 
     // ===================================================================================
     //                                                                      Extract Column

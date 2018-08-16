@@ -41,6 +41,7 @@ public class RecordDetailAction extends FrontBaseAction {
             accountItemList = accountItemBhv.selectList(cb -> {
                 cb.query().setMemberId_Equal(getUserBean().get().getUserId());
                 cb.query().setCategoryType_Equal_Spend();
+                cb.query().setDelFlg_Equal_False();
                 cb.query().addOrderBy_AccountItemId_Asc();
             });
 
@@ -48,12 +49,14 @@ public class RecordDetailAction extends FrontBaseAction {
             accountItemList = accountItemBhv.selectList(cb -> {
                 cb.query().setMemberId_Equal(getUserBean().get().getUserId());
                 cb.query().setCategoryType_Equal_Income();
+                cb.query().setDelFlg_Equal_False();
                 cb.query().addOrderBy_AccountItemId_Asc();
             });
         } else if (record.getAccountItem().get().getCategoryTypeAsCategoryType() == CategoryType.Move) {
             accountItemList = accountItemBhv.selectList(cb -> {
                 cb.query().setMemberId_Equal(getUserBean().get().getUserId());
                 cb.query().setCategoryType_Equal_Move();
+                cb.query().setDelFlg_Equal_False();
                 cb.query().addOrderBy_AccountItemId_Asc();
             });
         }
@@ -68,6 +71,7 @@ public class RecordDetailAction extends FrontBaseAction {
 
         ListResultBean<Asset> assetList = assetBhv.selectList(cb -> {
             cb.query().setMemberId_Equal(getUserBean().get().getMemberId());
+            cb.query().setDelFlg_Equal_False();
             cb.query().addOrderBy_AssetId_Asc();
         });
 

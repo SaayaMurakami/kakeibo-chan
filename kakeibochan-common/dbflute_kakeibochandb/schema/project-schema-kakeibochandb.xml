@@ -44,6 +44,8 @@
             name="MEMBER_ID" required="true" size="19" type="BIGINT"/>
         <column comment="資産名" dbType="VARCHAR" javaType="String"
             name="ASSET_NAME" required="true" size="200" type="VARCHAR"/>
+        <column comment="残高" dbType="INT" javaType="Integer"
+            name="BALANCE" required="true" size="10" type="INTEGER"/>
         <column comment="削除フラグ" dbType="CHAR" javaType="String"
             name="DEL_FLG" required="true" size="1" type="CHAR"/>
         <column comment="登録日時" dbType="DATETIME"
@@ -133,7 +135,7 @@
         </foreign-key>
         <foreign-key foreignSchema="kakeibochandb.$$NoNameSchema$$"
             foreignTable="ASSET" name="record_ibfk_2">
-            <reference foreign="ASSET_ID" local="DEPOSIT_ACCOUNT_ID"/>
+            <reference foreign="ASSET_ID" local="WITHDRAWAL_ACCOUNT_ID"/>
         </foreign-key>
         <foreign-key foreignSchema="kakeibochandb.$$NoNameSchema$$"
             foreignTable="MEMBER" name="record_ibfk_4">
@@ -141,7 +143,7 @@
         </foreign-key>
         <foreign-key foreignSchema="kakeibochandb.$$NoNameSchema$$"
             foreignTable="ASSET" name="record_ibfk_3">
-            <reference foreign="ASSET_ID" local="WITHDRAWAL_ACCOUNT_ID"/>
+            <reference foreign="ASSET_ID" local="DEPOSIT_ACCOUNT_ID"/>
         </foreign-key>
         <index name="ACCOUNT_ITEM_ID">
             <index-column name="ACCOUNT_ITEM_ID" position="1"/>

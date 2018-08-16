@@ -94,33 +94,33 @@ public class BsAssetCQ extends AbstractBsAssetCQ {
       return _assetId; }
     protected ConditionValue xgetCValueAssetId() { return xdfgetAssetId(); }
 
-    public Map<String, RecordCQ> xdfgetAssetId_ExistsReferrer_RecordByDepositAccountIdList() { return xgetSQueMap("assetId_ExistsReferrer_RecordByDepositAccountIdList"); }
-    public String keepAssetId_ExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_ExistsReferrer_RecordByDepositAccountIdList", sq); }
-
     public Map<String, RecordCQ> xdfgetAssetId_ExistsReferrer_RecordByWithdrawalAccountIdList() { return xgetSQueMap("assetId_ExistsReferrer_RecordByWithdrawalAccountIdList"); }
     public String keepAssetId_ExistsReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_ExistsReferrer_RecordByWithdrawalAccountIdList", sq); }
 
-    public Map<String, RecordCQ> xdfgetAssetId_NotExistsReferrer_RecordByDepositAccountIdList() { return xgetSQueMap("assetId_NotExistsReferrer_RecordByDepositAccountIdList"); }
-    public String keepAssetId_NotExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_NotExistsReferrer_RecordByDepositAccountIdList", sq); }
+    public Map<String, RecordCQ> xdfgetAssetId_ExistsReferrer_RecordByDepositAccountIdList() { return xgetSQueMap("assetId_ExistsReferrer_RecordByDepositAccountIdList"); }
+    public String keepAssetId_ExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_ExistsReferrer_RecordByDepositAccountIdList", sq); }
 
     public Map<String, RecordCQ> xdfgetAssetId_NotExistsReferrer_RecordByWithdrawalAccountIdList() { return xgetSQueMap("assetId_NotExistsReferrer_RecordByWithdrawalAccountIdList"); }
     public String keepAssetId_NotExistsReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_NotExistsReferrer_RecordByWithdrawalAccountIdList", sq); }
 
-    public Map<String, RecordCQ> xdfgetAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList() { return xgetSQueMap("assetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList"); }
-    public String keepAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList", sq); }
+    public Map<String, RecordCQ> xdfgetAssetId_NotExistsReferrer_RecordByDepositAccountIdList() { return xgetSQueMap("assetId_NotExistsReferrer_RecordByDepositAccountIdList"); }
+    public String keepAssetId_NotExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_NotExistsReferrer_RecordByDepositAccountIdList", sq); }
 
     public Map<String, RecordCQ> xdfgetAssetId_SpecifyDerivedReferrer_RecordByWithdrawalAccountIdList() { return xgetSQueMap("assetId_SpecifyDerivedReferrer_RecordByWithdrawalAccountIdList"); }
     public String keepAssetId_SpecifyDerivedReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_SpecifyDerivedReferrer_RecordByWithdrawalAccountIdList", sq); }
 
-    public Map<String, RecordCQ> xdfgetAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList() { return xgetSQueMap("assetId_QueryDerivedReferrer_RecordByDepositAccountIdList"); }
-    public String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_QueryDerivedReferrer_RecordByDepositAccountIdList", sq); }
-    public Map<String, Object> xdfgetAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter() { return xgetSQuePmMap("assetId_QueryDerivedReferrer_RecordByDepositAccountIdList"); }
-    public String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter(Object pm) { return xkeepSQuePm("assetId_QueryDerivedReferrer_RecordByDepositAccountIdList", pm); }
+    public Map<String, RecordCQ> xdfgetAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList() { return xgetSQueMap("assetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList"); }
+    public String keepAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList", sq); }
 
     public Map<String, RecordCQ> xdfgetAssetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdList() { return xgetSQueMap("assetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdList"); }
     public String keepAssetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdList", sq); }
     public Map<String, Object> xdfgetAssetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdListParameter() { return xgetSQuePmMap("assetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdList"); }
     public String keepAssetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdListParameter(Object pm) { return xkeepSQuePm("assetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdList", pm); }
+
+    public Map<String, RecordCQ> xdfgetAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList() { return xgetSQueMap("assetId_QueryDerivedReferrer_RecordByDepositAccountIdList"); }
+    public String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq) { return xkeepSQue("assetId_QueryDerivedReferrer_RecordByDepositAccountIdList", sq); }
+    public Map<String, Object> xdfgetAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter() { return xgetSQuePmMap("assetId_QueryDerivedReferrer_RecordByDepositAccountIdList"); }
+    public String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter(Object pm) { return xkeepSQuePm("assetId_QueryDerivedReferrer_RecordByDepositAccountIdList", pm); }
 
     /**
      * Add order-by as ascend. <br>
@@ -175,6 +175,26 @@ public class BsAssetCQ extends AbstractBsAssetCQ {
      * @return this. (NotNull)
      */
     public BsAssetCQ addOrderBy_AssetName_Desc() { regOBD("ASSET_NAME"); return this; }
+
+    protected ConditionValue _balance;
+    public ConditionValue xdfgetBalance()
+    { if (_balance == null) { _balance = nCV(); }
+      return _balance; }
+    protected ConditionValue xgetCValueBalance() { return xdfgetBalance(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsAssetCQ addOrderBy_Balance_Asc() { regOBA("BALANCE"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsAssetCQ addOrderBy_Balance_Desc() { regOBD("BALANCE"); return this; }
 
     protected ConditionValue _delFlg;
     public ConditionValue xdfgetDelFlg()

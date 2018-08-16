@@ -412,14 +412,14 @@ public class BsRecordCQ extends AbstractBsRecordCQ {
         if (bq.hasConditionQueryAccountItem()) {
             uq.queryAccountItem().reflectRelationOnUnionQuery(bq.queryAccountItem(), uq.queryAccountItem());
         }
-        if (bq.hasConditionQueryAssetByDepositAccountId()) {
-            uq.queryAssetByDepositAccountId().reflectRelationOnUnionQuery(bq.queryAssetByDepositAccountId(), uq.queryAssetByDepositAccountId());
+        if (bq.hasConditionQueryAssetByWithdrawalAccountId()) {
+            uq.queryAssetByWithdrawalAccountId().reflectRelationOnUnionQuery(bq.queryAssetByWithdrawalAccountId(), uq.queryAssetByWithdrawalAccountId());
         }
         if (bq.hasConditionQueryMember()) {
             uq.queryMember().reflectRelationOnUnionQuery(bq.queryMember(), uq.queryMember());
         }
-        if (bq.hasConditionQueryAssetByWithdrawalAccountId()) {
-            uq.queryAssetByWithdrawalAccountId().reflectRelationOnUnionQuery(bq.queryAssetByWithdrawalAccountId(), uq.queryAssetByWithdrawalAccountId());
+        if (bq.hasConditionQueryAssetByDepositAccountId()) {
+            uq.queryAssetByDepositAccountId().reflectRelationOnUnionQuery(bq.queryAssetByDepositAccountId(), uq.queryAssetByDepositAccountId());
         }
     }
 
@@ -448,23 +448,23 @@ public class BsRecordCQ extends AbstractBsRecordCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
+     * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
      * @return The instance of condition-query. (NotNull)
      */
-    public AssetCQ queryAssetByDepositAccountId() {
-        return xdfgetConditionQueryAssetByDepositAccountId();
+    public AssetCQ queryAssetByWithdrawalAccountId() {
+        return xdfgetConditionQueryAssetByWithdrawalAccountId();
     }
-    public AssetCQ xdfgetConditionQueryAssetByDepositAccountId() {
-        String prop = "assetByDepositAccountId";
-        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryAssetByDepositAccountId()); xsetupOuterJoinAssetByDepositAccountId(); }
+    public AssetCQ xdfgetConditionQueryAssetByWithdrawalAccountId() {
+        String prop = "assetByWithdrawalAccountId";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryAssetByWithdrawalAccountId()); xsetupOuterJoinAssetByWithdrawalAccountId(); }
         return xgetQueRlMap(prop);
     }
-    protected AssetCQ xcreateQueryAssetByDepositAccountId() {
-        String nrp = xresolveNRP("RECORD", "assetByDepositAccountId"); String jan = xresolveJAN(nrp, xgetNNLvl());
-        return xinitRelCQ(new AssetCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "assetByDepositAccountId", nrp);
+    protected AssetCQ xcreateQueryAssetByWithdrawalAccountId() {
+        String nrp = xresolveNRP("RECORD", "assetByWithdrawalAccountId"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new AssetCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "assetByWithdrawalAccountId", nrp);
     }
-    protected void xsetupOuterJoinAssetByDepositAccountId() { xregOutJo("assetByDepositAccountId"); }
-    public boolean hasConditionQueryAssetByDepositAccountId() { return xhasQueRlMap("assetByDepositAccountId"); }
+    protected void xsetupOuterJoinAssetByWithdrawalAccountId() { xregOutJo("assetByWithdrawalAccountId"); }
+    public boolean hasConditionQueryAssetByWithdrawalAccountId() { return xhasQueRlMap("assetByWithdrawalAccountId"); }
 
     /**
      * Get the condition-query for relation table. <br>
@@ -488,23 +488,23 @@ public class BsRecordCQ extends AbstractBsRecordCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * (資産)ASSET by my WITHDRAWAL_ACCOUNT_ID, named 'assetByWithdrawalAccountId'.
+     * (資産)ASSET by my DEPOSIT_ACCOUNT_ID, named 'assetByDepositAccountId'.
      * @return The instance of condition-query. (NotNull)
      */
-    public AssetCQ queryAssetByWithdrawalAccountId() {
-        return xdfgetConditionQueryAssetByWithdrawalAccountId();
+    public AssetCQ queryAssetByDepositAccountId() {
+        return xdfgetConditionQueryAssetByDepositAccountId();
     }
-    public AssetCQ xdfgetConditionQueryAssetByWithdrawalAccountId() {
-        String prop = "assetByWithdrawalAccountId";
-        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryAssetByWithdrawalAccountId()); xsetupOuterJoinAssetByWithdrawalAccountId(); }
+    public AssetCQ xdfgetConditionQueryAssetByDepositAccountId() {
+        String prop = "assetByDepositAccountId";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryAssetByDepositAccountId()); xsetupOuterJoinAssetByDepositAccountId(); }
         return xgetQueRlMap(prop);
     }
-    protected AssetCQ xcreateQueryAssetByWithdrawalAccountId() {
-        String nrp = xresolveNRP("RECORD", "assetByWithdrawalAccountId"); String jan = xresolveJAN(nrp, xgetNNLvl());
-        return xinitRelCQ(new AssetCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "assetByWithdrawalAccountId", nrp);
+    protected AssetCQ xcreateQueryAssetByDepositAccountId() {
+        String nrp = xresolveNRP("RECORD", "assetByDepositAccountId"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new AssetCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "assetByDepositAccountId", nrp);
     }
-    protected void xsetupOuterJoinAssetByWithdrawalAccountId() { xregOutJo("assetByWithdrawalAccountId"); }
-    public boolean hasConditionQueryAssetByWithdrawalAccountId() { return xhasQueRlMap("assetByWithdrawalAccountId"); }
+    protected void xsetupOuterJoinAssetByDepositAccountId() { xregOutJo("assetByDepositAccountId"); }
+    public boolean hasConditionQueryAssetByDepositAccountId() { return xhasQueRlMap("assetByDepositAccountId"); }
 
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String property) {
         return null;

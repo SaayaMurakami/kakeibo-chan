@@ -35,7 +35,7 @@ import com.kakeibochan.dbflute.exentity.*;
  *     ASSET_ID
  *
  * [column]
- *     ASSET_ID, MEMBER_ID, ASSET_NAME, DEL_FLG, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     ASSET_ID, MEMBER_ID, ASSET_NAME, BALANCE, DEL_FLG, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -56,13 +56,14 @@ import com.kakeibochan.dbflute.exentity.*;
  *     member
  *
  * [referrer property]
- *     recordByDepositAccountIdList, recordByWithdrawalAccountIdList
+ *     recordByWithdrawalAccountIdList, recordByDepositAccountIdList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Long assetId = entity.getAssetId();
  * Long memberId = entity.getMemberId();
  * String assetName = entity.getAssetName();
+ * Integer balance = entity.getBalance();
  * String delFlg = entity.getDelFlg();
  * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
  * String registerUser = entity.getRegisterUser();
@@ -72,6 +73,7 @@ import com.kakeibochan.dbflute.exentity.*;
  * entity.setAssetId(assetId);
  * entity.setMemberId(memberId);
  * entity.setAssetName(assetName);
+ * entity.setBalance(balance);
  * entity.setDelFlg(delFlg);
  * entity.setRegisterDatetime(registerDatetime);
  * entity.setRegisterUser(registerUser);
@@ -101,6 +103,9 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
 
     /** (資産名)ASSET_NAME: {NotNull, VARCHAR(200)} */
     protected String _assetName;
+
+    /** (残高)BALANCE: {NotNull, INT(10)} */
+    protected Integer _balance;
 
     /** (削除フラグ)DEL_FLG: {NotNull, CHAR(1), classification=Flg} */
     protected String _delFlg;
@@ -268,26 +273,6 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'. */
-    protected List<Record> _recordByDepositAccountIdList;
-
-    /**
-     * [get] (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
-     * @return The entity list of referrer property 'recordByDepositAccountIdList'. (NotNull: even if no loading, returns empty list)
-     */
-    public List<Record> getRecordByDepositAccountIdList() {
-        if (_recordByDepositAccountIdList == null) { _recordByDepositAccountIdList = newReferrerList(); }
-        return _recordByDepositAccountIdList;
-    }
-
-    /**
-     * [set] (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
-     * @param recordByDepositAccountIdList The entity list of referrer property 'recordByDepositAccountIdList'. (NullAllowed)
-     */
-    public void setRecordByDepositAccountIdList(List<Record> recordByDepositAccountIdList) {
-        _recordByDepositAccountIdList = recordByDepositAccountIdList;
-    }
-
     /** (明細)RECORD by WITHDRAWAL_ACCOUNT_ID, named 'recordByWithdrawalAccountIdList'. */
     protected List<Record> _recordByWithdrawalAccountIdList;
 
@@ -306,6 +291,26 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
      */
     public void setRecordByWithdrawalAccountIdList(List<Record> recordByWithdrawalAccountIdList) {
         _recordByWithdrawalAccountIdList = recordByWithdrawalAccountIdList;
+    }
+
+    /** (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'. */
+    protected List<Record> _recordByDepositAccountIdList;
+
+    /**
+     * [get] (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
+     * @return The entity list of referrer property 'recordByDepositAccountIdList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Record> getRecordByDepositAccountIdList() {
+        if (_recordByDepositAccountIdList == null) { _recordByDepositAccountIdList = newReferrerList(); }
+        return _recordByDepositAccountIdList;
+    }
+
+    /**
+     * [set] (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdList'.
+     * @param recordByDepositAccountIdList The entity list of referrer property 'recordByDepositAccountIdList'. (NullAllowed)
+     */
+    public void setRecordByDepositAccountIdList(List<Record> recordByDepositAccountIdList) {
+        _recordByDepositAccountIdList = recordByDepositAccountIdList;
     }
 
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
@@ -339,10 +344,10 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
         StringBuilder sb = new StringBuilder();
         if (_member != null && _member.isPresent())
         { sb.append(li).append(xbRDS(_member, "member")); }
-        if (_recordByDepositAccountIdList != null) { for (Record et : _recordByDepositAccountIdList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "recordByDepositAccountIdList")); } } }
         if (_recordByWithdrawalAccountIdList != null) { for (Record et : _recordByWithdrawalAccountIdList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "recordByWithdrawalAccountIdList")); } } }
+        if (_recordByDepositAccountIdList != null) { for (Record et : _recordByDepositAccountIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "recordByDepositAccountIdList")); } } }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -355,6 +360,7 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
         sb.append(dm).append(xfND(_assetId));
         sb.append(dm).append(xfND(_memberId));
         sb.append(dm).append(xfND(_assetName));
+        sb.append(dm).append(xfND(_balance));
         sb.append(dm).append(xfND(_delFlg));
         sb.append(dm).append(xfND(_registerDatetime));
         sb.append(dm).append(xfND(_registerUser));
@@ -373,10 +379,10 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
         StringBuilder sb = new StringBuilder();
         if (_member != null && _member.isPresent())
         { sb.append(dm).append("member"); }
-        if (_recordByDepositAccountIdList != null && !_recordByDepositAccountIdList.isEmpty())
-        { sb.append(dm).append("recordByDepositAccountIdList"); }
         if (_recordByWithdrawalAccountIdList != null && !_recordByWithdrawalAccountIdList.isEmpty())
         { sb.append(dm).append("recordByWithdrawalAccountIdList"); }
+        if (_recordByDepositAccountIdList != null && !_recordByDepositAccountIdList.isEmpty())
+        { sb.append(dm).append("recordByDepositAccountIdList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }
@@ -443,6 +449,24 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
     public void setAssetName(String assetName) {
         registerModifiedProperty("assetName");
         _assetName = assetName;
+    }
+
+    /**
+     * [get] (残高)BALANCE: {NotNull, INT(10)} <br>
+     * @return The value of the column 'BALANCE'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getBalance() {
+        checkSpecifiedProperty("balance");
+        return _balance;
+    }
+
+    /**
+     * [set] (残高)BALANCE: {NotNull, INT(10)} <br>
+     * @param balance The value of the column 'BALANCE'. (basically NotNull if update: for the constraint)
+     */
+    public void setBalance(Integer balance) {
+        registerModifiedProperty("balance");
+        _balance = balance;
     }
 
     /**

@@ -41,6 +41,7 @@ public class RecordListAction extends FrontBaseAction {
             cb.setupSelect_AssetByWithdrawalAccountId();
 
             cb.query().setMemberId_Equal(userId);
+            cb.query().setDelFlg_Equal_False();
             cb.query().addOrderBy_Date_Desc();
 
             cb.paging(PAGE_SIZE, pageNo.orElse(1));

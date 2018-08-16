@@ -174,25 +174,6 @@ public abstract class AbstractBsAssetCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
-     * {exists (select DEPOSIT_ACCOUNT_ID from RECORD where ...)} <br>
-     * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #CC4747">existsRecordByDepositAccountId</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     recordCB.query().set...
-     * });
-     * </pre>
-     * @param subCBLambda The callback for sub-query of RecordByDepositAccountIdList for 'exists'. (NotNull)
-     */
-    public void existsRecordByDepositAccountId(SubQuery<RecordCB> subCBLambda) {
-        assertObjectNotNull("subCBLambda", subCBLambda);
-        RecordCB cb = new RecordCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepAssetId_ExistsReferrer_RecordByDepositAccountIdList(cb.query());
-        registerExistsReferrer(cb.query(), "ASSET_ID", "DEPOSIT_ACCOUNT_ID", pp, "recordByDepositAccountIdList");
-    }
-    public abstract String keepAssetId_ExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq);
-
-    /**
-     * Set up ExistsReferrer (correlated sub-query). <br>
      * {exists (select WITHDRAWAL_ACCOUNT_ID from RECORD where ...)} <br>
      * (明細)RECORD by WITHDRAWAL_ACCOUNT_ID, named 'recordByWithdrawalAccountIdAsOne'.
      * <pre>
@@ -211,23 +192,23 @@ public abstract class AbstractBsAssetCQ extends AbstractConditionQuery {
     public abstract String keepAssetId_ExistsReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq);
 
     /**
-     * Set up NotExistsReferrer (correlated sub-query). <br>
-     * {not exists (select DEPOSIT_ACCOUNT_ID from RECORD where ...)} <br>
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select DEPOSIT_ACCOUNT_ID from RECORD where ...)} <br>
      * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">notExistsRecordByDepositAccountId</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * cb.query().<span style="color: #CC4747">existsRecordByDepositAccountId</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     recordCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of AssetId_NotExistsReferrer_RecordByDepositAccountIdList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of RecordByDepositAccountIdList for 'exists'. (NotNull)
      */
-    public void notExistsRecordByDepositAccountId(SubQuery<RecordCB> subCBLambda) {
+    public void existsRecordByDepositAccountId(SubQuery<RecordCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         RecordCB cb = new RecordCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepAssetId_NotExistsReferrer_RecordByDepositAccountIdList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ASSET_ID", "DEPOSIT_ACCOUNT_ID", pp, "recordByDepositAccountIdList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepAssetId_ExistsReferrer_RecordByDepositAccountIdList(cb.query());
+        registerExistsReferrer(cb.query(), "ASSET_ID", "DEPOSIT_ACCOUNT_ID", pp, "recordByDepositAccountIdList");
     }
-    public abstract String keepAssetId_NotExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq);
+    public abstract String keepAssetId_ExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
@@ -248,13 +229,24 @@ public abstract class AbstractBsAssetCQ extends AbstractConditionQuery {
     }
     public abstract String keepAssetId_NotExistsReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq);
 
-    public void xsderiveRecordByDepositAccountIdList(String fn, SubQuery<RecordCB> sq, String al, DerivedReferrerOption op) {
-        assertObjectNotNull("subQuery", sq);
-        RecordCB cb = new RecordCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ASSET_ID", "DEPOSIT_ACCOUNT_ID", pp, "recordByDepositAccountIdList", al, op);
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select DEPOSIT_ACCOUNT_ID from RECORD where ...)} <br>
+     * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsRecordByDepositAccountId</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recordCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of AssetId_NotExistsReferrer_RecordByDepositAccountIdList for 'not exists'. (NotNull)
+     */
+    public void notExistsRecordByDepositAccountId(SubQuery<RecordCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        RecordCB cb = new RecordCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepAssetId_NotExistsReferrer_RecordByDepositAccountIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "ASSET_ID", "DEPOSIT_ACCOUNT_ID", pp, "recordByDepositAccountIdList");
     }
-    public abstract String keepAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq);
+    public abstract String keepAssetId_NotExistsReferrer_RecordByDepositAccountIdList(RecordCQ sq);
 
     public void xsderiveRecordByWithdrawalAccountIdList(String fn, SubQuery<RecordCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
@@ -264,32 +256,13 @@ public abstract class AbstractBsAssetCQ extends AbstractConditionQuery {
     }
     public abstract String keepAssetId_SpecifyDerivedReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq);
 
-    /**
-     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
-     * {FOO &lt;= (select max(BAR) from RECORD where ...)} <br>
-     * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #CC4747">derivedRecordByDepositAccountId()</span>.<span style="color: #CC4747">max</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     recordCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-     *     recordCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
-     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
-     * </pre>
-     * @return The object to set up a function for referrer table. (NotNull)
-     */
-    public HpQDRFunction<RecordCB> derivedRecordByDepositAccountId() {
-        return xcreateQDRFunctionRecordByDepositAccountIdList();
-    }
-    protected HpQDRFunction<RecordCB> xcreateQDRFunctionRecordByDepositAccountIdList() {
-        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveRecordByDepositAccountIdList(fn, sq, rd, vl, op));
-    }
-    public void xqderiveRecordByDepositAccountIdList(String fn, SubQuery<RecordCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+    public void xsderiveRecordByDepositAccountIdList(String fn, SubQuery<RecordCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         RecordCB cb = new RecordCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList(cb.query()); String prpp = keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ASSET_ID", "DEPOSIT_ACCOUNT_ID", sqpp, "recordByDepositAccountIdList", rd, vl, prpp, op);
+        lockCall(() -> sq.query(cb)); String pp = keepAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "ASSET_ID", "DEPOSIT_ACCOUNT_ID", pp, "recordByDepositAccountIdList", al, op);
     }
-    public abstract String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq);
-    public abstract String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter(Object vl);
+    public abstract String keepAssetId_SpecifyDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -317,6 +290,33 @@ public abstract class AbstractBsAssetCQ extends AbstractConditionQuery {
     }
     public abstract String keepAssetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdList(RecordCQ sq);
     public abstract String keepAssetId_QueryDerivedReferrer_RecordByWithdrawalAccountIdListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from RECORD where ...)} <br>
+     * (明細)RECORD by DEPOSIT_ACCOUNT_ID, named 'recordByDepositAccountIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedRecordByDepositAccountId()</span>.<span style="color: #CC4747">max</span>(recordCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recordCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     recordCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<RecordCB> derivedRecordByDepositAccountId() {
+        return xcreateQDRFunctionRecordByDepositAccountIdList();
+    }
+    protected HpQDRFunction<RecordCB> xcreateQDRFunctionRecordByDepositAccountIdList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveRecordByDepositAccountIdList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveRecordByDepositAccountIdList(String fn, SubQuery<RecordCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        RecordCB cb = new RecordCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList(cb.query()); String prpp = keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "ASSET_ID", "DEPOSIT_ACCOUNT_ID", sqpp, "recordByDepositAccountIdList", rd, vl, prpp, op);
+    }
+    public abstract String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdList(RecordCQ sq);
+    public abstract String keepAssetId_QueryDerivedReferrer_RecordByDepositAccountIdListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
@@ -509,6 +509,123 @@ public abstract class AbstractBsAssetCQ extends AbstractConditionQuery {
 
     protected void regAssetName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAssetName(), "ASSET_NAME"); }
     protected abstract ConditionValue xgetCValueAssetName();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param balance The value of balance as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setBalance_Equal(Integer balance) {
+        doSetBalance_Equal(balance);
+    }
+
+    protected void doSetBalance_Equal(Integer balance) {
+        regBalance(CK_EQ, balance);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param balance The value of balance as notEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setBalance_NotEqual(Integer balance) {
+        doSetBalance_NotEqual(balance);
+    }
+
+    protected void doSetBalance_NotEqual(Integer balance) {
+        regBalance(CK_NES, balance);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param balance The value of balance as greaterThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setBalance_GreaterThan(Integer balance) {
+        regBalance(CK_GT, balance);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param balance The value of balance as lessThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setBalance_LessThan(Integer balance) {
+        regBalance(CK_LT, balance);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param balance The value of balance as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setBalance_GreaterEqual(Integer balance) {
+        regBalance(CK_GE, balance);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param balance The value of balance as lessEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setBalance_LessEqual(Integer balance) {
+        regBalance(CK_LE, balance);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param minNumber The min number of balance. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of balance. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of range-of. (NotNull)
+     */
+    public void setBalance_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setBalance_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param minNumber The min number of balance. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of balance. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    protected void setBalance_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueBalance(), "BALANCE", rangeOfOption);
+    }
+
+    /**
+     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param balanceList The collection of balance as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setBalance_InScope(Collection<Integer> balanceList) {
+        doSetBalance_InScope(balanceList);
+    }
+
+    protected void doSetBalance_InScope(Collection<Integer> balanceList) {
+        regINS(CK_INS, cTL(balanceList), xgetCValueBalance(), "BALANCE");
+    }
+
+    /**
+     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @param balanceList The collection of balance as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setBalance_NotInScope(Collection<Integer> balanceList) {
+        doSetBalance_NotInScope(balanceList);
+    }
+
+    protected void doSetBalance_NotInScope(Collection<Integer> balanceList) {
+        regINS(CK_NINS, cTL(balanceList), xgetCValueBalance(), "BALANCE");
+    }
+
+    protected void regBalance(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueBalance(), "BALANCE"); }
+    protected abstract ConditionValue xgetCValueBalance();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>

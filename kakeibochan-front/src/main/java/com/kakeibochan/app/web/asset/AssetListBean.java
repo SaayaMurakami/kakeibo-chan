@@ -1,13 +1,13 @@
-package com.kakeibochan.app.web.record;
+package com.kakeibochan.app.web.asset;
 
 import org.lastaflute.web.validation.Required;
 
-public class AssetBean {
+public class AssetListBean {
 
     @Required
     public String name;
 
     @Required
-    public Long id;
+    public Integer balance;
 
 }
