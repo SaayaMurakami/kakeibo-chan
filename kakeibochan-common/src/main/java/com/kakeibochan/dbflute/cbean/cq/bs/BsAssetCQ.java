@@ -176,26 +176,6 @@ public class BsAssetCQ extends AbstractBsAssetCQ {
      */
     public BsAssetCQ addOrderBy_AssetName_Desc() { regOBD("ASSET_NAME"); return this; }
 
-    protected ConditionValue _balance;
-    public ConditionValue xdfgetBalance()
-    { if (_balance == null) { _balance = nCV(); }
-      return _balance; }
-    protected ConditionValue xgetCValueBalance() { return xdfgetBalance(); }
-
-    /**
-     * Add order-by as ascend. <br>
-     * (残高)BALANCE: {NotNull, INT(10)}
-     * @return this. (NotNull)
-     */
-    public BsAssetCQ addOrderBy_Balance_Asc() { regOBA("BALANCE"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * (残高)BALANCE: {NotNull, INT(10)}
-     * @return this. (NotNull)
-     */
-    public BsAssetCQ addOrderBy_Balance_Desc() { regOBD("BALANCE"); return this; }
-
     protected ConditionValue _delFlg;
     public ConditionValue xdfgetDelFlg()
     { if (_delFlg == null) { _delFlg = nCV(); }
