@@ -461,7 +461,7 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">2</td>
 		<td class="aliascell">資産</td>
-		<td class="namecell" data-name="ASSET"><a href="#asset" title="type=TABLE, primaryKey={ASSET_ID}, nameLength=5, columnCount=9">ASSET</a></td>
+		<td class="namecell" data-name="ASSET"><a href="#asset" title="type=TABLE, primaryKey={ASSET_ID}, nameLength=5, columnCount=10">ASSET</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="asset_ibfk_1">MEMBER</a></td>
 		<td class="relcell"><a href="#record" title="record_ibfk_2">RECORD</a>, <a href="#record" title="record_ibfk_3">RECORD</a></td>
@@ -727,7 +727,7 @@ dl.procedurelist dd.column pre {
 	</tbody>
 </table>
 
-<h2 id="asset" title="type=TABLE, primaryKey={ASSET_ID}, nameLength=5, columnCount=9">
+<h2 id="asset" title="type=TABLE, primaryKey={ASSET_ID}, nameLength=5, columnCount=10">
 (資産)ASSET
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/12</span>
 </h2>
@@ -820,6 +820,25 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
+		<td class="aliascell">残高</td>
+		<td class=" columnnamecell" id="asset_balance">BALANCE</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
+		<td class="subcell">balance</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">2018/08/16</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
 		<td class="aliascell">削除フラグ</td>
 		<td class=" columnnamecell" id="asset_del_flg">DEL_FLG</td>
 		<td class="typecell">CHAR</td>
@@ -833,7 +852,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">first</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">5</td>
+		<td class="rownumcell">6</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -852,7 +871,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">first</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">6</td>
+		<td class="rownumcell">7</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -871,7 +890,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">first</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">7</td>
+		<td class="rownumcell">8</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -890,7 +909,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">first</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">8</td>
+		<td class="rownumcell">9</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -909,7 +928,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">first</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">9</td>
+		<td class="rownumcell">10</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -2271,6 +2290,9 @@ function StoreClient() {
 					'databaseComment': ''
 				}
 				, 'ASSET_NAME': {
+					'databaseComment': ''
+				}
+				, 'BALANCE': {
 					'databaseComment': ''
 				}
 				, 'DEL_FLG': {

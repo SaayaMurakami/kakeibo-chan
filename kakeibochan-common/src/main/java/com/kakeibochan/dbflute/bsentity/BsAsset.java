@@ -35,7 +35,7 @@ import com.kakeibochan.dbflute.exentity.*;
  *     ASSET_ID
  *
  * [column]
- *     ASSET_ID, MEMBER_ID, ASSET_NAME, DEL_FLG, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     ASSET_ID, MEMBER_ID, ASSET_NAME, BALANCE, DEL_FLG, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -63,6 +63,7 @@ import com.kakeibochan.dbflute.exentity.*;
  * Long assetId = entity.getAssetId();
  * Long memberId = entity.getMemberId();
  * String assetName = entity.getAssetName();
+ * Integer balance = entity.getBalance();
  * String delFlg = entity.getDelFlg();
  * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
  * String registerUser = entity.getRegisterUser();
@@ -72,6 +73,7 @@ import com.kakeibochan.dbflute.exentity.*;
  * entity.setAssetId(assetId);
  * entity.setMemberId(memberId);
  * entity.setAssetName(assetName);
+ * entity.setBalance(balance);
  * entity.setDelFlg(delFlg);
  * entity.setRegisterDatetime(registerDatetime);
  * entity.setRegisterUser(registerUser);
@@ -101,6 +103,9 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
 
     /** (資産名)ASSET_NAME: {NotNull, VARCHAR(200)} */
     protected String _assetName;
+
+    /** (残高)BALANCE: {NotNull, INT(10)} */
+    protected Integer _balance;
 
     /** (削除フラグ)DEL_FLG: {NotNull, CHAR(1), classification=Flg} */
     protected String _delFlg;
@@ -355,6 +360,7 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
         sb.append(dm).append(xfND(_assetId));
         sb.append(dm).append(xfND(_memberId));
         sb.append(dm).append(xfND(_assetName));
+        sb.append(dm).append(xfND(_balance));
         sb.append(dm).append(xfND(_delFlg));
         sb.append(dm).append(xfND(_registerDatetime));
         sb.append(dm).append(xfND(_registerUser));
@@ -443,6 +449,24 @@ public abstract class BsAsset extends AbstractEntity implements DomainEntity, En
     public void setAssetName(String assetName) {
         registerModifiedProperty("assetName");
         _assetName = assetName;
+    }
+
+    /**
+     * [get] (残高)BALANCE: {NotNull, INT(10)} <br>
+     * @return The value of the column 'BALANCE'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getBalance() {
+        checkSpecifiedProperty("balance");
+        return _balance;
+    }
+
+    /**
+     * [set] (残高)BALANCE: {NotNull, INT(10)} <br>
+     * @param balance The value of the column 'BALANCE'. (basically NotNull if update: for the constraint)
+     */
+    public void setBalance(Integer balance) {
+        registerModifiedProperty("balance");
+        _balance = balance;
     }
 
     /**

@@ -61,6 +61,7 @@ public class AssetDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Asset)et).getAssetId(), (et, vl) -> ((Asset)et).setAssetId(ctl(vl)), "assetId");
         setupEpg(_epgMap, et -> ((Asset)et).getMemberId(), (et, vl) -> ((Asset)et).setMemberId(ctl(vl)), "memberId");
         setupEpg(_epgMap, et -> ((Asset)et).getAssetName(), (et, vl) -> ((Asset)et).setAssetName((String)vl), "assetName");
+        setupEpg(_epgMap, et -> ((Asset)et).getBalance(), (et, vl) -> ((Asset)et).setBalance(cti(vl)), "balance");
         setupEpg(_epgMap, et -> ((Asset)et).getDelFlg(), (et, vl) -> {
             CDef.Flg cls = (CDef.Flg)gcls(et, columnDelFlg(), vl);
             if (cls != null) {
@@ -111,6 +112,7 @@ public class AssetDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnAssetId = cci("ASSET_ID", "ASSET_ID", null, "資産ID", Long.class, "assetId", null, true, true, true, "BIGINT", 19, 0, null, null, false, null, null, null, "recordByWithdrawalAccountIdList,recordByDepositAccountIdList", null, false);
     protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Long.class, "memberId", null, false, false, true, "BIGINT", 19, 0, null, null, false, null, null, "member", null, null, false);
     protected final ColumnInfo _columnAssetName = cci("ASSET_NAME", "ASSET_NAME", null, "資産名", String.class, "assetName", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnBalance = cci("BALANCE", "BALANCE", null, "残高", Integer.class, "balance", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDelFlg = cci("DEL_FLG", "DEL_FLG", null, "削除フラグ", String.class, "delFlg", null, false, false, true, "CHAR", 1, 0, null, null, false, null, null, null, null, CDef.DefMeta.Flg, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
@@ -133,6 +135,11 @@ public class AssetDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnAssetName() { return _columnAssetName; }
+    /**
+     * (残高)BALANCE: {NotNull, INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnBalance() { return _columnBalance; }
     /**
      * (削除フラグ)DEL_FLG: {NotNull, CHAR(1), classification=Flg}
      * @return The information object of specified column. (NotNull)
@@ -169,6 +176,7 @@ public class AssetDbm extends AbstractDBMeta {
         ls.add(columnAssetId());
         ls.add(columnMemberId());
         ls.add(columnAssetName());
+        ls.add(columnBalance());
         ls.add(columnDelFlg());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());

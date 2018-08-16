@@ -99,6 +99,7 @@ public class AssetCIQ extends AbstractBsAssetCQ {
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueMemberId() { return _myCQ.xdfgetMemberId(); }
     protected ConditionValue xgetCValueAssetName() { return _myCQ.xdfgetAssetName(); }
+    protected ConditionValue xgetCValueBalance() { return _myCQ.xdfgetBalance(); }
     protected ConditionValue xgetCValueDelFlg() { return _myCQ.xdfgetDelFlg(); }
     protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
     protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }

@@ -44,6 +44,8 @@
             name="MEMBER_ID" required="true" size="19" type="BIGINT"/>
         <column comment="資産名" dbType="VARCHAR" javaType="String"
             name="ASSET_NAME" required="true" size="200" type="VARCHAR"/>
+        <column comment="残高" dbType="INT" javaType="Integer"
+            name="BALANCE" required="true" size="10" type="INTEGER"/>
         <column comment="削除フラグ" dbType="CHAR" javaType="String"
             name="DEL_FLG" required="true" size="1" type="CHAR"/>
         <column comment="登録日時" dbType="DATETIME"

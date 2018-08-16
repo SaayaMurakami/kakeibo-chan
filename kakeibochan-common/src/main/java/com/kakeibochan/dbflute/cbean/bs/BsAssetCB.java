@@ -345,6 +345,11 @@ public class BsAssetCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnAssetName() { return doColumn("ASSET_NAME"); }
         /**
+         * (残高)BALANCE: {NotNull, INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnBalance() { return doColumn("BALANCE"); }
+        /**
          * (削除フラグ)DEL_FLG: {NotNull, CHAR(1), classification=Flg}
          * @return The information object of specified column. (NotNull)
          */
