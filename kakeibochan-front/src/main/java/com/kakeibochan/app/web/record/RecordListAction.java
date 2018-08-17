@@ -1,6 +1,7 @@
 package com.kakeibochan.app.web.record;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -47,9 +48,7 @@ public class RecordListAction extends FrontBaseAction {
             cb.paging(PAGE_SIZE, pageNo.orElse(1));
         });
 
-        ArrayList<RecordBean> recordBeans = new ArrayList<>();
-
-        for (Record record : records) {
+        List<RecordBean> recordBeans = records.stream().map(record -> {
             RecordBean recordBean = new RecordBean();
             recordBean.id = record.getRecordId();
             recordBean.date = record.getDate();
@@ -60,8 +59,8 @@ public class RecordListAction extends FrontBaseAction {
             recordBean.withdrawalAccount = record.getAssetByWithdrawalAccountId().map(asset -> asset.getAssetName()).orElse(null);
             recordBean.amount = record.getAmount();
             recordBean.memo = record.getMemo();
-            recordBeans.add(recordBean);
-        }
+            return recordBean;
+        }).collect(Collectors.toList());
 
         return asHtml(path_Record_ListHtml).renderWith(data -> {
             data.register("recordBeans", recordBeans);
